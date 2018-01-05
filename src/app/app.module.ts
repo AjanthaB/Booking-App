@@ -10,6 +10,9 @@ import { FormsModule }   from '@angular/forms';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ProsonalInfoPage } from '../pages/personal-info/personal-info';
+import { PropertyInfoPage } from '../pages/property-info/property-info';
+import { PaymentPage } from '../pages/payment/payment';
 
 // services
 import { BookingService } from "../services/booking.service";
@@ -17,7 +20,10 @@ import { BookingService } from "../services/booking.service";
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ProsonalInfoPage,
+    PropertyInfoPage,
+    PaymentPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,10 @@ import { BookingService } from "../services/booking.service";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ProsonalInfoPage,
+    PropertyInfoPage,
+    PaymentPage
   ],
   providers: [
     StatusBar,

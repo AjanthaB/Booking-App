@@ -3,18 +3,11 @@ import { NavController } from 'ionic-angular';
 import { FormControl,  FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 
-import { ProsonalInfoPage } from '../personal-info/personal-info';
-
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-payment',
+  templateUrl: 'payment.html'
 })
-export class HomePage {
-
-  /**
-   * @desc - handle visibility of personal information form
-   */
-  public _personalInfoFormVisible = true;
+export class PaymentPage {
 
 
   constructor(public navCtrl: NavController, private authService: BookingService) {}
@@ -23,13 +16,20 @@ export class HomePage {
    * Angular lifecyvle event
    */
   ngOnInit() {
+    // this.createPersonalIntoForm();
   }
 
   /**
-   * @desc - Redirect to Personal Info Page
+   * cache Personal Information when click on Next button
    */
-  public redirectToPersonalInfo(): void {
-    this.navCtrl.push(ProsonalInfoPage);
+  public payNow(): void {
+    // this.navCtrl.push()
   }
 
+  /**
+   * @desc - back to Home Page
+   */
+  public redirecToPersonalInfoPage(): void {
+    this.navCtrl.pop();
+  }
 }
