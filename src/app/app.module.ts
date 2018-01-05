@@ -11,6 +11,9 @@ import { FormsModule }   from '@angular/forms';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
+// services
+import { BookingService } from "../services/booking.service";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -29,7 +32,8 @@ import { HomePage } from '../pages/home/home';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BookingService
   ]
 })
 export class AppModule {}
