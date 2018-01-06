@@ -16,6 +16,7 @@ import { PaymentPage } from '../pages/payment/payment';
 
 // services
 import { BookingService } from "../services/booking.service";
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BookingService } from "../services/booking.service";
   imports: [
     BrowserModule,
     FormsModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

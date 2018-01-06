@@ -8,59 +8,51 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row>
-      <form [formGroup]="_personalInfoForm">
-        <div class="col-sm-6 col-md-6 col-lg-4 field-group">
-          <label for="dateTime" class="col-sm-4 panel-label">Date,Time * </label>
-          <div class="col-sm-8">
-            <input type="date" formControlName="dateTime"  class="form-control">
-          </div>
-        </div>
-          
-        <div class="col-sm-6 col-md-6 col-lg-4 field-group">
-          <label for="name" class="col-sm-4 panel-label">Name * </label>
-          <div class="col-sm-8">
-            <input type="text" formControlName="name"  class="form-control">
-          </div>
-        </div>
-          
-        <div class="col-sm-6 col-md-6 col-lg-4 field-group">
-          <label for="postCode" class="col-sm-4 panel-label">Postcode * </label>
-          <div class="col-sm-8">
-            <input type="text" formControlName="postCode"  class="form-control">
-          </div>
-        </div>
-      
-        <div class="col-sm-6 col-md-6 col-lg-4 field-group">
-          <label for="address" class="col-sm-4 panel-label">Address * </label>
-          <div class="col-sm-8">
-            <input type="text" formControlName="address"  class="form-control">
-          </div>
-        </div>
-    
-        <div class="col-sm-6 col-md-6 col-lg-4 field-group">
-          <label for="phoneNum" class="col-sm-4 panel-label">Phone No * </label>
-          <div class="col-sm-8">
-            <input type="text" formControlName="phoneNum"  class="form-control">
-          </div>
-        </div>
-      
-        <div class="col-sm-6 col-md-6 col-lg-4 field-group">
-          <label for="email" class="col-sm-4 panel-label">Email * </label>
-          <div class="col-sm-8">
-            <input type="text" formControlName="email"  class="form-control">
-          </div>
-        </div>
-          
-        <div class="col-sm-6 col-md-6 col-lg-4 field-group">
-          <label for="comments" class="col-sm-4 panel-label">Comments  </label>
-          <div class="col-sm-8">
-            <input type="text" formControlName="comments"  class="form-control">
-          </div>
-        </div>
-      </form>
+    <form [formGroup]="_personalInfoForm">
+      <ion-list>
+
+        <ion-item>
+          <ion-label stacked>Date, Time *</ion-label>
+          <ion-input type="date" formControlName="dateTime"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Name *</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Postcode *</ion-label>
+          <ion-input type="text" formControlName="postCode"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Address *</ion-label>
+          <ion-input type="text" formControlName="address"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Phone No *</ion-label>
+          <ion-input type="text" formControlName="phoneNum"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Email *</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Comments</ion-label>
+          <ion-input type="text" formControlName="comments"></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </form>
+
+    <ion-row *ngIf="_formInvalid">
+      ** Please fill all the mandatory fields
     </ion-row>
-          
+
     <ion-row>
       <ion-col>
         <div class="col-sm-12">
