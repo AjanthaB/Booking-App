@@ -47,13 +47,13 @@ export class PropertyInfoPage {
   public savePropertyDataAndRedirectTo(): void {
     const formValue = this._propertylInfoForm.value;
     console.log("Form Data: ", formValue, this._propertylInfoForm);
-    // this.navCtrl.push(PaymentPage)
+    this.navCtrl.push(PaymentPage)
   }
 
   /**
    * @desc - back to Home Page
    */
-  public redirecToPropertyInfoPage(): void {
+  public redirecToPersonalInfoPage(): void {
     this.navCtrl.pop();
   }
 }

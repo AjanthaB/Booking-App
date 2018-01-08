@@ -18,6 +18,7 @@ import { PaymentPage } from '../pages/payment/payment';
 import { BookingService } from "../services/booking.service";
 import { ComponentsModule } from '../components/components.module';
 
+
 @NgModule({
   declarations: [
     MyApp,
