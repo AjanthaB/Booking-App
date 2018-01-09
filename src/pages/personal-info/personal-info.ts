@@ -32,7 +32,8 @@ export class ProsonalInfoPage {
    */
   private createPersonalIntoForm(): void {
     this._personalInfoForm = new FormGroup({
-      dateTime: new FormControl(new Date(), Validators.required),
+      date: new FormControl("", Validators.required),
+      time: new FormControl("", Validators.required),
       name: new FormControl("", Validators.required),
       postCode: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),

@@ -6,14 +6,19 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
   <ion-grid>
     <form [formGroup]="_personalInfoForm">
       <ion-list>
 
         <ion-item>
-          <ion-label stacked>Date, Time *</ion-label>
-          <ion-input type="date" formControlName="dateTime"></ion-input>
+          <ion-label stacked>Date</ion-label>
+          <ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Time</ion-label>
+          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time"></ion-datetime>
         </ion-item>
 
         <ion-item>
