@@ -10,7 +10,70 @@
 <ion-content padding>
   <ion-grid>
 
-          <selector></selector>
+          
+    <ion-row>
+      <ion-col>
+        <selector [lable]="'Type'"></selector>
+      </ion-col>
+      <ion-col>
+        <selector [lable]="'Flat/ Studio'"></selector>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <selector [lable]="'Bedrooms'"></selector>
+      </ion-col>
+      <ion-col>
+        <selector [lable]="'Bathrooms'"></selector>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        <selector [lable]="'Carpert Cleaning'"></selector>
+      </ion-col>
+      <ion-col>
+        <selector [lable]="'External Windows'"></selector>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <selector [lable]="'Blinds'"></selector>
+      </ion-col>
+      <ion-col>
+        <selector [lable]="'Curtain steam'"></selector>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <selector [lable]="'Mattress steam'"></selector>
+      </ion-col>
+      <ion-col>
+        <selector [lable]="'Wall washing'"></selector>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <selector [lable]="'Sofa clean'"></selector>
+      </ion-col>
+      <ion-col>
+        <selector [lable]="'Rug'"></selector>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <selector [lable]="'Balcony'"></selector>
+      </ion-col>
+    </ion-row>
+
+
     <form [formGroup]="_propertylInfoForm">
 
         
@@ -20,6 +83,12 @@
           <ion-input type="text" formControlName="name"></ion-input>
         </ion-item>
       </ion-list>
+
+
+
+
+
+      
     </form>
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * Generated class for the SelectorComponent component.
@@ -13,10 +13,18 @@ import { Component } from '@angular/core';
 export class SelectorComponent {
 
   text: string;
+  _lable = "lable";
   selected: boolean = false;
   showPopup: boolean = false;
   noText: string = "NO";
   items=["01", "02", "03", "04", "05", "06"]
+
+  @Input()
+  set lable(lable: string) {
+    if (lable) {
+      this._lable = lable;
+    }
+  }
 
   constructor() {
     console.log('Hello SelectorComponent Component');
