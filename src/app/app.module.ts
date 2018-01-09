@@ -17,7 +17,7 @@ import { PaymentPage } from '../pages/payment/payment';
 // services
 import { BookingService } from "../services/booking.service";
 import { ComponentsModule } from '../components/components.module';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 @NgModule({
   declarations: [
     MyApp,
@@ -44,7 +44,8 @@ import { ComponentsModule } from '../components/components.module';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BookingService
+    BookingService,
+    InAppBrowser
   ]
 })
 export class AppModule {}
