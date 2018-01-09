@@ -31,5 +31,6 @@ export class HomePage {
   public redirectToPersonalInfo(): void {
     this.navCtrl.push(ProsonalInfoPage);
   }
+  
 
 }

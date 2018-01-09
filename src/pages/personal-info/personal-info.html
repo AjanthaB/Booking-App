@@ -7,19 +7,26 @@
 </ion-header>
 
 <ion-content >
-  <ion-grid>
+  <ion-grid padding>
+
     <form [formGroup]="_personalInfoForm">
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label stacked>Date</ion-label>
+						<ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
+					</ion-item>
+				</ion-col>
+				<ion-col>
+					<ion-item>
+						<ion-label stacked>Time</ion-label>
+						<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time"></ion-datetime>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			
       <ion-list>
 
-        <ion-item>
-          <ion-label stacked>Date</ion-label>
-          <ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
-        </ion-item>
-
-        <ion-item>
-          <ion-label stacked>Time</ion-label>
-          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time"></ion-datetime>
-        </ion-item>
 
         <ion-item>
           <ion-label stacked>Name *</ion-label>
