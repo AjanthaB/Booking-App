@@ -23,7 +23,7 @@ export class PropertyInfoPage {
    * Angular lifecyvle event
    */
   ngOnInit() {
-    this.createPersonalIntoForm();
+    // this.createPersonalIntoForm();
   }
 
   /**
@@ -45,9 +45,7 @@ export class PropertyInfoPage {
    * cache Personal Information when click on Next button
    */
   public savePropertyDataAndRedirectTo(): void {
-    const formValue = this._propertylInfoForm.value;
-    console.log("Form Data: ", formValue, this._propertylInfoForm);
-    // this.navCtrl.push(PaymentPage)
+    this.navCtrl.push(PaymentPage)
   }
 
   /**
