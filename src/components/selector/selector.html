@@ -3,7 +3,7 @@
   <div class="lbl">{{_lable}}</div>
   <div class="btn-test">
     <div>
-    <div class="item " (click)="clickBtn()">{{noText}}</div>
+    <div class="item" [ngClass]="{'noItem': !selected}" (click)="clickBtn()">{{noText}}</div>
     <div class="item" [ngClass]="{'colored': selected}" (click)="clickBtn()">YES</div>
   </div>
     <div class="popup" *ngIf="showPopup">

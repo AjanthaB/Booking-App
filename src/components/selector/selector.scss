@@ -16,6 +16,10 @@ selector {
         border-radius: 20px;
     }
 
+    .noItem{
+        background: #ffffff
+    }
+
     .lbl{
         float: left;
         padding: 8px 5px;
@@ -38,11 +42,12 @@ selector {
     .btn-test{
     /* width: 110px; */
     float: right;
-    border: 1px solid;
-    padding: 2px;
+    // border: 1px solid;
+    background: #e0e0e0;
+    padding: 3px;
     border-radius: 20px;
     }
     .colored{
-        background: #048d8d
+        background: #3693D5
     }
 }
