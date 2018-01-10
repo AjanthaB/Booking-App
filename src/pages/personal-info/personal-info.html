@@ -10,16 +10,16 @@
   <ion-grid padding>
 
     <form [formGroup]="_personalInfoForm">
-			<ion-row>
-				<ion-col>
-					<ion-item>
-						<ion-label stacked>Date</ion-label>
+			<ion-row style="border-bottom:none;">
+				<ion-col style="padding:0">
+					<ion-item style="padding-left: 15px;">
+						<ion-label stacked>Date <b>*</b></ion-label>
 						<ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
 					</ion-item>
 				</ion-col>
-				<ion-col>
+				<ion-col style="padding:0">
 					<ion-item>
-						<ion-label stacked>Time</ion-label>
+						<ion-label stacked>Time <b>*</b></ion-label>
 						<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time"></ion-datetime>
 					</ion-item>
 				</ion-col>
@@ -29,27 +29,27 @@
 
 
         <ion-item>
-          <ion-label stacked>Name *</ion-label>
+          <ion-label stacked>Name <b>*</b></ion-label>
           <ion-input type="text" formControlName="name"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Postcode *</ion-label>
+          <ion-label stacked>Postcode <b>*</b></ion-label>
           <ion-input type="text" formControlName="postCode"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Address *</ion-label>
+          <ion-label stacked>Address <b>*</b></ion-label>
           <ion-input type="text" formControlName="address"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Phone No *</ion-label>
+          <ion-label stacked>Phone No <b>*</b></ion-label>
           <ion-input type="text" formControlName="phoneNum"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Email *</ion-label>
+          <ion-label stacked>Email <b>*</b></ion-label>
           <ion-input type="text" formControlName="email"></ion-input>
         </ion-item>
 
@@ -62,13 +62,13 @@
     </form>
 
     <ion-row *ngIf="_formInvalid">
-      ** Please fill all the mandatory fields
+      <b>**</b> Please fill all the mandatory fields
     </ion-row>
 
     <ion-row>
       <ion-col>
         <div class="col-sm-12">
-          <button ion-button icon-right float-left color="secondary" (click)="redirecToHomePage()">
+          <button ion-button icon-right float-left (click)="redirecToHomePage()">
             Back
             <ion-icon name="md-arrow-dropleft-circle"></ion-icon>
           </button>
@@ -76,7 +76,7 @@
       </ion-col>
       <ion-col>
         <div class="col-sm-12">
-          <button ion-button icon-right float-left color="secondary" (click)="savePersonalInfo()">
+          <button ion-button icon-right float-left (click)="savePersonalInfo()">
             Next
             <ion-icon name="md-arrow-dropright-circle"></ion-icon>
           </button>

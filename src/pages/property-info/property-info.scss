@@ -3,3 +3,26 @@
 // 		    background: #048d8d;
 // 	}
 // }
+page-property-info{
+	.lbl{
+		float:none;
+		display:block;
+	}
+	.btn-test{
+		float: none;
+		display: block;
+		height: 30px;
+		width: 110px;
+		background: #e0e0e0;
+		border: solid 1px #0093d1;
+	}
+	.popup{
+		border: solid 1px #0093d1;
+	}
+	.list-item:hover{
+		background:#b2dced;
+	}
+	button{
+		background:#0b3853;
+	}
+}
