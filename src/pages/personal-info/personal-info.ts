@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 
 import { PropertyInfoPage } from '../property-info/property-info';
+import { BookingData } from '../../model/booking-data';
 
 @Component({
   selector: 'page-personal-info',
@@ -16,9 +17,11 @@ export class ProsonalInfoPage {
    */
   public _personalInfoForm: FormGroup;
   public _formInvalid: boolean = false;
+  private _bookingDataObj = {} as BookingData;
 
-
-  constructor(public navCtrl: NavController, private authService: BookingService) { }
+  constructor(public navCtrl: NavController,
+    private bookingService: BookingService) {
+  }
 
   /**
    * Angular lifecyvle event
@@ -49,12 +52,21 @@ export class ProsonalInfoPage {
   public savePersonalInfo(): void {
     const formValue = this._personalInfoForm.value;
     console.log("Form Data: ", formValue, this._personalInfoForm);
-    // if (this._personalInfoForm.invalid) {
-      this._formInvalid = false;
-      this.navCtrl.push(PropertyInfoPage);
-    // } else {
-    //   this._formInvalid = true;
-    // }
+    this._formInvalid = false;
+    this.navCtrl.push(PropertyInfoPage);
+  }
+
+  private setPersonalData(formValue: any): void {
+    const bookingData = this.bookingService.getBookingDataObj();
+    bookingData.booking_date = formValue.date;  // need to format the date
+    bookingData.booking_time = formValue.time; // need to format 
+    bookingData.cust_name = formValue.date;
+    bookingData.postcode = formValue.postcode;
+    bookingData.address = formValue.address;
+    bookingData.phone = formValue.phoneNum;
+    bookingData.email = formValue.email;
+    bookingData.cust_comments = formValue.comments;
+    this.bookingService.setBookingDataObj(bookingData);
   }
 
   /**
