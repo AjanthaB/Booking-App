@@ -29,7 +29,7 @@ export class SelectorComponent {
   text: string;
   selected: boolean = false;
   showPopup: boolean = false;
-  _items = ["01", "02", "03", "04", "05", "06"]
+  _items = ["01", "02", "03", "04", "05", "06"];
 
   @Input()
   set lable(lable: string) {
@@ -72,6 +72,15 @@ export class SelectorComponent {
   // }
  }
 
+ @Input()
+ set selectedItem(item: string) {
+   if (item) {
+     this._deActiveLable = item;
+     this.selected = true;
+     this.showPopup = true;
+   }
+ }
+
  @Output()
  onSelectItem = new EventEmitter<any>();
 
@@ -92,20 +101,21 @@ export class SelectorComponent {
       this.showPopup = false;
       this._deActiveLable = this._tmpDeActiveLable;
     }
+    this.emitOnToggle();
   }
 
   /**
    * @desc - emit data to OnToggle EventEmitter
    */
   private emitOnToggle(): void {
-    this.onToggle.emit({active: this._deActiveLable, deActice: this._deActiveLable, selected: this.selected});
+    this.onToggle.emit({active: this._activeLable, deActive: this._deActiveLable, selected: this.selected});
   }
 
    /**
    * @desc - emit data to OnSelect EventEmitter
    */
   private emitOnSelect(): void {
-    this.onSelectItem.emit({active: this._deActiveLable, deActice: this._deActiveLable, selected: this.selected});
+    this.onSelectItem.emit({active: this._activeLable, deActive: this._deActiveLable, selected: this.selected});
   }
 
   /**
@@ -115,5 +125,6 @@ export class SelectorComponent {
   selectItem(item: string): void {
     this.showPopup = false;
     this._deActiveLable = item;
+    this.emitOnSelect();
   }
 }

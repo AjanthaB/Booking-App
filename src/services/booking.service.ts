@@ -13,9 +13,7 @@ export class BookingService {
     personalInfoValid: false
   };
 
-  constructor(private http: Http) {
-    console.log(this._bookingDataObj);
-  }
+  constructor(private http: Http) {}
 
   /**
    * @desc - set Personal Info Valid

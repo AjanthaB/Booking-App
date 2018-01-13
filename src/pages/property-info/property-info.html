@@ -13,54 +13,82 @@
           
     <ion-row>
       <ion-col>
-        <selector [lable]="'Type'" [toggleOnly]="true"></selector>
+        <selector 
+        [lable]="'Type'" 
+        [toggleOnly]="true"
+        [activeLable]="'FLAT'"
+        [deActiveLable]="'HOUSE'"
+        (onToggle)="onSelectType($event)"></selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'Flat/ Studio'" [toggleOnly]="true"></selector>
+        <selector 
+        [lable]="'Flat/ Studio'" 
+        [toggleOnly]="true" 
+        (onToggle)="onFlatOrStudio($event)"></selector>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <selector [lable]="'Bedrooms'"></selector>
+        <selector [lable]="'Bedrooms'" 
+        (onToggle)="onToggleBedrooms($event)"
+        (onSelectItem)="onSelectBedrooms($event)">
+      </selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'Bathrooms'"></selector>
+        <selector [lable]="'Bathrooms'"  
+        (onToggle)="onToggleBathrooms($event)"
+        (onSelectItem)="onSelectBathRooms($event)"></selector>
       </ion-col>
     </ion-row>
     
     <ion-row>
       <ion-col>
-        <selector [lable]="'Carpert Cleaning'"></selector>
+        <selector [lable]="'Carpert Cleaning'"
+        (onToggle)="onToggleCarpets($event)"
+        (onSelectItem)="onSelectCatpets($event)"></selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'External Windows'"></selector>
+        <selector [lable]="'External Windows'"
+        (onToggle)="onToggleWindows($event)"
+        (onSelectItem)="onSelectWindows($event)"></selector>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <selector [lable]="'Blinds'"></selector>
+        <selector [lable]="'Blinds'" 
+        (onToggle)="onToggleBlinds($event)"
+        (onSelectItem)="onSelectBlinds($event)"></selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'Curtain steam'"></selector>
-      </ion-col>
-    </ion-row>
-
-
-    <ion-row>
-      <ion-col>
-        <selector [lable]="'Mattress steam'"></selector>
-      </ion-col>
-      <ion-col>
-        <selector [lable]="'Wall washing'"></selector>
+        <selector [lable]="'Curtain steam'" 
+        (onToggle)="onToggleCurtain($event)"
+        (onSelectItem)="onSelectCurtain($event)"></selector>
       </ion-col>
     </ion-row>
 
 
     <ion-row>
       <ion-col>
-        <selector [lable]="'Sofa clean'"></selector>
+        <selector [lable]="'Mattress steam'"
+        (onToggle)="onToggleMattress($event)"
+        (onSelectItem)="onSelectMattress($event)" 
+        ></selector>
+      </ion-col>
+      <ion-col>
+        <selector [lable]="'Wall washing'"
+        (onToggle)="onToggleWall($event)"
+        (onSelectItem)="onSelectWall($event)" ></selector>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <selector [lable]="'Sofa clean'" 
+        (onToggle)="onToggleSofa($event)"
+        (onSelectItem)="onSelectSofa($event)" ></selector>
       </ion-col>
       <ion-col>
         <selector [lable]="'Rug'"></selector>

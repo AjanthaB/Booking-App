@@ -51,8 +51,8 @@ export class ProsonalInfoPage {
    */
   public savePersonalInfo(): void {
     const formValue = this._personalInfoForm.value;
-    console.log("Form Data: ", formValue, this._personalInfoForm);
     this._formInvalid = false;
+    this.setPersonalData(formValue)
     this.navCtrl.push(PropertyInfoPage);
   }
 
@@ -67,6 +67,7 @@ export class ProsonalInfoPage {
     bookingData.email = formValue.email;
     bookingData.cust_comments = formValue.comments;
     this.bookingService.setBookingDataObj(bookingData);
+    console.log("after setting booking data: ", this.bookingService.getBookingDataObj())
   }
 
   /**
