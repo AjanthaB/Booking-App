@@ -51,7 +51,7 @@ export class PropertyInfoPage {
   /**
    * @desc - back to Home Page
    */
-  public redirecToPropertyInfoPage(): void {
+  public redirecToPersonalInfoPage(): void {
     this.navCtrl.pop();
   }
 }

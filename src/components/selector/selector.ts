@@ -1,23 +1,35 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-/**
- * Generated class for the SelectorComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'selector',
   templateUrl: 'selector.html'
 })
 export class SelectorComponent {
 
-  text: string;
+  /**
+   * Hold the Lable of the toggle
+   */
   _lable = "lable";
+  /**
+   * Hold the lable value of active state
+   */
+  _activeLable: string = "YES";
+  /**
+   * Hold the lable value of deactive state
+   */
+  _deActiveLable: string = "NO";
+  /**
+   * Hold the copy of deactive lable value
+   */
+  _tmpDeActiveLable: string = "NO";
+  /**
+   * Hold the boolean value to determine toggle and selection
+   */
+  _toggleOnly: boolean = false;
+  text: string;
   selected: boolean = false;
   showPopup: boolean = false;
-  noText: string = "NO";
-  items=["01", "02", "03", "04", "05", "06"]
+  _items = ["01", "02", "03", "04", "05", "06"]
 
   @Input()
   set lable(lable: string) {
@@ -26,22 +38,82 @@ export class SelectorComponent {
     }
   }
 
+ @Input()
+ set activeLable(lable: string) {
+  if (lable) {
+    this._activeLable = lable;
+  }
+ }
+
+ @Input()
+ set deActiveLable(lable: string) {
+   if (lable) {
+     this._deActiveLable = lable;
+     this._tmpDeActiveLable = lable;
+   }
+ }
+
+ @Input()
+ set toggleOnly(toggle: boolean) {
+   if (toggle == null) {
+    this._toggleOnly = false;
+   } else {
+    this._toggleOnly = toggle;
+   }
+ }
+
+ @Input()
+ set items(items: any[]) {
+  if (items) {
+    this._items = items;
+  }
+  // } else { // need to uncomment after remove the harcoded items
+  //   this._items = [];
+  // }
+ }
+
+ @Output()
+ onSelectItem = new EventEmitter<any>();
+
+ @Output()
+ onToggle = new EventEmitter<any>();
+
   constructor() {
-    console.log('Hello SelectorComponent Component');
-    this.text = 'Hello World';
   }
 
-  clickBtn(){
+  /**
+   * @desc - toggle the selection and show the popup
+   */
+  toggle(): void {
     this.selected = !this.selected;
-    this.showPopup = this.selected;
-    if(!this.selected){
-      this.noText = "NO";
+    if (this.selected) {
+      this.showPopup = true;
+    } else {
+      this.showPopup = false;
+      this._deActiveLable = this._tmpDeActiveLable;
     }
   }
 
-  clickItem(item: string){
-    this.showPopup = false;
-    this.noText = item;
+  /**
+   * @desc - emit data to OnToggle EventEmitter
+   */
+  private emitOnToggle(): void {
+    this.onToggle.emit({active: this._deActiveLable, deActice: this._deActiveLable, selected: this.selected});
   }
 
+   /**
+   * @desc - emit data to OnSelect EventEmitter
+   */
+  private emitOnSelect(): void {
+    this.onSelectItem.emit({active: this._deActiveLable, deActice: this._deActiveLable, selected: this.selected});
+  }
+
+  /**
+   * @desc - select the item from dopdown and 
+   * @param item - selected item
+   */
+  selectItem(item: string): void {
+    this.showPopup = false;
+    this._deActiveLable = item;
+  }
 }

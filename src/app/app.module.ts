@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { FormsModule }   from '@angular/forms';
+import { HttpModule } from "@angular/http";
 
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MatButtonModule, MatCheckboxModule } from '@angular/material';
@@ -29,6 +30,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     ComponentsModule
   ],
