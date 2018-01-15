@@ -14,7 +14,24 @@ export class BookingService {
     personalInfoValid: false
   };
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+   this.initPropertyData();
+  }
+
+  private initPropertyData() {
+    this._bookingDataObj.bedrooms  = 0;
+    this._bookingDataObj.bathrooms_no  = 0;
+    this._bookingDataObj.ext_windows_no = 0;
+    this._bookingDataObj.blinds_no  = 0;
+    this._bookingDataObj.curtain_steam_no  = 0;
+    this._bookingDataObj.mattress_steam_no = 0;
+    this._bookingDataObj.wall_washing_no  = 0;
+    this._bookingDataObj.sofa_clean_no = 0;
+    this._bookingDataObj.carpet_no  = 0;
+    this._bookingDataObj.rug = 0;
+    this._bookingDataObj.balcony = 0;
+    console.log("Initializing the Property data");
+  }
 
   /**
    * @desc - set Personal Info Valid
@@ -51,16 +68,21 @@ export class BookingService {
    * @desc - get the total cost of the cart in every toggle selection
    * @param bookingDta Booking Data Object
    */
-  public getCartTotal(bookingDta: BookingData): Observable<any> {
+  public getCartTotal(bookingDta: BookingData): any {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
     const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}`
       + `&bedrooms=${bookingDta.bedrooms}&bathrooms=${bookingDta.bathrooms_no}&ext_windows=${bookingDta.ext_windows_no}&blinds=${bookingDta.blinds_no}`
       + `&curtain=${bookingDta.curtain_steam_no}&mattress=${bookingDta.mattress_steam_no}&wall_washing=${bookingDta.wall_washing_no}&sofa_clean=${bookingDta.sofa_clean_no}`
       + `&carpet_cleaning=${bookingDta.carpet_no}&rug=${bookingDta.rug}&balcony=${bookingDta.balcony}&bf=true&discount=false`;
-      
-      return this.http.get(urlPrefix + urlPrefix);
+      console.log(urlPrefix + urlParams);
+      return this.http.get(urlPrefix + urlParams);
+      // return Observable.empty();
   }
 
+  /**
+   * @desc - get the Booking data in payment view
+   * @param bookingDta Booking Data Object
+   */
   public getBookingFee(bookingDta: BookingData): Observable <any> {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
     const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}&bedrooms=${bookingDta.bedrooms}`;

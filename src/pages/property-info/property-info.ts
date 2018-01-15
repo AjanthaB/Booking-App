@@ -58,6 +58,12 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.bedrooms = event.deActive;
       console.log("After select the bed rooms: ", this.bookingDataObj);
+      this.bookingService.getCartTotal(this.bookingDataObj)
+        .subscribe(data => {
+          console.log("price: ", data);
+        }, err => {
+          console.log("Error: ", err)
+        })
     }
   }
 
