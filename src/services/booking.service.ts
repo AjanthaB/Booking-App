@@ -83,17 +83,15 @@ export class BookingService {
    * @param bookingDta Booking Data Object
    */
   public getBookingFee(bookingDta: BookingData): Observable <any> {
-    let headers = new Headers();
-    // headers.append('Authorization', this.authHeader);
-    headers.append('Accept', 'text/plain; charset=utf-8');
-    headers.append('Content-Type', 'text/plain; charset=utf-8');
-    headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
     const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}&bedrooms=${bookingDta.bedrooms}`;
 
-    return this.http.get(urlPrefix + urlParams);
+    return this.http.get(urlPrefix + urlParams, this.getCORSTextHeader());
   }
 
+  /**
+   * @desc - return header for access text type response
+   */
   private getCORSTextHeader(): RequestOptions {
     const headers = new Headers();
     headers.append('Accept', 'text/plain; charset=utf-8');

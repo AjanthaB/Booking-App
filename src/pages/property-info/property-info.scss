@@ -1,8 +1,6 @@
-// .btn-test{
-// 	.item {
-// 		    background: #048d8d;
-// 	}
-// }
+
+
+
 page-property-info{
 	.lbl{
 		float:none;
@@ -24,5 +22,16 @@ page-property-info{
 	}
 	button{
 		background:#0b3853;
+	}
+
+	.price-box {
+		background-color: #0093d1;
+		color: #fff;
+		font-size: 16px;
+		text-align: center;
+	}
+
+	.without-discount {
+		font-style: italic;
 	}
 }

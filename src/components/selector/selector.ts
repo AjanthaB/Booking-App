@@ -87,8 +87,7 @@ export class SelectorComponent {
  @Output()
  onToggle = new EventEmitter<any>();
 
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * @desc - toggle the selection and show the popup
