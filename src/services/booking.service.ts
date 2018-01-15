@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import { Http, Headers, RequestOptions, Response } from "@angular/http";
 
 import { BookingData } from "../model/booking-data";
 import { Observable } from "rxjs/Observable";
@@ -59,7 +59,7 @@ export class BookingService {
     let headers = new Headers();
     // headers.append('Authorization', this.authHeader);
     headers.append('Accept', 'application/json; charset=utf-8');
-    headers.append('Content-Type', 'application/json; charset=utf-8')
+    headers.append('Content-Type', 'application/json; charset=utf-8');
     headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
     return this.http.post(saveUrl, this._bookingDataObj);
   }
@@ -68,15 +68,14 @@ export class BookingService {
    * @desc - get the total cost of the cart in every toggle selection
    * @param bookingDta Booking Data Object
    */
-  public getCartTotal(bookingDta: BookingData): any {
+  public getCartTotal(bookingDta: BookingData): Observable<Response> {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
     const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}`
       + `&bedrooms=${bookingDta.bedrooms}&bathrooms=${bookingDta.bathrooms_no}&ext_windows=${bookingDta.ext_windows_no}&blinds=${bookingDta.blinds_no}`
       + `&curtain=${bookingDta.curtain_steam_no}&mattress=${bookingDta.mattress_steam_no}&wall_washing=${bookingDta.wall_washing_no}&sofa_clean=${bookingDta.sofa_clean_no}`
       + `&carpet_cleaning=${bookingDta.carpet_no}&rug=${bookingDta.rug}&balcony=${bookingDta.balcony}&bf=true&discount=false`;
-      console.log(urlPrefix + urlParams);
-      return this.http.get(urlPrefix + urlParams);
-      // return Observable.empty();
+     
+      return this.http.get(urlPrefix + urlParams, this.getCORSTextHeader());
   }
 
   /**
@@ -84,9 +83,22 @@ export class BookingService {
    * @param bookingDta Booking Data Object
    */
   public getBookingFee(bookingDta: BookingData): Observable <any> {
+    let headers = new Headers();
+    // headers.append('Authorization', this.authHeader);
+    headers.append('Accept', 'text/plain; charset=utf-8');
+    headers.append('Content-Type', 'text/plain; charset=utf-8');
+    headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
     const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}&bedrooms=${bookingDta.bedrooms}`;
 
     return this.http.get(urlPrefix + urlParams);
+  }
+
+  private getCORSTextHeader(): RequestOptions {
+    const headers = new Headers();
+    headers.append('Accept', 'text/plain; charset=utf-8');
+    headers.append('Content-Type', 'text/plain; charset=utf-8');
+    headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
+    return new RequestOptions({ headers: headers });
   }
 }

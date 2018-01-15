@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BookingService } from '../../services/booking.service';
+import { Response } from "@angular/http";
 
 import { PaymentPage } from '../payment/payment';
 import { BookingData } from '../../model/booking-data';
@@ -13,6 +14,7 @@ export class PropertyInfoPage {
 
 
   private bookingDataObj = {} as BookingData;
+  public price = 0;
 
 
   constructor(public navCtrl: NavController, private bookingService: BookingService) {}
@@ -25,12 +27,23 @@ export class PropertyInfoPage {
     console.log(this.bookingDataObj);
   }
 
+  private updatePrice(): void {
+    this.bookingService.getCartTotal(this.bookingDataObj)
+      .subscribe((res: Response) => {
+        const price = res.json();
+        this.price = price;
+        console.log("Updated price: ", this.price);
+      }, err => {
+        console.log("Error: ", err)
+      });
+  }
+
   /**
    * On Select the Type
    */
   public onSelectType(event: any): void {
     if (event.selected) {
-      this.bookingDataObj.prop_type = event.active;
+      this.bookingDataObj.prop_type = event.active.toLowerCase();
     } else {
       this.bookingDataObj.prop_type = event.deActive;
     }
@@ -43,9 +56,9 @@ export class PropertyInfoPage {
    */
   public onFlatOrStudio(event: any): void {
     if (event.selected) {
-      this.bookingDataObj.flat_studio = event.active;
+      this.bookingDataObj.flat_studio = (event.active === "YES") ? "1" : "0";
     } else {
-      this.bookingDataObj.flat_studio = event.deActive;
+      this.bookingDataObj.flat_studio = "0";
     }
     console.log("Flat or Studio selected: ", this.bookingDataObj);
   }
@@ -58,12 +71,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.bedrooms = event.deActive;
       console.log("After select the bed rooms: ", this.bookingDataObj);
-      this.bookingService.getCartTotal(this.bookingDataObj)
-        .subscribe(data => {
-          console.log("price: ", data);
-        }, err => {
-          console.log("Error: ", err)
-        })
+      this.updatePrice();
     }
   }
 
@@ -86,6 +94,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.bathrooms_no = event.deActive;
       console.log("After toggle the bathrooms: ", this.bookingDataObj);
+      this.updatePrice();
     }
   }
 
@@ -108,6 +117,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.carpet_no = event.deActive;
       console.log("After select the carpers", this.bookingDataObj);
+      this.updatePrice();
     }
   }
 
@@ -130,6 +140,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.ext_windows_no = event.deActive;
       console.log("After select the windows", this.bookingDataObj);
+      this.updatePrice();
     }
   }
 
@@ -152,6 +163,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.blinds_no = event.deActive;
       console.log("After select the Blinds", this.bookingDataObj);
+      this.updatePrice();
     }
   }
 
@@ -174,6 +186,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.curtain_steam_no = event.deActive;
       console.log("After select the Curtain", this.bookingDataObj);
+      this.updatePrice();
     }
   }
 
@@ -196,6 +209,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.mattress_steam_no = event.deActive;
       console.log("After select the Matttress", this.bookingDataObj);
+      this.updatePrice();
     }
   }
 
@@ -218,6 +232,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.wall_washing_no = event.deActive;
       console.log("After select the Wall", this.bookingDataObj);
+      this.updatePrice();
     }
   }
 
@@ -240,6 +255,7 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.sofa_clean_no = event.deActive;
       console.log("After select the Sofa", this.bookingDataObj);
+      this.updatePrice();
     }
   }
 

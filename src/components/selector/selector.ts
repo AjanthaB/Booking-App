@@ -17,11 +17,11 @@ export class SelectorComponent {
   /**
    * Hold the lable value of deactive state
    */
-  _deActiveLable: string = "NO";
+  _deActiveLable: any = "NO";
   /**
    * Hold the copy of deactive lable value
    */
-  _tmpDeActiveLable: string = "NO";
+  _tmpDeActiveLable: any = "NO";
   /**
    * Hold the boolean value to determine toggle and selection
    */
@@ -29,7 +29,7 @@ export class SelectorComponent {
   text: string;
   selected: boolean = false;
   showPopup: boolean = false;
-  _items = ["01", "02", "03", "04", "05", "06"];
+  _items = [{displayValue: "01", actualValue: "1"}, {displayValue: "02", actualValue: "2"}, {displayValue: "03", actualValue: "3"}];
 
   @Input()
   set lable(lable: string) {
@@ -108,14 +108,18 @@ export class SelectorComponent {
    * @desc - emit data to OnToggle EventEmitter
    */
   private emitOnToggle(): void {
-    this.onToggle.emit({active: this._activeLable, deActive: this._deActiveLable, selected: this.selected});
+    this.onToggle.emit({active: this._activeLable, 
+      deActive: this._deActiveLable, 
+      selected: this.selected});
   }
 
    /**
    * @desc - emit data to OnSelect EventEmitter
    */
   private emitOnSelect(): void {
-    this.onSelectItem.emit({active: this._activeLable, deActive: this._deActiveLable, selected: this.selected});
+    this.onSelectItem.emit({active: this._activeLable, 
+      deActive: (this._deActiveLable.displayValue) ? this._deActiveLable.displayValue: this._deActiveLable, 
+      selected: this.selected});
   }
 
   /**
