@@ -14,7 +14,8 @@ export class PropertyInfoPage {
 
 
   private bookingDataObj = {} as BookingData;
-  public price = 0;
+  public price = "0";
+  public discountPrice = "0";
 
 
   constructor(public navCtrl: NavController, private bookingService: BookingService) {}
@@ -30,12 +31,18 @@ export class PropertyInfoPage {
   private updatePrice(): void {
     this.bookingService.getCartTotal(this.bookingDataObj)
       .subscribe((res: Response) => {
-        const price = res.json();
+        const price: string = res.json();
         this.price = price;
+        this.calCulateDiscount(price);
         console.log("Updated price: ", this.price);
       }, err => {
         console.log("Error: ", err)
       });
+  }
+
+  private calCulateDiscount(price: any): void {
+    const discountPrice = (price/100*90).toFixed(2);
+    this.discountPrice = discountPrice;
   }
 
   /**
