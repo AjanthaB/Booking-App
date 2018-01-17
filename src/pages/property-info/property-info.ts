@@ -34,10 +34,32 @@ export class PropertyInfoPage {
         const price: string = res.json();
         this.price = price;
         this.calCulateDiscount(price);
+        this.updateBookingFee();
+        this.updatePayValue("full");
         console.log("Updated price: ", this.price);
       }, err => {
         console.log("Error: ", err)
       });
+  }
+
+  private updateBookingFee(): void {
+    this.bookingService.getBookingFee(this.bookingDataObj)
+      .subscribe((res: Response) => {
+        const bookingFee = res.json();
+        console.log("Booking fee: ", bookingFee);
+      }, err => {
+        console.log("error getting booking fee: ", err);
+      })
+  }
+
+  private updatePayValue(paymentType: string): void {
+    this.bookingService.updatePayValue(this.bookingDataObj, paymentType)
+      .subscribe((res: Response) => {
+        const payValue = res.json();
+        console.log("PayeValue", payValue);
+      }, err => {
+        console.log("error getting payvalue ", err);
+      })
   }
 
   private calCulateDiscount(price: any): void {

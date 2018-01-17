@@ -117,7 +117,7 @@ export class SelectorComponent {
    */
   private emitOnSelect(): void {
     this.onSelectItem.emit({active: this._activeLable, 
-      deActive: (this._deActiveLable.displayValue) ? this._deActiveLable.displayValue: this._deActiveLable, 
+      deActive: (this._deActiveLable.displayValue) ? this._deActiveLable.actualValue: this._deActiveLable, 
       selected: this.selected});
   }
 
