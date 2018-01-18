@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BookingService } from '../../services/booking.service';
+import { Response } from '@angular/http';
 
+import { BookingService } from '../../services/booking.service';
 import { PropertyInfoPage } from '../property-info/property-info';
 import { BookingData } from '../../model/booking-data';
 
@@ -29,6 +30,7 @@ export class ProsonalInfoPage {
   ngOnInit() {
     this._bookingDataObj = this.bookingService.getBookingDataObj();
     this.createPersonalIntoForm();
+    this.updatePrice();
     console.log("on Init")
   }
 
@@ -63,7 +65,7 @@ export class ProsonalInfoPage {
     bookingData.booking_date = formValue.date;  // need to format the date
     bookingData.booking_time = formValue.time; // need to format 
     bookingData.cust_name = formValue.name;
-    bookingData.postcode = formValue.postcode;
+    bookingData.postcode = formValue.postCode;
     bookingData.address = formValue.address;
     bookingData.phone = formValue.phoneNum;
     bookingData.email = formValue.email;
@@ -77,5 +79,39 @@ export class ProsonalInfoPage {
    */
   public redirecToHomePage(): void {
     this.navCtrl.pop();
+  }
+
+  private updatePrice(): void {
+    this.bookingService.getCartTotal(this._bookingDataObj)
+      .subscribe((res: Response) => {
+        const price: string = res.json();
+        this.bookingService.setTotalCart(price);
+        this.updateBookingFee();
+        this.updatePayValue("full");
+      }, err => {
+        console.log("Error: ", err)
+      });
+  }
+
+  private updateBookingFee(): void {
+    this.bookingService.getBookingFee(this._bookingDataObj)
+      .subscribe((res: Response) => {
+        const bookingFee = res.json();
+        this.bookingService.setBookingFee(bookingFee);
+        console.log("Booking fee: ", bookingFee);
+      }, err => {
+        console.log("error getting booking fee: ", err);
+      })
+  }
+
+  private updatePayValue(paymentType: string): void {
+    this.bookingService.updatePayValue(this._bookingDataObj, paymentType)
+      .subscribe((res: Response) => {
+        const payValue = res.json();
+        this.bookingService.setPayValue(payValue);
+        console.log("PayeValue", payValue);
+      }, err => {
+        console.log("error getting payvalue ", err);
+      })
   }
 }

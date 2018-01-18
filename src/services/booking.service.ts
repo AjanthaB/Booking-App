@@ -13,7 +13,7 @@ export class BookingService {
    */
   private _bookingDataObj = {} as BookingData;
   /**
-   * Hold weather states are completed ot not
+   * Hold weather states are completed or not
    */
   private stateInfo = {
     personalInfoCompleted: false,
@@ -23,6 +23,19 @@ export class BookingService {
   private requestInfo = {
     personalInfoValid: false
   };
+
+  /**
+   * Hold the booking fee
+   */
+  private bookingFee = "0";
+  /**
+   * Hold the total cart value
+   */
+  private totalCart = "0";
+  /**
+   * Hold the wold pay value
+   */
+  private payValue = "0";
 
   /**
    * Constructor function of the class
@@ -37,9 +50,31 @@ export class BookingService {
    */
   private initPropertyData() {
     this._bookingDataObj = this.getBookingInitData();
-    console.log("Initializing the Property data");
   }
 
+  public getBookkingFee(): string {
+    return this.bookingFee;
+  }
+
+  public setBookingFee(fee: string): void {
+    this.bookingFee = fee;
+  }
+
+  public getTotalCart(): string {
+    return this.totalCart;
+  }
+
+  public setTotalCart(price: string): void {
+    this.totalCart = price;
+  }
+
+  public getPayValue(): string {
+    return this.payValue;
+  }
+
+  public setPayValue(value: string): void {
+    this.payValue = value;
+  }
   /**
    * @desc - return dummy Booking Data Object
    */
@@ -56,19 +91,19 @@ export class BookingService {
       cust_comments : "",
       paid_amount : 0,
       full_amount : 0,
-      prop_type : "",
+      prop_type : "flat",
       flat_studio : "",
-      bedrooms: 0,
-      bathrooms_no: 0,
-      ext_windows_no: 0,
-      blinds_no: 0,
-      curtain_steam_no: 0,
-      mattress_steam_no: 0,
-      wall_washing_no: 0,
-      sofa_clean_no: 0,
-      carpet_no: 0,
-      rug: 0,
-      balcony: 0
+      bedrooms: "",
+      bathrooms_no: "",
+      ext_windows_no: "",
+      blinds_no: "",
+      curtain_steam_no: "",
+      mattress_steam_no: "",
+      wall_washing_no: "",
+      sofa_clean_no: "",
+      carpet_no: "",
+      rug: "",
+      balcony: ""
     };
   }
 

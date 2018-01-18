@@ -3,11 +3,11 @@
   <div class="lbl">{{_lable}}</div>
   <div class="btn-test">
     <div>
-    <div class="item" [ngClass]="{'noItem': !selected}" (click)="toggle()">{{ (_deActiveLable.actualValue) ? _deActiveLable.actualValue: _deActiveLable}}</div>
+    <div class="item" [ngClass]="{'noItem': !selected}" (click)="toggle()">{{_deActiveLable}}</div>
     <div class="item" [ngClass]="{'colored': selected}" (click)="toggle()">{{_activeLable}}</div>
   </div>
     <div class="popup" *ngIf="showPopup && !_toggleOnly">
-      <div class="list-item" *ngFor="let item of _items" (click)="selectItem(item)">{{item?.displayValue}}</div>
+      <div class="list-item" *ngFor="let item of _items" (click)="selectItem(item)">{{item}}</div>
     </div>
   </div>
 </div>

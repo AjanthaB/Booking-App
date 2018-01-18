@@ -11,6 +11,10 @@ export class SelectorComponent {
    */
   _lable = "lable";
   /**
+   * Key to identify the which property is display
+   */
+  _key = "";
+  /**
    * Hold the lable value of active state
    */
   _activeLable: string = "YES";
@@ -29,7 +33,7 @@ export class SelectorComponent {
   text: string;
   selected: boolean = false;
   showPopup: boolean = false;
-  _items = [{displayValue: "01", actualValue: "1"}, {displayValue: "02", actualValue: "2"}, {displayValue: "03", actualValue: "3"}];
+  _items = ["01", "02", "03", "04"];
 
   @Input()
   set lable(lable: string) {
@@ -77,7 +81,14 @@ export class SelectorComponent {
    if (item) {
      this._deActiveLable = item;
      this.selected = true;
-     this.showPopup = true;
+     this.showPopup = false;
+   }
+ }
+
+ @Input()
+ set key(key: string) {
+   if (key) {
+     this._key = key;
    }
  }
 
@@ -117,7 +128,7 @@ export class SelectorComponent {
    */
   private emitOnSelect(): void {
     this.onSelectItem.emit({active: this._activeLable, 
-      deActive: (this._deActiveLable.displayValue) ? this._deActiveLable.actualValue: this._deActiveLable, 
+      deActive: this._deActiveLable, 
       selected: this.selected});
   }
 
@@ -129,5 +140,20 @@ export class SelectorComponent {
     this.showPopup = false;
     this._deActiveLable = item;
     this.emitOnSelect();
+  }
+
+  public getKey(): string {
+    return this._key;
+  }
+
+  public setSelectedItem(item: string): void {
+    if (item) {
+      this._deActiveLable = item;
+     this.selected = true;
+    }
+  }
+
+  public setSelectedOnlyToggle(): void {
+    this.selected = true;
   }
 }

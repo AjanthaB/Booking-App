@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ContentChild, ViewChildren, QueryList } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BookingService } from '../../services/booking.service';
 import { Response } from "@angular/http";
 
 import { PaymentPage } from '../payment/payment';
 import { BookingData } from '../../model/booking-data';
+import { SelectorComponent } from '../../components/selector/selector';
 
 @Component({
   selector: 'page-property-info',
@@ -12,11 +13,12 @@ import { BookingData } from '../../model/booking-data';
 })
 export class PropertyInfoPage {
 
+  @ViewChildren(SelectorComponent) toggleSelectors: QueryList<SelectorComponent>
 
-  private bookingDataObj = {} as BookingData;
+  public bookingDataObj = {} as BookingData;
   public price = "0";
   public discountPrice = "0";
-
+  public summaryVisible = false;
 
   constructor(public navCtrl: NavController, private bookingService: BookingService) {}
 
@@ -25,7 +27,30 @@ export class PropertyInfoPage {
    */
   ngOnInit() {
     this.bookingDataObj = this.bookingService.getBookingDataObj();
-    console.log(this.bookingDataObj);
+    this.price = this.bookingService.getTotalCart();
+    this.calCulateDiscount(this.price);
+  }
+
+  ngAfterViewInit() {
+    this.setInitValues();
+  }
+
+  /**
+   * @desc set initial Booking data values into toogle selectors id exist
+   */
+  private setInitValues(): void {
+    if (this.toggleSelectors) {
+      this.toggleSelectors.forEach(selector => {
+        const key = selector.getKey();
+        if (this.bookingDataObj[key]) {
+          if (key === 'prop_type' || key === 'flat_studio') {
+            selector.setSelectedOnlyToggle();
+          } else {
+            selector.setSelectedItem(this.bookingDataObj[key]);
+          }
+        }
+      })
+    }
   }
 
   private updatePrice(): void {
@@ -33,6 +58,7 @@ export class PropertyInfoPage {
       .subscribe((res: Response) => {
         const price: string = res.json();
         this.price = price;
+        this.bookingService.setTotalCart(price);
         this.calCulateDiscount(price);
         this.updateBookingFee();
         this.updatePayValue("full");
@@ -46,6 +72,7 @@ export class PropertyInfoPage {
     this.bookingService.getBookingFee(this.bookingDataObj)
       .subscribe((res: Response) => {
         const bookingFee = res.json();
+        this.bookingService.setBookingFee(bookingFee);
         console.log("Booking fee: ", bookingFee);
       }, err => {
         console.log("error getting booking fee: ", err);
@@ -56,6 +83,7 @@ export class PropertyInfoPage {
     this.bookingService.updatePayValue(this.bookingDataObj, paymentType)
       .subscribe((res: Response) => {
         const payValue = res.json();
+        this.bookingService.setPayValue(payValue);
         console.log("PayeValue", payValue);
       }, err => {
         console.log("error getting payvalue ", err);
@@ -74,8 +102,9 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.prop_type = event.active.toLowerCase();
     } else {
-      this.bookingDataObj.prop_type = event.deActive;
+      this.bookingDataObj.prop_type = event.deActive.toLowerCase();
     }
+    this.updatePrice();
     console.log("booking type selected: ", this.bookingDataObj);
   }
 
@@ -89,6 +118,7 @@ export class PropertyInfoPage {
     } else {
       this.bookingDataObj.flat_studio = "0";
     }
+    this.updatePrice();
     console.log("Flat or Studio selected: ", this.bookingDataObj);
   }
 
@@ -110,7 +140,7 @@ export class PropertyInfoPage {
    */
   public onToggleBedrooms(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.bedrooms = 0;
+      this.bookingDataObj.bedrooms = "0";
       console.log("After toggle the bed rooms: ", this.bookingDataObj);
     }
   }
@@ -133,7 +163,7 @@ export class PropertyInfoPage {
    */
   public onToggleBathrooms(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.bathrooms_no = 0;
+      this.bookingDataObj.bathrooms_no = "0";
       console.log("After toggle the bath rooms: ", this.bookingDataObj);
     }
   }
@@ -156,7 +186,7 @@ export class PropertyInfoPage {
    */
   public onToggleCarpets(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.carpet_no = 0;
+      this.bookingDataObj.carpet_no = "0";
       console.log("After toggle the carrpets: ", this.bookingDataObj);
     }
   }
@@ -179,7 +209,7 @@ export class PropertyInfoPage {
    */
   public onToggleWindows(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.ext_windows_no = 0;
+      this.bookingDataObj.ext_windows_no = "0";
       console.log("After toggle the windows: ", this.bookingDataObj);
     }
   }
@@ -202,7 +232,7 @@ export class PropertyInfoPage {
    */
   public onToggleBlinds(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.blinds_no = 0;
+      this.bookingDataObj.blinds_no = "0";
       console.log("After toggle the Blinds: ", this.bookingDataObj);
     }
   }
@@ -225,7 +255,7 @@ export class PropertyInfoPage {
    */
   public onToggleCurtain(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.curtain_steam_no = 0;
+      this.bookingDataObj.curtain_steam_no = "0";
       console.log("After toggle the Curtain: ", this.bookingDataObj);
     }
   }
@@ -248,7 +278,7 @@ export class PropertyInfoPage {
    */
   public onToggleMattress(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.mattress_steam_no = 0;
+      this.bookingDataObj.mattress_steam_no = "0";
       console.log("After toggle the Mattress: ", this.bookingDataObj);
     }
   }
@@ -271,7 +301,7 @@ export class PropertyInfoPage {
    */
   public onToggleWall(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.wall_washing_no = 0;
+      this.bookingDataObj.wall_washing_no = "0";
       console.log("After toggle the Mattress: ", this.bookingDataObj);
     }
   }
@@ -294,7 +324,7 @@ export class PropertyInfoPage {
    */
   public onToggleSofa(event: any): void {
     if (!event.selected) {
-      this.bookingDataObj.sofa_clean_no = 0;
+      this.bookingDataObj.sofa_clean_no = "0";
       console.log("After toggle the Sofa: ", this.bookingDataObj);
     }
   }
@@ -305,13 +335,21 @@ export class PropertyInfoPage {
    * cache Personal Information when click on Next button
    */
   public savePropertyDataAndRedirectTo(): void {
-    this.navCtrl.push(PaymentPage)
+    if (this.summaryVisible) {
+      this.navCtrl.push(PaymentPage)
+    } else {
+      this.summaryVisible = true;
+    }
   }
 
   /**
    * @desc - back to Home Page
    */
   public redirecToPersonalInfoPage(): void {
-    this.navCtrl.pop();
+    if (!this.summaryVisible) {
+      this.navCtrl.pop();
+    } else {
+      this.summaryVisible = false;
+    } 
   }
 }

@@ -17,15 +17,15 @@ export interface BookingData {
   prop_type : string;
   flat_studio : string;
 
-  bedrooms : number;
-  bathrooms_no : number;
-  ext_windows_no : number;
-  blinds_no : number;
-  curtain_steam_no : number;
-  mattress_steam_no : number;
-  wall_washing_no : number;
-  sofa_clean_no : number;
-  carpet_no : number;
-  rug : number; 
-  balcony : number; 
+  bedrooms : string;
+  bathrooms_no : string;
+  ext_windows_no : string;
+  blinds_no : string;
+  curtain_steam_no : string;
+  mattress_steam_no : string;
+  wall_washing_no : string;
+  sofa_clean_no : string;
+  carpet_no : string;
+  rug : string; 
+  balcony : string; 
 }

@@ -8,21 +8,60 @@
 
 
 <ion-content padding>
-  <ion-grid>
+
+
+  <ion-grid *ngIf="summaryVisible">
     <ion-row>
       <ion-col>
         <div class="price-box">
           CURRENT PRICE
           <br>
-          <span class="without-discount">{{'€' + price}}</span><br>
-          <span class="without-discount"> {{'€' + discountPrice}}</span>
+          <span class="without-discount">{{'£' + price}}</span><br>
+          <span class="without-discount"> {{'£' + discountPrice}}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>TYPE</ion-col>
+      <ion-col> {{bookingDataObj.prop_type}} </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+          <div class="col-sm-12">
+            <button ion-button icon-right float-left (click)="redirecToPersonalInfoPage()">
+              Back
+              <ion-icon name="md-arrow-dropleft-circle"></ion-icon>
+            </button>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="col-sm-12">
+            <button ion-button icon-right float-left (click)="savePropertyDataAndRedirectTo()">
+              Next
+              <ion-icon name="md-arrow-dropright-circle"></ion-icon>
+            </button>
+          </div>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="!summaryVisible">
+    <ion-row>
+      <ion-col>
+        <div class="price-box">
+          CURRENT PRICE
+          <br>
+          <span class="without-discount">{{'£' + price}}</span><br>
+          <span class="without-discount"> {{'£' + discountPrice}}</span>
         </div>
       </ion-col>
     </ion-row>
           
     <ion-row>
       <ion-col>
-        <selector 
+        <selector
+        [key]="'prop_type'"
         [lable]="'Type'" 
         [toggleOnly]="true"
         [activeLable]="'FLAT'"
@@ -31,6 +70,7 @@
       </ion-col>
       <ion-col>
         <selector 
+        [key]="'flat_studio'"
         [lable]="'Flat/ Studio'" 
         [toggleOnly]="true" 
         (onToggle)="onFlatOrStudio($event)"></selector>
@@ -39,13 +79,17 @@
 
     <ion-row>
       <ion-col>
-        <selector [lable]="'Bedrooms'" 
+        <selector
+        [key]="'bedrooms'"
+        [lable]="'Bedrooms'"
         (onToggle)="onToggleBedrooms($event)"
         (onSelectItem)="onSelectBedrooms($event)">
       </selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'Bathrooms'"  
+        <selector
+        [key]="'bathrooms_no'"
+        [lable]="'Bathrooms'"  
         (onToggle)="onToggleBathrooms($event)"
         (onSelectItem)="onSelectBathRooms($event)"></selector>
       </ion-col>
@@ -53,12 +97,16 @@
     
     <ion-row>
       <ion-col>
-        <selector [lable]="'Carpert Cleaning'"
+        <selector
+        [key]="'carpet_no'"
+        [lable]="'Carpert Cleaning'"
         (onToggle)="onToggleCarpets($event)"
         (onSelectItem)="onSelectCatpets($event)"></selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'External Windows'"
+        <selector 
+        [key]="'ext_windows_no'"
+        [lable]="'External Windows'"
         (onToggle)="onToggleWindows($event)"
         (onSelectItem)="onSelectWindows($event)"></selector>
       </ion-col>
@@ -66,12 +114,16 @@
 
     <ion-row>
       <ion-col>
-        <selector [lable]="'Blinds'" 
+        <selector
+        [key]="'blinds_no'"
+        [lable]="'Blinds'" 
         (onToggle)="onToggleBlinds($event)"
         (onSelectItem)="onSelectBlinds($event)"></selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'Curtain steam'" 
+        <selector 
+        [key]="'curtain_steam_no'"
+        [lable]="'Curtain steam'" 
         (onToggle)="onToggleCurtain($event)"
         (onSelectItem)="onSelectCurtain($event)"></selector>
       </ion-col>
@@ -80,13 +132,17 @@
 
     <ion-row>
       <ion-col>
-        <selector [lable]="'Mattress steam'"
+        <selector
+        [key]="'mattress_steam_no'"
+        [lable]="'Mattress steam'"
         (onToggle)="onToggleMattress($event)"
         (onSelectItem)="onSelectMattress($event)" 
         ></selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'Wall washing'"
+        <selector
+        [key]="'wall_washing_no'"
+        [lable]="'Wall washing'"
         (onToggle)="onToggleWall($event)"
         (onSelectItem)="onSelectWall($event)" ></selector>
       </ion-col>
@@ -95,18 +151,24 @@
 
     <ion-row>
       <ion-col>
-        <selector [lable]="'Sofa clean'" 
+        <selector 
+        [key]="'sofa_clean_no'"
+        [lable]="'Sofa clean'" 
         (onToggle)="onToggleSofa($event)"
         (onSelectItem)="onSelectSofa($event)" ></selector>
       </ion-col>
       <ion-col>
-        <selector [lable]="'Rug'"></selector>
+        <selector
+        [key]="'rug'"
+        [lable]="'Rug'"></selector>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <selector [lable]="'Balcony'"></selector>
+        <selector
+        [key]="'balcony'"
+        [lable]="'Balcony'"></selector>
       </ion-col>
     </ion-row>
 
@@ -129,7 +191,6 @@
         </div>
       </ion-col>
     </ion-row>
-
   </ion-grid>
 
 </ion-content>
