@@ -83,6 +83,11 @@ export class PropertyInfoPage {
     this.bookingService.updatePayValue(this.bookingDataObj, paymentType)
       .subscribe((res: Response) => {
         const payValue = res.json();
+        if (payValue === "full") {
+          this.bookingService.setFullAmount(payValue);
+        } else {
+          this.bookingService.setBookingFee(payValue);
+        }
         this.bookingService.setPayValue(payValue);
         console.log("PayeValue", payValue);
       }, err => {

@@ -4,6 +4,7 @@ import { FormControl,  FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { BookingData } from '../../model/booking-data';
 
 @Component({
   selector: 'page-payment',
@@ -26,16 +27,18 @@ export class PaymentPage {
     + '</body></html>';
 
   private pageContentUrl = 'data:text/html;base64,' + btoa(this.pageContent);
+  public bookingDataObj = {} as BookingData;
+  public peymentType = "full";
 
   constructor(public navCtrl: NavController,
     private iab: InAppBrowser,
-    private authService: BookingService) {}
+    private bookingService: BookingService) {}
 
   /**
    * Angular lifecyvle event
    */
   ngOnInit() {
-    // this.createPersonalIntoForm();
+   this.bookingDataObj =  this.bookingService.getBookingDataObj();
   }
 
   /**
@@ -44,10 +47,27 @@ export class PaymentPage {
   public payNow(): void {
     // this.navCtrl.push()
     const browser:any = this.iab.create(this.pageContentUrl, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
-
-
     browser.addEventListener('loaderror', this.loadErrorCallBack)
-    
+  }
+
+  /**
+   * @desc fetch price when toggle chnaged
+   * @param type payment type (pull or half)
+   */
+  public onChangePaymentType(event): void {
+    console.log(event);
+    this.bookingService.updatePayValue(this.bookingDataObj, event)
+      .subscribe((res: Response) => {
+        const payValue: any = res.json();
+        if (event === 'full') {
+          this.bookingService.setPayValue(payValue);
+        } else {
+
+        }
+        console.log("PayValue: ")
+      }, err => {
+        console.log("Error: ", err);
+      });
   }
 
   private loadErrorCallBack(error): void {

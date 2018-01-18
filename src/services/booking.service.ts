@@ -35,7 +35,11 @@ export class BookingService {
   /**
    * Hold the wold pay value
    */
-  private payValue = "0";
+  private worldPayValue = "0";
+  /**
+   * Hold the full amount value
+   */
+  private fullAmount = "0";
 
   /**
    * Constructor function of the class
@@ -69,11 +73,19 @@ export class BookingService {
   }
 
   public getPayValue(): string {
-    return this.payValue;
+    return this.worldPayValue;
   }
 
   public setPayValue(value: string): void {
-    this.payValue = value;
+    this.worldPayValue = value;
+  }
+
+  public getFullAmount(): string {
+    return this.fullAmount;
+  }
+
+  public setFullAmount(value: string): void {
+    this.fullAmount = value
   }
   /**
    * @desc - return dummy Booking Data Object
@@ -184,12 +196,36 @@ export class BookingService {
   }
 
   /**
+   * @desc - Create a new booking
+   * @param bookingDta 
+   */
+  public addNewBooking(bookingDta: BookingData): Observable<Response> {
+    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/new`;
+    // todo: need to add the parameter cartId
+    return this.http.get(urlPrefix, this.getCORSJSONHeader());
+  }
+
+  public enableBooking(bookingDta: BookingData): Observable<Response> {
+    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-enable`;
+    // todo: need to add paramaeter cartId
+    return this.http.get(urlPrefix, this.getCORSJSONHeader());
+  }
+
+  /**
    * @desc - return header for access text type response
    */
   private getCORSTextHeader(): RequestOptions {
     const headers = new Headers();
     headers.append('Accept', 'text/plain; charset=utf-8');
     headers.append('Content-Type', 'text/plain; charset=utf-8');
+    headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
+    return new RequestOptions({ headers: headers });
+  }
+
+  private getCORSJSONHeader(): RequestOptions {
+    const headers = new Headers();
+    headers.append('Accept', 'application/json; charset=utf-8');
+    headers.append('Content-Type', 'application/json; charset=utf-8');
     headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
     return new RequestOptions({ headers: headers });
   }
