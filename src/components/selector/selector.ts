@@ -32,9 +32,10 @@ export class SelectorComponent {
   _toggleOnly: boolean = false;
   text: string;
   selected: boolean = false;
+  selected1: boolean = false;
   showPopup: boolean = false;
   _items = ["01", "02", "03", "04"];
-
+  _isToggle = false;
   @Input()
   set lable(lable: string) {
     if (lable) {
@@ -77,6 +78,11 @@ export class SelectorComponent {
  }
 
  @Input()
+ set isToggle(isToggle: boolean) {
+    this._isToggle = (isToggle == true) ? true : false;
+ }
+
+ @Input()
  set selectedItem(item: string) {
    if (item) {
      this._deActiveLable = item;
@@ -105,6 +111,7 @@ export class SelectorComponent {
    */
   toggle(): void {
     this.selected = !this.selected;
+    this.selected1 = !this.selected;
     if (this.selected) {
       this.showPopup = true;
     } else {
@@ -118,8 +125,8 @@ export class SelectorComponent {
    * @desc - emit data to OnToggle EventEmitter
    */
   private emitOnToggle(): void {
-    this.onToggle.emit({active: this._activeLable, 
-      deActive: this._deActiveLable, 
+    this.onToggle.emit({active: this._activeLable,
+      deActive: this._deActiveLable,
       selected: this.selected});
   }
 
@@ -127,13 +134,13 @@ export class SelectorComponent {
    * @desc - emit data to OnSelect EventEmitter
    */
   private emitOnSelect(): void {
-    this.onSelectItem.emit({active: this._activeLable, 
-      deActive: this._deActiveLable, 
+    this.onSelectItem.emit({active: this._activeLable,
+      deActive: this._deActiveLable,
       selected: this.selected});
   }
 
   /**
-   * @desc - select the item from dopdown and 
+   * @desc - select the item from dopdown and
    * @param item - selected item
    */
   selectItem(item: string): void {

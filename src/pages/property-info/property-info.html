@@ -17,7 +17,7 @@
         <div class="price-box">
           CURRENT PRICE
           <br>
-          <span class="without-discount">{{'£' + price}}</span><br>
+          <span class="without-discount line" >{{'£' + price}}</span><br>
           <span class="without-discount"> {{'£' + discountPrice}}</span>
         </div>
       </ion-col>
@@ -30,7 +30,7 @@
     <ion-row>
         <ion-col>
           <div class="col-sm-12">
-            <button ion-button icon-right float-left (click)="redirecToPersonalInfoPage()">
+            <button ion-button icon-right float-left outline (click)="redirecToPersonalInfoPage()">
               Back
               <ion-icon name="md-arrow-dropleft-circle"></ion-icon>
             </button>
@@ -64,6 +64,7 @@
         <selector
         [key]="'prop_type'"
         [lable]="'Type'"
+        [isToggle]="true"
         [toggleOnly]="true"
         [activeLable]="'FLAT'"
         [deActiveLable]="'HOUSE'"
@@ -188,7 +189,7 @@
     <ion-row>
       <ion-col>
         <div class="col-sm-12">
-          <button ion-button icon-right float-left (click)="redirecToPersonalInfoPage()">
+          <button ion-button icon-right float-left outline (click)="redirecToPersonalInfoPage()">
             Back
             <ion-icon name="md-arrow-dropleft-circle"></ion-icon>
           </button>

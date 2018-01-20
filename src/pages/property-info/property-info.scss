@@ -9,13 +9,13 @@ page-property-info{
 	.btn-test{
 		float: none;
 		display: block;
-		height: 30px;
-		width: 110px;
+		height: 32px;
+		width: 120px;
 		background: #e0e0e0;
-		border: solid 1px #0093d1;
+		border: solid 2px #0093d1;
 	}
 	.popup{
-		border: solid 1px #0093d1;
+		border: solid 2px #0093d1;
 	}
 	.list-item:hover{
 		background:#b2dced;
@@ -37,4 +37,7 @@ page-property-info{
 	.without-discount {
 		font-style: italic;
 	}
+  .line{
+    text-decoration: line-through;
+  }
 }
