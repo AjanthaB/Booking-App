@@ -16,6 +16,7 @@ import { ProsonalInfoPage } from '../pages/personal-info/personal-info';
 import { PropertyInfoPage } from '../pages/property-info/property-info';
 import { PaymentPage } from '../pages/payment/payment';
 import { StateComponent } from '../components/state/state';
+import { SliderComponent } from '../pages/slider/slider';
 
 // services
 import { BookingService } from "../services/booking.service";
@@ -29,7 +30,8 @@ import { OfflieDetectionService } from '../services/offline-detection.service';
     ProsonalInfoPage,
     PropertyInfoPage,
     PaymentPage,
-    StateComponent
+    StateComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { OfflieDetectionService } from '../services/offline-detection.service';
     ProsonalInfoPage,
     PropertyInfoPage,
     PaymentPage,
-    StateComponent
+    StateComponent,
+    SliderComponent
   ],
   providers: [
     StatusBar,

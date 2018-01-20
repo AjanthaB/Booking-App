@@ -4,6 +4,7 @@ import { FormControl,  FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 
 import { ProsonalInfoPage } from '../personal-info/personal-info';
+import { SliderComponent } from '../slider/slider';
 
 @Component({
   selector: 'page-home',
@@ -29,7 +30,7 @@ export class HomePage {
    * @desc - Redirect to Personal Info Page
    */
   public redirectToPersonalInfo(): void {
-    this.navCtrl.push(ProsonalInfoPage);
+    this.navCtrl.push(SliderComponent);
   }
   
 
