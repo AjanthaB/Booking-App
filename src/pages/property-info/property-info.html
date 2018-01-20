@@ -10,6 +10,7 @@
 <ion-content padding>
 
 
+  <progress-eot [position]="2"></progress-eot>
   <ion-grid *ngIf="summaryVisible">
     <ion-row>
       <ion-col>
@@ -57,22 +58,22 @@
         </div>
       </ion-col>
     </ion-row>
-          
+
     <ion-row>
       <ion-col>
         <selector
         [key]="'prop_type'"
-        [lable]="'Type'" 
+        [lable]="'Type'"
         [toggleOnly]="true"
         [activeLable]="'FLAT'"
         [deActiveLable]="'HOUSE'"
         (onToggle)="onSelectType($event)"></selector>
       </ion-col>
       <ion-col>
-        <selector 
+        <selector
         [key]="'flat_studio'"
-        [lable]="'Flat/ Studio'" 
-        [toggleOnly]="true" 
+        [lable]="'Flat/ Studio'"
+        [toggleOnly]="true"
         (onToggle)="onFlatOrStudio($event)"></selector>
       </ion-col>
     </ion-row>
@@ -89,12 +90,12 @@
       <ion-col>
         <selector
         [key]="'bathrooms_no'"
-        [lable]="'Bathrooms'"  
+        [lable]="'Bathrooms'"
         (onToggle)="onToggleBathrooms($event)"
         (onSelectItem)="onSelectBathRooms($event)"></selector>
       </ion-col>
     </ion-row>
-    
+
     <ion-row>
       <ion-col>
         <selector
@@ -104,7 +105,7 @@
         (onSelectItem)="onSelectCatpets($event)"></selector>
       </ion-col>
       <ion-col>
-        <selector 
+        <selector
         [key]="'ext_windows_no'"
         [lable]="'External Windows'"
         (onToggle)="onToggleWindows($event)"
@@ -116,14 +117,14 @@
       <ion-col>
         <selector
         [key]="'blinds_no'"
-        [lable]="'Blinds'" 
+        [lable]="'Blinds'"
         (onToggle)="onToggleBlinds($event)"
         (onSelectItem)="onSelectBlinds($event)"></selector>
       </ion-col>
       <ion-col>
-        <selector 
+        <selector
         [key]="'curtain_steam_no'"
-        [lable]="'Curtain steam'" 
+        [lable]="'Curtain steam'"
         (onToggle)="onToggleCurtain($event)"
         (onSelectItem)="onSelectCurtain($event)"></selector>
       </ion-col>
@@ -136,7 +137,7 @@
         [key]="'mattress_steam_no'"
         [lable]="'Mattress steam'"
         (onToggle)="onToggleMattress($event)"
-        (onSelectItem)="onSelectMattress($event)" 
+        (onSelectItem)="onSelectMattress($event)"
         ></selector>
       </ion-col>
       <ion-col>
@@ -151,9 +152,9 @@
 
     <ion-row>
       <ion-col>
-        <selector 
+        <selector
         [key]="'sofa_clean_no'"
-        [lable]="'Sofa clean'" 
+        [lable]="'Sofa clean'"
         (onToggle)="onToggleSofa($event)"
         (onSelectItem)="onSelectSofa($event)" ></selector>
       </ion-col>

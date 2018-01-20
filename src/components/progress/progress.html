@@ -4,25 +4,20 @@
 </div> -->
 
    <i class="icon ion-home" style="font-size:30px; color:#000"></i>
-   
+
 <div class="navigation">
-  <span class="bullet">
-    >
-  </span>
-  
+
+  <span class="bullet" [ngClass]="{'default next': _position < 1}"></span>
   <span class="line filled"></span>
-  <span id="second-bullet" class="bullet default next">
- 
-  </span>
-  
+
+  <span id="second-bullet" class="bullet" [ngClass]="{'default next': _position < 2}"></span>
   <span id="second-line" class="line filled"></span>
-  <span id="third-bullet" class="bullet default next">
-    
-  </span>
+
+  <span id="third-bullet" class="bullet" [ngClass]="{'default next': _position < 3}"></span>
 
   <div class="row labels" style="width:100%">
-    <div style="width:33%;text-align:center">personal info</div>
-    <div style="width:33%;text-align:center">property info</div>
-    <div style="width:33%;text-align:center">complete</div>
+    <div style="width:33%;text-align:center" class="default-text" [ngClass]="{'done-text': _position == 1}">personal info</div>
+    <div style="width:33%;text-align:center" class="default-text" [ngClass]="{'done-text': _position == 2}">property info</div>
+    <div style="width:33%;text-align:center" class="default-text" [ngClass]="{'done-text': _position == 3}">complete</div>
   </div>
 </div>

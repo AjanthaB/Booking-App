@@ -5,27 +5,29 @@
       </ion-title>
     </ion-navbar>
   </ion-header>
-  
-  
+
+
   <ion-content padding>
+
+    <progress-eot [position]="3"></progress-eot>
     <ion-grid>
 
       <ion-list radio-group [(ngModel)]="peymentType" (ngModelChange)="onChangePaymentType($event)">
-      
+
         <ion-item>
           <ion-radio checked="true" value="full"></ion-radio>
           <ion-label>Full payment (£ 166.50 +20% Vat)</ion-label>
         </ion-item>
-      
+
         <ion-item>
           <ion-radio value="half"></ion-radio>
           <ion-label>Booking Fee (£ 35 +20% Vat) and remaning cash on the day.</ion-label>
         </ion-item>
-    
+
       </ion-list>
 
       <ion-row>
-        <div class="row"> 
+        <div class="row">
           <span class="txt">We accept all types of cards</span>
           <span>
             <img src="assets/imgs/worldpay-icon.jpg">
@@ -41,8 +43,8 @@
 
       <ion-row>
         <p class="payments-para">
-          <i class="fa fa-exclamation-circle"></i> 
-          By making this payment you accepts our 
+          <i class="fa fa-exclamation-circle"></i>
+          By making this payment you accepts our
           <a href="https://www.end-of-tenancy-london.co.uk/terms-and-conditions/" target="_blank">terms &amp; Conditions</a>
         </p>
       </ion-row>
@@ -66,7 +68,7 @@
         </div>
       </ion-col>
     </ion-row>
-  
+
     </ion-grid>
-    
+
   </ion-content>

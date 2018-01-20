@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 /**
  * Generated class for the ProgressComponent component.
@@ -13,6 +13,13 @@ import { Component } from '@angular/core';
 export class ProgressComponent {
 
   text: string;
+  _position = 0;
+
+  @Input()
+  set position(position: number) {
+      this._position = position;
+    console.log(this._position);
+  }
 
   constructor() {
     console.log('Hello ProgressComponent Component');

@@ -14,12 +14,12 @@ progress-eot {
         background: #0b3853;
     }
 
-    
+
     .navigation span.line {
         width: 3em;
     }
-    
-    
+
+
     .navigation span.line {
         height: 2px;
         background: #f3f3f3;
@@ -27,8 +27,8 @@ progress-eot {
         display: inline-block;
         margin-top: 1em;
     }
-   
-    
+
+
     .navigation span {
         float: left;
     }
@@ -42,10 +42,10 @@ progress-eot {
         background: #eaeaea;
         border: 2px solid #0b3853;
     }
-    
-    
-    
-    
+
+
+
+
     .navigation span.bullet {
         border: 1px solid gray;
         width: 2em;
@@ -56,13 +56,14 @@ progress-eot {
         text-align: center;
         transition: all .15s ease-in;
     }
-    
-    
+
+
+
     .navigation span {
         float: left;
     }
 
-    
+
 .navigation span.line {
     width: 3em;
 }
@@ -98,4 +99,10 @@ span.bullet.default {
 .navigation span {
     float: left;
 }
+  .default-text{
+    color: #b4b3b2;
+  }
+  .done-text{
+    color: #0b3853;
+  }
 }
