@@ -10,20 +10,43 @@ import { ProsonalInfoPage } from "../personal-info/personal-info";
 })
 export class SliderComponent {
 
+  /**
+   * Slider component
+   */
   @ViewChild(Slides) slides: Slides;
-  
-  constructor(private navCtrl: NavController) {
-    console.log("Slider component");
+
+  constructor(private navCtrl: NavController) {}
+
+  /**
+   * Angular lifecycle event
+   */
+  ngOnInit() {
+    this.startSlider();
   }
 
-  public nextSlide(): void {
+  /**
+   * Start the Slider
+   */
+  public startSlider(): void {
+    setTimeout(() => {
+      this.initSlider();
+    }, 2000);
+  }
+
+  /**
+   * Navigate to the Booking Page
+   */
+  public toBooking(): void {
+    this.navCtrl.push(ProsonalInfoPage);
+  }
+
+  /**
+   * Initialize Slider component with bellow properties
+   */
+  public initSlider(): void {
     this.slides.loop = true;
     this.slides.pager = true;
     this.slides.autoplay = 1000;
     this.slides.startAutoplay();
-  }
-
-  public toBooking(): void {
-    this.navCtrl.push(ProsonalInfoPage);
   }
 }
