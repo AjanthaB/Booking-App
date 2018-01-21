@@ -141,7 +141,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle set the bedroom to zero
-   * @param event 
+   * @param event
    */
   public onToggleBedrooms(event: any): void {
     if (!event.selected) {
@@ -152,7 +152,7 @@ export class PropertyInfoPage {
 
   /**
    * On select the Bathrooms
-   * @param event 
+   * @param event
    */
   public onSelectBathRooms(event: any): void {
     if (event.selected) {
@@ -164,7 +164,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle set the Bathroom to zero
-   * @param event 
+   * @param event
    */
   public onToggleBathrooms(event: any): void {
     if (!event.selected) {
@@ -175,7 +175,7 @@ export class PropertyInfoPage {
 
   /**
    * On Select carpets dropdown
-   * @param event 
+   * @param event
    */
   public onSelectCatpets(event: any): void {
     if (event.selected) {
@@ -187,7 +187,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle carpets dropdown
-   * @param event 
+   * @param event
    */
   public onToggleCarpets(event: any): void {
     if (!event.selected) {
@@ -198,7 +198,7 @@ export class PropertyInfoPage {
 
   /**
    * On Select carpets dropdown
-   * @param event 
+   * @param event
    */
   public onSelectWindows(event: any): void {
     if (event.selected) {
@@ -210,7 +210,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle carpets dropdown
-   * @param event 
+   * @param event
    */
   public onToggleWindows(event: any): void {
     if (!event.selected) {
@@ -221,7 +221,7 @@ export class PropertyInfoPage {
 
    /**
    * On Select carpets dropdown
-   * @param event 
+   * @param event
    */
   public onSelectBlinds(event: any): void {
     if (event.selected) {
@@ -233,7 +233,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle carpets dropdown
-   * @param event 
+   * @param event
    */
   public onToggleBlinds(event: any): void {
     if (!event.selected) {
@@ -244,7 +244,7 @@ export class PropertyInfoPage {
 
    /**
    * On Select carpets dropdown
-   * @param event 
+   * @param event
    */
   public onSelectCurtain(event: any): void {
     if (event.selected) {
@@ -256,7 +256,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle carpets dropdown
-   * @param event 
+   * @param event
    */
   public onToggleCurtain(event: any): void {
     if (!event.selected) {
@@ -267,7 +267,7 @@ export class PropertyInfoPage {
 
   /**
    * On Select carpets dropdown
-   * @param event 
+   * @param event
    */
   public onSelectMattress(event: any): void {
     if (event.selected) {
@@ -279,7 +279,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle carpets dropdown
-   * @param event 
+   * @param event
    */
   public onToggleMattress(event: any): void {
     if (!event.selected) {
@@ -290,7 +290,7 @@ export class PropertyInfoPage {
 
   /**
    * On Select carpets dropdown
-   * @param event 
+   * @param event
    */
   public onSelectWall(event: any): void {
     if (event.selected) {
@@ -302,7 +302,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle carpets dropdown
-   * @param event 
+   * @param event
    */
   public onToggleWall(event: any): void {
     if (!event.selected) {
@@ -313,7 +313,7 @@ export class PropertyInfoPage {
 
   /**
    * On Select carpets dropdown
-   * @param event 
+   * @param event
    */
   public onSelectSofa(event: any): void {
     if (event.selected) {
@@ -325,7 +325,7 @@ export class PropertyInfoPage {
 
   /**
    * On Toggle carpets dropdown
-   * @param event 
+   * @param event
    */
   public onToggleSofa(event: any): void {
     if (!event.selected) {
@@ -334,7 +334,7 @@ export class PropertyInfoPage {
     }
   }
 
-  
+
 
   /**
    * cache Personal Information when click on Next button
@@ -355,6 +355,9 @@ export class PropertyInfoPage {
       this.navCtrl.pop();
     } else {
       this.summaryVisible = false;
-    } 
+      setTimeout(() => {this.setInitValues();}, 0);
+    }
+
+
   }
 }

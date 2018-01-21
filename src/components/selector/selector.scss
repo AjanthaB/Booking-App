@@ -11,7 +11,7 @@ selector {
     float: right;
     width: 55px;
     // border: solid 1px black;
-    padding: 3px 5px;
+    padding: 3px 4px;
     text-align: center;
     border-radius: 20px;
   }
@@ -23,6 +23,8 @@ selector {
   .lbl {
     float: left;
     padding: 8px 5px;
+    font-weight: 800;
+    color: #0b3853;
   }
   .popup {
     border: solid 1px black;
@@ -44,12 +46,14 @@ selector {
     float: right;
     // border: 1px solid;
     background: #e0e0e0;
+    font-weight: 100;
     padding: 3px;
     border-radius: 20px;
   }
   .colored {
     background: #3693D5;
     color: white;
+    font-weight: 500 !important;
     transition-duration: 500ms;
   }
 }
