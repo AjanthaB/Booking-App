@@ -350,6 +350,51 @@ export class PropertyInfoPage {
   }
 
 
+  /**
+   * On Select carpets dropdown
+   * @param event
+   */
+  public onSelectRug(event: any): void {
+    if (event.selected) {
+      this.bookingDataObj.rug = event.deActive;
+      console.log("After select Rug", this.bookingDataObj);
+      this.updatePrice();
+    }
+  }
+
+  /**
+   * On Toggle carpets dropdown
+   * @param event
+   */
+  public onToggleRug(event: any): void {
+    if (!event.selected) {
+      this.bookingDataObj.rug = "0";
+      console.log("After toggle the run: ", this.bookingDataObj);
+    }
+  }
+
+  /**
+   * On Select carpets dropdown
+   * @param event
+   */
+  public onSelectBalcony(event: any): void {
+    if (event.selected) {
+      this.bookingDataObj.balcony = event.deActive;
+      console.log("After select balcony", this.bookingDataObj);
+      this.updatePrice();
+    }
+  }
+
+  /**
+   * On Toggle carpets dropdown
+   * @param event
+   */
+  public onToggleBalcony(event: any): void {
+    if (!event.selected) {
+      this.bookingDataObj.balcony = "0";
+      console.log("After toggle the balcony: ", this.bookingDataObj);
+    }
+  }
 
   /**
    * cache Personal Information when click on Next button
@@ -372,7 +417,5 @@ export class PropertyInfoPage {
       this.summaryVisible = false;
       setTimeout(() => {this.setInitValues();}, 0);
     }
-
-
   }
 }

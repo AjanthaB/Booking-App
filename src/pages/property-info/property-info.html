@@ -257,7 +257,9 @@
         <selector
         [key]="'rug'"
         [items]="['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']"
-        [lable]="'Rug'"></selector>
+        [lable]="'Rug'"
+        (onToggle)="onToggleRug($event)"
+        (onSelectItem)="onSelectRug($event)"></selector>
       </ion-col>
     </ion-row>
 
@@ -266,7 +268,9 @@
         <selector
         [key]="'balcony'"
         [items]="['01', '02', '03', '04', '05']"
-        [lable]="'Balcony'"></selector>
+        [lable]="'Balcony'"
+        (onToggle)="onToggleBalcony($event)"
+        (onSelectItem)="onSelectBalcony($event)"></selector>
       </ion-col>
     </ion-row>
 
