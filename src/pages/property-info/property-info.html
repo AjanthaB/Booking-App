@@ -11,6 +11,7 @@
 
 
   <progress-eot [position]="2"></progress-eot>
+
   <ion-grid *ngIf="summaryVisible">
     <ion-row>
       <ion-col>
@@ -24,7 +25,86 @@
     </ion-row>
     <ion-row>
       <ion-col>TYPE</ion-col>
-      <ion-col> {{bookingDataObj.prop_type}} </ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.prop_type | uppercase}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Flat Studio</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.prop_type}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf=" bookingDataObj.ext_windows_no !== null && bookingDataObj.ext_windows_no != ''">
+      <ion-col>External Windows</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.ext_windows_no}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.bedrooms !== null && bookingDataObj.bedrooms != ''">
+      <ion-col>Bedrooms</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.bedrooms}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.carpet_no !== null && bookingDataObj.carpet_no != ''">
+      <ion-col>Carpet Cleaning</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.carpet_no}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.blinds_no !== null && bookingDataObj.blinds_no != ''">
+      <ion-col>Blinds</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.blinds_no}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.curtain_steam_no !== null && bookingDataObj.curtain_steam_no != ''">
+      <ion-col>Curtain Steam</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.curtain_steam_no}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.mattress_steam_no !== null && bookingDataObj.mattress_steam_no != ''">
+      <ion-col>Mattres Steam</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.mattress_steam_no}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.wall_washing_no !== null && bookingDataObj.wall_washing_no != ''">
+      <ion-col>Wall Washing</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.wall_washing_no}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.sofa_clean_no !== null && bookingDataObj.sofa_clean_no != ''">
+      <ion-col>Sofa clean</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.sofa_clean_no}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.rug !== null && bookingDataObj.rug != ''">
+      <ion-col>Rug</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.rug}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.balcony !== null && bookingDataObj.balcony != ''">
+      <ion-col>Balcony</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.balcony}}</span>
+      </ion-col>
     </ion-row>
 
     <ion-row>
@@ -186,7 +266,7 @@
     </ion-row>
 
 
-    <ion-row>
+    <ion-row style="padding-bottom: 50px;">
       <ion-col>
         <div class="col-sm-12">
           <button class="back" ion-button icon-right float-left outline (click)="redirecToPersonalInfoPage()">
@@ -207,3 +287,6 @@
   </ion-grid>
 
 </ion-content>
+
+
+<eot-footer></eot-footer>

@@ -40,4 +40,14 @@ page-property-info{
   .line{
     text-decoration: line-through;
   }
+
+  span.numb {
+    border: 2px solid #0093d1;
+    border-radius: 30px;
+    overflow: hidden;
+    width: 5em;
+    line-height: 2em;
+    text-align: center;
+    margin-right: 2em;
+  }
 }

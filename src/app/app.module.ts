@@ -15,7 +15,7 @@ import { HomePage } from '../pages/home/home';
 import { ProsonalInfoPage } from '../pages/personal-info/personal-info';
 import { PropertyInfoPage } from '../pages/property-info/property-info';
 import { PaymentPage } from '../pages/payment/payment';
-import { StateComponent } from '../components/state/state';
+import { EOTFooterComponent } from '../components/footer/footer';
 import { SliderComponent } from '../pages/slider/slider';
 
 // services
@@ -30,7 +30,7 @@ import { OfflieDetectionService } from '../services/offline-detection.service';
     ProsonalInfoPage,
     PropertyInfoPage,
     PaymentPage,
-    StateComponent,
+    EOTFooterComponent,
     SliderComponent
   ],
   imports: [
@@ -47,7 +47,7 @@ import { OfflieDetectionService } from '../services/offline-detection.service';
     ProsonalInfoPage,
     PropertyInfoPage,
     PaymentPage,
-    StateComponent,
+    EOTFooterComponent,
     SliderComponent
   ],
   providers: [

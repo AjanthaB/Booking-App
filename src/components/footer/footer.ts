@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: 'nav-state',
-  templateUrl: 'state.html'
+  selector: 'eot-footer',
+  templateUrl: 'footer.html',
+  styles: ['footer.scss']
 })
-export class StateComponent {
+export class EOTFooterComponent {
 
   constructor() {
     console.log("State Component Initialization");
