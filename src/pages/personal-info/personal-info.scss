@@ -1,13 +1,46 @@
-ion-label, .label, .label-ios{
-	font-size:14px !important;
-	font-weight:bold;
-	color:#0b3853;
+ion-label, .label, .label-ios {
+  font-size: 14px !important;
+  font-weight: bold;
+  color: #0b3853;
 }
-ion-label b{ 
-	color:#ee0043;
-	font-weight: bolder;
-    font-size: 15px;
+
+ion-label b {
+  color: #ee0043;
+  font-weight: bolder;
+  font-size: 15px;
 }
-ion-input, .datetime-text{
-color:#555;
+
+ion-input, .datetime-text {
+  color: #555;
+}
+
+.input_box {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 5px 0px;
+  padding: 8px 10px;
+  border: solid 2px #0093d1;
+  border-radius: 20px;
+}
+
+page-personal-info {
+  .label-md {
+    margin: 5px 8px 5px 0;
+  }
+  .list-md .item-block .item-inner {
+    border: 0px;
+  }
+  ion-input, .datetime-text {
+    padding-left: 8px;
+  }
+}
+
+.button-outline-md {
+  border-width: 2px;
+  border-radius: 20px;
+}
+
+.button-md {
+  border-radius: 20px;
 }

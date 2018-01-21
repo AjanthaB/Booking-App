@@ -8,56 +8,57 @@
 
 <ion-content>
   <ion-grid padding>
-<!--<ion-icon name="checkmark-circle" style=" font-size:33px; color: #0b3853;"></ion-icon>-->
+    <!--<ion-icon name="checkmark-circle" style=" font-size:33px; color: #0b3853;"></ion-icon>-->
 
     <progress-eot [position]="1"></progress-eot>
+
     <form [formGroup]="_personalInfoForm">
-			<ion-row style="border-bottom:none;">
-				<ion-col style="padding:0">
-					<ion-item style="padding-left: 15px;">
-						<ion-label stacked>Date <b>*</b></ion-label>
-						<ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
-					</ion-item>
-				</ion-col>
-				<ion-col style="padding:0">
-					<ion-item>
-						<ion-label stacked>Time <b>*</b></ion-label>
-						<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time"></ion-datetime>
-					</ion-item>
-				</ion-col>
-			</ion-row>
+
+      <ion-row style="border-bottom:none;">
+        <ion-col style="padding:0">
+          <ion-item style="padding-left: 15px;">
+            <ion-label stacked>Date <b>*</b></ion-label>
+            <ion-datetime class="input_box" displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col style="padding:0">
+          <ion-item>
+            <ion-label stacked>Time <b>*</b></ion-label>
+            <ion-datetime class="input_box" displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
       <ion-list>
 
-
         <ion-item>
-          <ion-label stacked>Name <b>*</b></ion-label>
-          <ion-input type="text" formControlName="name"></ion-input>
+          Name <b>*</b><br>
+          <input class="input_box" type="text" formControlName="name">
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Postcode <b>*</b></ion-label>
-          <ion-input type="text" formControlName="postCode"></ion-input>
+          Postcode <b>*</b><br>
+          <input class="input_box" type="text" formControlName="postCode">
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Address <b>*</b></ion-label>
-          <ion-input type="text" formControlName="address"></ion-input>
+          Address <b>*</b><br>
+          <input class="input_box" type="text" formControlName="address">
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Phone No <b>*</b></ion-label>
-          <ion-input type="text" formControlName="phoneNum"></ion-input>
+          Phone No <b>*</b><br>
+          <input class="input_box" type="text" formControlName="phoneNum">
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Email <b>*</b></ion-label>
-          <ion-input type="text" formControlName="email"></ion-input>
+          Email <b>*</b><br>
+          <input class="input_box" type="text" formControlName="email">
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Comments</ion-label>
-          <ion-input type="text" formControlName="comments"></ion-input>
+          Comments <b>*</b><br>
+          <textarea rows="4" class="input_box" type="text" formControlName="comments"></textarea>
         </ion-item>
 
       </ion-list>
