@@ -30,7 +30,7 @@ export class SliderComponent {
   public startSlider(): void {
     setTimeout(() => {
       this.initSlider();
-    }, 2000);
+    }, 3000);
   }
 
   /**
