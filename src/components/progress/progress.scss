@@ -45,8 +45,8 @@ progress-eot {
 
   .navigation span.bullet {
     border: 1px solid gray;
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     background: #0b3853;
     display: inline-block;
     border-radius: 50%;
@@ -65,9 +65,9 @@ progress-eot {
   .navigation span.line {
     height: 2px;
     background: #f3f3f3;
-    width: 8em;
+    width: 5.323em;
     display: inline-block;
-    margin-top: 1em;
+    margin-top: 0.7em;
   }
 
   .navigation span {
@@ -81,9 +81,9 @@ progress-eot {
 
   .navigation span.bullet {
     border: 1px solid gray;
-    width: 2em;
-    height: 2em;
-    background: #0b3853;
+    width: 1.5em;
+    height: 1.5em;
+    background: #0b3853 url('../../assets/imgs/pro-icn.png') left no-repeat; 
     display: inline-block;
     border-radius: 50%;
     text-align: center;

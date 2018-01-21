@@ -1,5 +1,10 @@
 eot-footer {
   .toolbar-title.toolbar-title-md {
-    font-size:14px;
+    font-size:11px;    
+	font-weight: 100;
+    text-align: center;
+  }
+  .toolbar{
+	min-height:25px;
   }
 }
