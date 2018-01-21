@@ -162,5 +162,11 @@ export class SelectorComponent {
 
   public setSelectedOnlyToggle(): void {
     this.selected = true;
+    this.selected1 = false;
+  }
+
+  public setUnSelectedOnlyToggle(): void {
+    this.selected = false;
+    this._deActiveLable = "NO";
   }
 }

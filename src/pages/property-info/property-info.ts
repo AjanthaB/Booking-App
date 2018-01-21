@@ -1,4 +1,4 @@
-import { Component, ContentChild, ViewChildren, QueryList } from '@angular/core';
+import {Component, ContentChild, ViewChildren, QueryList, ViewChild} from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BookingService } from '../../services/booking.service';
 import { Response } from "@angular/http";
@@ -14,6 +14,9 @@ import { SelectorComponent } from '../../components/selector/selector';
 export class PropertyInfoPage {
 
   @ViewChildren(SelectorComponent) toggleSelectors: QueryList<SelectorComponent>
+  @ViewChild("flatSelector") flatToggle: SelectorComponent;
+  @ViewChild("typeSelector") typeToggle: SelectorComponent;
+  @ViewChild("bedSelector") bedToggle: SelectorComponent;
 
   public bookingDataObj = {} as BookingData;
   public price = "0";
@@ -106,8 +109,14 @@ export class PropertyInfoPage {
   public onSelectType(event: any): void {
     if (event.selected) {
       this.bookingDataObj.prop_type = event.active.toLowerCase();
+      this.bookingDataObj.flat_studio = "1";
+      this.flatToggle.setSelectedOnlyToggle();
+      this.bookingDataObj.bedrooms = "0";
+      this.bedToggle.setUnSelectedOnlyToggle();
     } else {
       this.bookingDataObj.prop_type = event.deActive.toLowerCase();
+      this.bookingDataObj.flat_studio = "0";
+      this.flatToggle.setUnSelectedOnlyToggle();
     }
     this.updatePrice();
     console.log("booking type selected: ", this.bookingDataObj);
@@ -120,6 +129,10 @@ export class PropertyInfoPage {
   public onFlatOrStudio(event: any): void {
     if (event.selected) {
       this.bookingDataObj.flat_studio = (event.active === "YES") ? "1" : "0";
+      this.typeToggle.setSelectedOnlyToggle();
+      this.bookingDataObj.prop_type = "flat";
+      this.bookingDataObj.bedrooms = "0";
+      this.bedToggle.setUnSelectedOnlyToggle();
     } else {
       this.bookingDataObj.flat_studio = "0";
     }
@@ -135,6 +148,8 @@ export class PropertyInfoPage {
     if (event.selected) {
       this.bookingDataObj.bedrooms = event.deActive;
       console.log("After select the bed rooms: ", this.bookingDataObj);
+      this.bookingDataObj.flat_studio = "0";
+      this.flatToggle.setUnSelectedOnlyToggle();
       this.updatePrice();
     }
   }

@@ -3,8 +3,8 @@
   <div class="lbl">{{_lable}}</div>
   <div class="btn-test">
     <div *ngIf="_isToggle">
-      <div class="item" [ngClass]="{'noItem': !selected1, 'colored': selected1}" (click)="toggle()">{{_deActiveLable}}</div>
-      <div class="item" [ngClass]="{'colored': selected, 'noItem': !selected}" (click)="toggle()">{{_activeLable}}</div>
+      <div class="item" [ngClass]="{'colored': selected1}" (click)="toggle()">{{_deActiveLable}}</div>
+      <div class="item" [ngClass]="{'colored': selected}" (click)="toggle()">{{_activeLable}}</div>
     </div>
     <div *ngIf="!_isToggle">
       <div class="item" [ngClass]="{'noItem': !selected}" (click)="toggle()">{{_deActiveLable}}</div>

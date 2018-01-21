@@ -133,7 +133,7 @@
         <div class="price-box">
           CURRENT PRICE
           <br>
-          <span class="without-discount">{{'£' + price}}</span><br>
+          <span class="without-discount line">{{'£' + price}}</span><br>
           <span class="without-discount"> {{'£' + discountPrice}}</span>
         </div>
       </ion-col>
@@ -146,6 +146,7 @@
         [lable]="'Type'"
         [isToggle]="true"
         [toggleOnly]="true"
+        #typeSelector
         [activeLable]="'FLAT'"
         [deActiveLable]="'HOUSE'"
         (onToggle)="onSelectType($event)"></selector>
@@ -154,7 +155,10 @@
         <selector
         [key]="'flat_studio'"
         [lable]="'Flat/ Studio'"
+        #flatSelector
         [toggleOnly]="true"
+        [activeLable]="'YES'"
+        [deActiveLable]="'NO'"
         (onToggle)="onFlatOrStudio($event)"></selector>
       </ion-col>
     </ion-row>
@@ -164,6 +168,7 @@
         <selector
         [key]="'bedrooms'"
         [lable]="'Bedrooms'"
+        #bedSelector
         [items]="['01', '02', '03', '04', '05']"
         (onToggle)="onToggleBedrooms($event)"
         (onSelectItem)="onSelectBedrooms($event)">
