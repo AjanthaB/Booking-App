@@ -19,6 +19,7 @@ export class ProsonalInfoPage {
   public _personalInfoForm: FormGroup;
   public _formInvalid: boolean = false;
   private _bookingDataObj = {} as BookingData;
+  public timeRangeValues = ['07 AM : 08 AM', '08 AM : 09 AM', '09 AM : 10 AM', '12 PM : 01 PM', '01 PM : 02 PM', '03 PM : 04 PM', '04 PM : 05 PM', 'Arrival Time'];
 
   constructor(public navCtrl: NavController,
     private bookingService: BookingService) {
@@ -31,7 +32,6 @@ export class ProsonalInfoPage {
     this._bookingDataObj = this.bookingService.getBookingDataObj();
     this.createPersonalIntoForm();
     this.updatePrice();
-    console.log("on Init")
   }
 
   /**
@@ -63,7 +63,7 @@ export class ProsonalInfoPage {
   private setPersonalData(formValue: any): void {
     const bookingData = this.bookingService.getBookingDataObj();
     bookingData.booking_date = formValue.date;  // need to format the date
-    bookingData.booking_time = formValue.time; // need to format 
+    bookingData.booking_time = formValue.time; // need to format
     bookingData.cust_name = formValue.name;
     bookingData.postcode = formValue.postCode;
     bookingData.address = formValue.address;
@@ -71,7 +71,6 @@ export class ProsonalInfoPage {
     bookingData.email = formValue.email;
     bookingData.cust_comments = formValue.comments;
     this.bookingService.setBookingDataObj(bookingData);
-    console.log("after setting booking data: ", this.bookingService.getBookingDataObj())
   }
 
   /**
@@ -109,9 +108,9 @@ export class ProsonalInfoPage {
       .subscribe((res: Response) => {
         const payValue = res.json();
         this.bookingService.setPayValue(payValue);
-        console.log("PayeValue", payValue);
+        console.log("PayValue", payValue);
       }, err => {
-        console.log("error getting payvalue ", err);
+        console.log("error getting payValue ", err);
       })
   }
 }

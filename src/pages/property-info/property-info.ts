@@ -88,11 +88,9 @@ export class PropertyInfoPage {
         const payValue = res.json();
         if (payValue === "full") {
           this.bookingService.setFullAmount(payValue);
-        } else {
-          this.bookingService.setBookingFee(payValue);
         }
         this.bookingService.setPayValue(payValue);
-        console.log("PayeValue", payValue);
+        console.log("PayValue", payValue);
       }, err => {
         console.log("error getting payvalue ", err);
       })

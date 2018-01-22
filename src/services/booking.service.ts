@@ -43,7 +43,7 @@ export class BookingService {
 
   /**
    * Constructor function of the class
-   * @param http 
+   * @param http
    */
   constructor(private http: Http) {
    this.initPropertyData();
@@ -56,7 +56,7 @@ export class BookingService {
     this._bookingDataObj = this.getBookingInitData();
   }
 
-  public getBookkingFee(): string {
+  public getBookkingFee(): any {
     return this.bookingFee;
   }
 
@@ -64,7 +64,7 @@ export class BookingService {
     this.bookingFee = fee;
   }
 
-  public getTotalCart(): string {
+  public getTotalCart(): any {
     return this.totalCart;
   }
 
@@ -72,19 +72,21 @@ export class BookingService {
     this.totalCart = price;
   }
 
-  public getPayValue(): string {
+  public getPayValue(): any {
     return this.worldPayValue;
   }
 
   public setPayValue(value: string): void {
+    this._bookingDataObj.paid_amount = parseInt(value, 10);
     this.worldPayValue = value;
   }
 
-  public getFullAmount(): string {
+  public getFullAmount(): any {
     return this.fullAmount;
   }
 
   public setFullAmount(value: string): void {
+    this._bookingDataObj.full_amount = parseInt(value, 10);
     this.fullAmount = value
   }
   /**
@@ -95,7 +97,7 @@ export class BookingService {
       booking_ref: "",
       booking_date: "",
       booking_time: "",
-      cust_name: "",  
+      cust_name: "",
       postcode : "",
       address : "",
       phone : "",
@@ -160,7 +162,7 @@ export class BookingService {
       + `&bedrooms=${bookingDta.bedrooms}&bathrooms=${bookingDta.bathrooms_no}&ext_windows=${bookingDta.ext_windows_no}&blinds=${bookingDta.blinds_no}`
       + `&curtain=${bookingDta.curtain_steam_no}&mattress=${bookingDta.mattress_steam_no}&wall_washing=${bookingDta.wall_washing_no}&sofa_clean=${bookingDta.sofa_clean_no}`
       + `&carpet_cleaning=${bookingDta.carpet_no}&rug=${bookingDta.rug}&balcony=${bookingDta.balcony}&bf=true&discount=false`;
-     
+
       return this.http.get(urlPrefix + urlParams, this.getCORSTextHeader());
   }
 
@@ -197,7 +199,7 @@ export class BookingService {
 
   /**
    * @desc - Create a new booking
-   * @param bookingDta 
+   * @param bookingDta
    */
   public addNewBooking(bookingDta: BookingData): Observable<Response> {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/new`;

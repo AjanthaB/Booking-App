@@ -24,7 +24,9 @@
         <ion-col style="padding:0">
           <ion-item>
             <ion-label stacked>Time <b>*</b></ion-label>
-            <ion-datetime class="input_box" displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time"></ion-datetime>
+            <ion-select class="input_box" formControlName="time" interface="action-sheet">
+              <ion-option *ngFor="let timeRange of timeRangeValues" [value]="timeRange">{{timeRange}}</ion-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>

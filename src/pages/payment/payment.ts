@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FormControl,  FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -39,15 +38,28 @@ export class PaymentPage {
    */
   ngOnInit() {
    this.bookingDataObj =  this.bookingService.getBookingDataObj();
+   this.bookingDataObj.full_amount = this.bookingDataObj.paid_amount;
+   console.log("Booking data: ", this.bookingDataObj);
+  }
+
+  public getBookingFee(): any {
+    return this.bookingService.getBookkingFee();
+  }
+
+  public getPayValue(): any {
+    return this.bookingService.getPayValue();
   }
 
   /**
    * cache Personal Information when click on Next button
    */
   public payNow(): void {
-    // this.navCtrl.push()
     const browser:any = this.iab.create(this.pageContentUrl, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
     browser.addEventListener('loaderror', this.loadErrorCallBack)
+  }
+
+  private loadErrorCallBack(err) {
+    console.log(err);
   }
 
   /**
@@ -61,17 +73,17 @@ export class PaymentPage {
         const payValue: any = res.json();
         if (event === 'full') {
           this.bookingService.setPayValue(payValue);
+          console.log("payValue: ", this.bookingService.getPayValue());
         } else {
-
+          this.bookingService.setBookingFee(payValue);
+          this.bookingDataObj.paid_amount = payValue;
+          console.log("Booking Fee: ", this.bookingService.getBookkingFee());
         }
-        console.log("PayValue: ")
+        this.bookingDataObj.paid_amount = payValue;
+        console.log("Booking Data: ", this.bookingDataObj);
       }, err => {
         console.log("Error: ", err);
       });
-  }
-
-  private loadErrorCallBack(error): void {
-    console.log(error);
   }
 
   /**
