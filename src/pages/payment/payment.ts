@@ -38,7 +38,8 @@ export class PaymentPage {
    */
   ngOnInit() {
    this.bookingDataObj =  this.bookingService.getBookingDataObj();
-   this.bookingDataObj.full_amount = this.bookingDataObj.paid_amount;
+   this.bookingDataObj.paid_amount = this.bookingDataObj.full_amount;
+   this.bookingService.setBookingDataObj(this.bookingDataObj);
    console.log("Booking data: ", this.bookingDataObj);
   }
 
@@ -48,6 +49,16 @@ export class PaymentPage {
 
   public getPayValue(): any {
     return this.bookingService.getPayValue();
+  }
+
+  public getTotalCartPrice(): any {
+    return this.bookingService.getTotalCart();
+  }
+
+  private calCulateDiscount(): any {
+    const price = this.bookingService.getTotalCart();
+    const discountPrice = (price/100*90).toFixed(2);
+    return discountPrice;
   }
 
   /**
@@ -71,15 +82,9 @@ export class PaymentPage {
     this.bookingService.updatePayValue(this.bookingDataObj, event)
       .subscribe((res: Response) => {
         const payValue: any = res.json();
-        if (event === 'full') {
-          this.bookingService.setPayValue(payValue);
-          console.log("payValue: ", this.bookingService.getPayValue());
-        } else {
-          this.bookingService.setBookingFee(payValue);
-          this.bookingDataObj.paid_amount = payValue;
-          console.log("Booking Fee: ", this.bookingService.getBookkingFee());
-        }
         this.bookingDataObj.paid_amount = payValue;
+        this.bookingService.setBookingDataObj(this.bookingDataObj);
+        this.bookingDataObj = this.bookingService.getBookingDataObj();
         console.log("Booking Data: ", this.bookingDataObj);
       }, err => {
         console.log("Error: ", err);
@@ -91,5 +96,9 @@ export class PaymentPage {
    */
   public redirecToPersonalInfoPage(): void {
     this.navCtrl.pop();
+  }
+
+  private createANewBooking(): void {
+    this.bookingService.addNewBooking(this.bookingDataObj)
   }
 }

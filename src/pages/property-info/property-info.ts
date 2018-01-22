@@ -46,8 +46,14 @@ export class PropertyInfoPage {
       this.toggleSelectors.forEach(selector => {
         const key = selector.getKey();
         if (this.bookingDataObj[key]) {
-          if (key === 'prop_type' || key === 'flat_studio') {
+          if (key === 'prop_type') {
             selector.setSelectedOnlyToggle();
+          } else if (key === 'flat_studio') {
+            if (this.bookingDataObj[key] === "1") {
+              selector.setSelectedOnlyToggle();
+            } else {
+              selector.setUnSelectedOnlyToggle();
+            }
           } else {
             selector.setSelectedItem(this.bookingDataObj[key]);
           }

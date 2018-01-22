@@ -12,11 +12,22 @@
     <progress-eot [position]="3"></progress-eot>
     <ion-grid>
 
+      <ion-row>
+        <ion-col>
+          <div class="price-box">
+            CURRENT PRICE
+            <br>
+            <span class="without-discount line" >{{'£' + getTotalCartPrice()}}</span><br>
+            <span class="without-discount"> {{'£' + calCulateDiscount()}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+
       <ion-list radio-group [(ngModel)]="peymentType" (ngModelChange)="onChangePaymentType($event)">
 
         <ion-item>
           <ion-radio checked="true" value="full"></ion-radio>
-          <ion-label>Full payment (£ {{getPayValue()}} + 20% Vat)</ion-label>
+          <ion-label>Full payment (£ {{calCulateDiscount()}} + 20% Vat)</ion-label>
         </ion-item>
 
         <ion-item>

@@ -33,74 +33,81 @@
     <ion-row>
       <ion-col>Flat Studio</ion-col>
       <ion-col>
-        <span class="numb">{{(bookingDataObj.prop_type === 'flat') ? 'Yes' : 'No'}}</span>
+        <span class="numb">{{(bookingDataObj.flat_studio === '1') ? 'Yes' : 'No'}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf=" bookingDataObj.ext_windows_no !== null && bookingDataObj.ext_windows_no != ''">
+    <ion-row *ngIf=" bookingDataObj.ext_windows_no !== null && bookingDataObj.ext_windows_no != '0'">
       <ion-col>External Windows</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.ext_windows_no}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.bedrooms !== null && bookingDataObj.bedrooms != ''">
+    <ion-row *ngIf="bookingDataObj.bedrooms !== null && bookingDataObj.bedrooms != '0'">
       <ion-col>Bedrooms</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.bedrooms}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.carpet_no !== null && bookingDataObj.carpet_no != ''">
+    <ion-row *ngIf="bookingDataObj.bathrooms_no !== null && bookingDataObj.bathrooms_no != '0'">
+      <ion-col>BathRooms</ion-col>
+      <ion-col>
+        <span class="numb">{{bookingDataObj.bathrooms_no}}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="bookingDataObj.carpet_no !== null && bookingDataObj.carpet_no != '0'">
       <ion-col>Carpet Cleaning</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.carpet_no}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.blinds_no !== null && bookingDataObj.blinds_no != ''">
+    <ion-row *ngIf="bookingDataObj.blinds_no !== null && bookingDataObj.blinds_no != '0'">
       <ion-col>Blinds</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.blinds_no}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.curtain_steam_no !== null && bookingDataObj.curtain_steam_no != ''">
+    <ion-row *ngIf="bookingDataObj.curtain_steam_no !== null && bookingDataObj.curtain_steam_no != '0'">
       <ion-col>Curtain Steam</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.curtain_steam_no}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.mattress_steam_no !== null && bookingDataObj.mattress_steam_no != ''">
+    <ion-row *ngIf="bookingDataObj.mattress_steam_no !== null && bookingDataObj.mattress_steam_no != '0'">
       <ion-col>Mattres Steam</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.mattress_steam_no}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.wall_washing_no !== null && bookingDataObj.wall_washing_no != ''">
+    <ion-row *ngIf="bookingDataObj.wall_washing_no !== null && bookingDataObj.wall_washing_no != '0'">
       <ion-col>Wall Washing</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.wall_washing_no}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.sofa_clean_no !== null && bookingDataObj.sofa_clean_no != ''">
+    <ion-row *ngIf="bookingDataObj.sofa_clean_no !== null && bookingDataObj.sofa_clean_no != '0'">
       <ion-col>Sofa clean</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.sofa_clean_no}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.rug !== null && bookingDataObj.rug != ''">
+    <ion-row *ngIf="bookingDataObj.rug !== null && bookingDataObj.rug != '0'">
       <ion-col>Rug</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.rug}}</span>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="bookingDataObj.balcony !== null && bookingDataObj.balcony != ''">
+    <ion-row *ngIf="bookingDataObj.balcony !== null && bookingDataObj.balcony != '0'">
       <ion-col>Balcony</ion-col>
       <ion-col>
         <span class="numb">{{bookingDataObj.balcony}}</span>

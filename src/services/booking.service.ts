@@ -77,7 +77,7 @@ export class BookingService {
   }
 
   public setPayValue(value: string): void {
-    this._bookingDataObj.paid_amount = parseInt(value, 10);
+    this._bookingDataObj.full_amount = parseInt(value, 10);
     this.worldPayValue = value;
   }
 
@@ -106,18 +106,18 @@ export class BookingService {
       paid_amount : 0,
       full_amount : 0,
       prop_type : "flat",
-      flat_studio : "",
-      bedrooms: "",
-      bathrooms_no: "",
-      ext_windows_no: "",
-      blinds_no: "",
-      curtain_steam_no: "",
-      mattress_steam_no: "",
-      wall_washing_no: "",
-      sofa_clean_no: "",
-      carpet_no: "",
-      rug: "",
-      balcony: ""
+      flat_studio : "0",
+      bedrooms: "0",
+      bathrooms_no: "0",
+      ext_windows_no: "0",
+      blinds_no: "0",
+      curtain_steam_no: "0",
+      mattress_steam_no: "0",
+      wall_washing_no: "0",
+      sofa_clean_no: "0",
+      carpet_no: "0",
+      rug: "0",
+      balcony: "0"
     };
   }
 

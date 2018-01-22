@@ -72,19 +72,16 @@ export class SelectorComponent {
   if (items) {
     this._items = items;
   }
-  // } else { // need to uncomment after remove the harcoded items
-  //   this._items = [];
-  // }
  }
 
  @Input()
  set isToggle(isToggle: boolean) {
-    this._isToggle = (isToggle == true) ? true : false;
+    this._isToggle = (isToggle == true);
  }
 
  @Input()
  set selectedItem(item: string) {
-   if (item) {
+   if (item && this._items.indexOf(item) >= 0 ) {
      this._deActiveLable = item;
      this.selected = true;
      this.showPopup = false;
@@ -154,9 +151,9 @@ export class SelectorComponent {
   }
 
   public setSelectedItem(item: string): void {
-    if (item) {
+    if (item && this._items.indexOf(item) >= 0 ) {
       this._deActiveLable = item;
-     this.selected = true;
+      this.selected = true;
     }
   }
 
