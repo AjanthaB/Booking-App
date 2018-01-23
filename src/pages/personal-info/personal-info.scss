@@ -60,3 +60,21 @@ width: 245px;
 margin: 0 auto;
 padding-left:16px;
 }
+
+.picker-wrapper{
+	.picker-toolbar{
+		background:#3D9BDD;
+	}
+	.picker-button{
+		color:#fff;
+	}
+}
+.action-sheet-title{
+	background:#3D9BDD;
+	color:#fff !important;
+}
+.action-sheet-wrapper{
+	.action-sheet-group{
+		padding-top:0 !important;
+	}
+}

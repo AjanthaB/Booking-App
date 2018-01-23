@@ -4,7 +4,8 @@
 
     <ion-slides>
       <ion-slide>
-       <img src="assets/imgs/slide1.jpg" alt="your image" style="display: block; width: auto;">
+ <img src="assets/imgs/slide1.jpg" alt="your image" style="display: block; width: auto; ">
+
       </ion-slide>
       <ion-slide>
         <img src="assets/imgs/slide2.jpg" alt="your image" style="display: block; width: auto; ">
@@ -15,12 +16,18 @@
     </ion-slides>
 
 
-    <button ion-button block round icon-right color="primary" (click)="toBooking()">
-      ONLINE BOOKING
-      <ion-icon name="play"></ion-icon>
-    </button>
+
   </ion-grid>
 
 
 
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+
+    <button ion-button block round icon-right color="primary" (click)="toBooking()">
+      ONLINE BOOKING
+      <ion-icon name="play"></ion-icon>
+    </button>
+  </ion-toolbar>	
+</ion-footer>
