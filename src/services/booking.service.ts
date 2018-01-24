@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers, RequestOptions, Response } from "@angular/http";
+import { Http, Headers, RequestOptions, Response, URLSearchParams } from "@angular/http";
 
 import { BookingData } from "../model/booking-data";
 import { Observable } from "rxjs/Observable";
 import { DEMO_BOKKING_URI_PREFIX } from "../config/constants";
+import {HttpParams, HttpHeaders, HttpClient, HttpResponse} from "@angular/common/http";
 
 @Injectable()
 export class BookingService {
@@ -45,7 +46,7 @@ export class BookingService {
    * Constructor function of the class
    * @param http
    */
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
    this.initPropertyData();
   }
 
@@ -144,7 +145,7 @@ export class BookingService {
 
   public saveBookingData(): Observable<any> {
     const saveUrl = "";
-    let headers = new Headers();
+    let headers = new HttpHeaders();
     // headers.append('Authorization', this.authHeader);
     headers.append('Accept', 'application/json; charset=utf-8');
     headers.append('Content-Type', 'application/json; charset=utf-8');
@@ -156,14 +157,15 @@ export class BookingService {
    * @desc - get the total cost of the cart in every toggle selection
    * @param bookingDta Booking Data Object
    */
-  public getCartTotal(bookingDta: BookingData): Observable<Response> {
+  public getCartTotal(bookingDta: BookingData): Observable<any> {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
+    const headers = this.getCORSTextHeader();
     const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}`
       + `&bedrooms=${bookingDta.bedrooms}&bathrooms=${bookingDta.bathrooms_no}&ext_windows=${bookingDta.ext_windows_no}&blinds=${bookingDta.blinds_no}`
       + `&curtain=${bookingDta.curtain_steam_no}&mattress=${bookingDta.mattress_steam_no}&wall_washing=${bookingDta.wall_washing_no}&sofa_clean=${bookingDta.sofa_clean_no}`
       + `&carpet_cleaning=${bookingDta.carpet_no}&rug=${bookingDta.rug}&balcony=${bookingDta.balcony}&bf=true&discount=false`;
 
-      return this.http.get(urlPrefix + urlParams, this.getCORSTextHeader());
+      return this.http.get(urlPrefix + urlParams, {headers});
   }
 
   /**
@@ -173,8 +175,9 @@ export class BookingService {
   public getBookingFee(bookingDta: BookingData): Observable <any> {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
     const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}&bedrooms=${bookingDta.bedrooms}&bf=only`;
+    const headers = this.getCORSTextHeader();
 
-    return this.http.get(urlPrefix + urlParams, this.getCORSTextHeader());
+    return this.http.get(urlPrefix + urlParams, {headers} );
   }
 
   /**
@@ -184,6 +187,7 @@ export class BookingService {
    */
   public updatePayValue(bookingDta: BookingData, paymentType: string): Observable<any> {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
+    const headers = this.getCORSTextHeader();
     let urlParams = ``;
     if (paymentType === 'full') {
       urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}`
@@ -194,41 +198,48 @@ export class BookingService {
       urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}&bedrooms=${bookingDta.bedrooms}&bf=only&vat=bf`;
     }
 
-    return this.http.get(urlPrefix + urlParams, this.getCORSTextHeader());
+    return this.http.get(urlPrefix + urlParams, {headers});
   }
 
   /**
    * @desc - Create a new booking
    * @param bookingDta
    */
-  public addNewBooking(bookingDta: BookingData): Observable<Response> {
+  public addNewBooking(bookingData: BookingData): any {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/new`;
-    // todo: need to add the parameter cartId
-    return this.http.get(urlPrefix, this.getCORSJSONHeader());
+    const headers = this.getCORSJSONHeader();
+    const params = new HttpParams();
+
+    Object.keys(bookingData).forEach(key => {
+      params.append(key, bookingData[key]);
+    });
+    console.log(params);
+
+    return this.http.get(urlPrefix, {headers, params});
   }
 
-  public enableBooking(bookingDta: BookingData): Observable<Response> {
+  public enableBooking(bookingDta: BookingData): any {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-enable`;
     // todo: need to add paramaeter cartId
-    return this.http.get(urlPrefix, this.getCORSJSONHeader());
+    return this.http.get(urlPrefix);
   }
 
   /**
    * @desc - return header for access text type response
    */
-  private getCORSTextHeader(): RequestOptions {
-    const headers = new Headers();
+  private getCORSTextHeader(): HttpHeaders {
+    const headers = new HttpHeaders();
     headers.append('Accept', 'text/plain; charset=utf-8');
     headers.append('Content-Type', 'text/plain; charset=utf-8');
     headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
-    return new RequestOptions({ headers: headers });
+    return headers;
   }
 
-  private getCORSJSONHeader(): RequestOptions {
-    const headers = new Headers();
+  private getCORSJSONHeader(): HttpHeaders {
+    const headers = new HttpHeaders();
     headers.append('Accept', 'application/json; charset=utf-8');
     headers.append('Content-Type', 'application/json; charset=utf-8');
     headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
-    return new RequestOptions({ headers: headers });
+    return  headers;
   }
 }

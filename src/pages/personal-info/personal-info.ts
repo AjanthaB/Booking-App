@@ -82,8 +82,7 @@ export class ProsonalInfoPage {
 
   private updatePrice(): void {
     this.bookingService.getCartTotal(this._bookingDataObj)
-      .subscribe((res: Response) => {
-        const price: string = res.json();
+      .subscribe((price: any) => {
         this.bookingService.setTotalCart(price);
         this.updateBookingFee();
         this.updatePayValue("full");
@@ -94,10 +93,9 @@ export class ProsonalInfoPage {
 
   private updateBookingFee(): void {
     this.bookingService.getBookingFee(this._bookingDataObj)
-      .subscribe((res: Response) => {
-        const bookingFee = res.json();
-        this.bookingService.setBookingFee(bookingFee);
-        console.log("Booking fee: ", bookingFee);
+      .subscribe((price) => {
+        this.bookingService.setBookingFee(price);
+        console.log("Booking fee: ", price);
       }, err => {
         console.log("error getting booking fee: ", err);
       })
@@ -105,8 +103,7 @@ export class ProsonalInfoPage {
 
   private updatePayValue(paymentType: string): void {
     this.bookingService.updatePayValue(this._bookingDataObj, paymentType)
-      .subscribe((res: Response) => {
-        const payValue = res.json();
+      .subscribe((payValue: any) => {
         this.bookingService.setPayValue(payValue);
         console.log("PayValue", payValue);
       }, err => {

@@ -64,8 +64,7 @@ export class PropertyInfoPage {
 
   private updatePrice(): void {
     this.bookingService.getCartTotal(this.bookingDataObj)
-      .subscribe((res: Response) => {
-        const price: string = res.json();
+      .subscribe((price: any) => {
         this.price = price;
         this.bookingService.setTotalCart(price);
         this.calCulateDiscount(price);
@@ -79,8 +78,7 @@ export class PropertyInfoPage {
 
   private updateBookingFee(): void {
     this.bookingService.getBookingFee(this.bookingDataObj)
-      .subscribe((res: Response) => {
-        const bookingFee = res.json();
+      .subscribe((bookingFee: any) => {
         this.bookingService.setBookingFee(bookingFee);
         console.log("Booking fee: ", bookingFee);
       }, err => {
@@ -90,8 +88,7 @@ export class PropertyInfoPage {
 
   private updatePayValue(paymentType: string): void {
     this.bookingService.updatePayValue(this.bookingDataObj, paymentType)
-      .subscribe((res: Response) => {
-        const payValue = res.json();
+      .subscribe((payValue: any) => {
         if (payValue === "full") {
           this.bookingService.setFullAmount(payValue);
         }

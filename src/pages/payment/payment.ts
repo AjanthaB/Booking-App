@@ -38,7 +38,7 @@ export class PaymentPage {
    */
   ngOnInit() {
    this.bookingDataObj =  this.bookingService.getBookingDataObj();
-   this.bookingDataObj.paid_amount = this.bookingDataObj.full_amount;
+   this.bookingDataObj.paid_amount = this.bookingService.getBookkingFee();
    this.bookingService.setBookingDataObj(this.bookingDataObj);
    console.log("Booking data: ", this.bookingDataObj);
   }
