@@ -15,11 +15,12 @@ import {QuotePage} from "../quote/quote";
 })
 export class HomePage {
 
-  public sliider = SliderComponent;
+  public slider = SliderComponent;
   public booking = ProsonalInfoPage;
   public contact = ContactPage;
   public call = CallPage;
   public quote = QuotePage;
+
 
   /**
    * @desc - handle visibility of personal information form

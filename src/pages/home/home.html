@@ -1,7 +1,7 @@
 <ion-content padding class="home wrapper">
-	<div class="container">
-		<img src="assets/imgs/eot.png" alt="your image" style="display: block;">
-	</div>
+  <div class="container">
+    <img src="assets/imgs/eot.png" alt="your image" style="display: block;">
+  </div>
   <ion-grid>
 
     <button ion-button block round icon-right color="primary" (click)="redirectToPersonalInfo()">
@@ -12,8 +12,8 @@
   </ion-grid>
 
 
-  <ion-tabs selectedIndex="1">
-    <ion-tab [root]="slider"  tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tabs selectedIndex="0">
+    <ion-tab [root]="slider" tabTitle="Home" tabIcon="home"></ion-tab>
     <ion-tab [root]="booking" tabTitle="Booking" tabIcon="calendar"></ion-tab>
     <ion-tab [root]="contact" tabTitle="Contact" tabIcon="person"></ion-tab>
     <ion-tab [root]="call" tabTitle="Call Now" tabIcon="call"></ion-tab>

@@ -1,6 +1,6 @@
 <ion-content padding class="home wrapper">
   <ion-grid>
-    <ion-slides>
+    <ion-slides style="height: 65vh;">
       <ion-slide>
         <img src="assets/imgs/slide1.jpg" alt="your image" style="display: block; width: 100vw; height:100% auto; vertical-align: middle; ">
       </ion-slide>
@@ -17,14 +17,32 @@
         <img src="assets/imgs/slide1.jpg" alt="your image" style="display: block; width: 100vw; height:100% auto; vertical-align: middle; ">
       </ion-slide>
     </ion-slides>
+
+    <ion-row>
+      <span style="font-size: 25px;text-align:center;width:100%;padding-top:10px">Need Some else?</span>
+      <span style="font-size: 15px;text-align:center;width:100%;padding: 5px 10px">Just let us know, You will be amazed at what we can do</span>
+      <ion-row >
+        <ion-col>
+          <button ion-button round outline >
+            Call Now
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button round outline>
+            Start Chat
+            </button>
+          </ion-col>
+      </ion-row>
+    </ion-row>
   </ion-grid>
+
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
     <button ion-button block round icon-right color="primary" (click)="toBooking()">
       ONLINE BOOKING
       <ion-icon name="play"></ion-icon>
     </button>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->
