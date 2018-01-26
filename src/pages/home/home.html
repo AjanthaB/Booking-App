@@ -12,8 +12,21 @@
   </ion-grid>
 
 
+  <ion-tabs selectedIndex="1">
+    <ion-tab [root]="slider"  tabTitle="Home" tabIcon="home"></ion-tab>
+    <ion-tab [root]="booking" tabTitle="Booking" tabIcon="calendar"></ion-tab>
+    <ion-tab [root]="contact" tabTitle="Contact" tabIcon="person"></ion-tab>
+    <ion-tab [root]="call" tabTitle="Call Now" tabIcon="call"></ion-tab>
+    <ion-tab [root]="quote" tabTitle="Quote" tabIcon="call"></ion-tab>
+
+    <!--<ion-tab [root]="tab3Root"></ion-tab>-->
+  </ion-tabs>
+
+
 
 </ion-content>
+
+
 
 <!--
 <ion-footer>
@@ -23,7 +36,7 @@
       ONLINE BOOKING
       <ion-icon name="play"></ion-icon>
     </button>
-  </ion-toolbar>	
+  </ion-toolbar>
 </ion-footer>
 
 -->

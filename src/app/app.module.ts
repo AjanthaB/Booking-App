@@ -23,6 +23,11 @@ import { BookingService } from "../services/booking.service";
 import { ComponentsModule } from '../components/components.module';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfflieDetectionService } from '../services/offline-detection.service';
+import {ContactPage} from "../pages/contact/contact";
+import {CallPage} from "../pages/call/call";
+import {QuotePage} from "../pages/quote/quote";
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -31,7 +36,10 @@ import { OfflieDetectionService } from '../services/offline-detection.service';
     PropertyInfoPage,
     PaymentPage,
     EOTFooterComponent,
-    SliderComponent
+    SliderComponent,
+    ContactPage,
+    CallPage,
+    QuotePage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,10 @@ import { OfflieDetectionService } from '../services/offline-detection.service';
     PropertyInfoPage,
     PaymentPage,
     EOTFooterComponent,
-    SliderComponent
+    SliderComponent,
+    ContactPage,
+    CallPage,
+    QuotePage
   ],
   providers: [
     StatusBar,
