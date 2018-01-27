@@ -1,16 +1,15 @@
 <ion-content padding class="home wrapper">
+
   <div class="container">
     <img src="assets/imgs/eot.png" alt="your image" style="display: block;">
   </div>
-  <ion-grid>
 
+  <ion-grid>
     <button ion-button block round icon-right color="primary" (click)="redirectToPersonalInfo()">
       ONLINE BOOKING
       <ion-icon name="play"></ion-icon>
     </button>
-
   </ion-grid>
-
 
   <ion-tabs selectedIndex="0">
     <ion-tab [root]="slider" tabTitle="Home" tabIcon="home"></ion-tab>
@@ -18,25 +17,6 @@
     <ion-tab [root]="contact" tabTitle="Contact" tabIcon="person"></ion-tab>
     <ion-tab [root]="call" tabTitle="Call Now" tabIcon="call"></ion-tab>
     <ion-tab [root]="quote" tabTitle="Quote" tabIcon="call"></ion-tab>
-
-    <!--<ion-tab [root]="tab3Root"></ion-tab>-->
   </ion-tabs>
 
-
-
 </ion-content>
-
-
-
-<!--
-<ion-footer>
-  <ion-toolbar>
-
-    <button ion-button block round icon-right color="primary" (click)="redirectToPersonalInfo()">
-      ONLINE BOOKING
-      <ion-icon name="play"></ion-icon>
-    </button>
-  </ion-toolbar>
-</ion-footer>
-
--->

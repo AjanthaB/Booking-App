@@ -1,5 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      EOT Cleaning Service
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
 <ion-content padding>
-  <p>
-    contact
-  </p>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2 style="color:deepskyblue">
+          Contact Us
+        </h2>
+        <p>
+          Job mart, <br>
+          14 Holland Road, E15 3BP, London, <br>
+          United kingdom <br>
+          Company Reg. No : 07469521
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>
+          Call Us : 020 33 711 200 <br>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+       <ion-list>
+        <ion-item>
+          <ion-label color="primary" stacked>Name</ion-label>
+          <ion-input type="name" placeholder="Name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" stacked>Emaill</ion-label>
+          <ion-input type="password" placeholder="Email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" stacked>PostCode</ion-label>
+          <ion-input type="password" placeholder="postcode"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" stacked>Phone Number</ion-label>
+          <ion-input type="password" placeholder="phone_num"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" stacked>Message</ion-label>
+          <ion-textarea #message id="myInput" placeholder="Mssage" rows="3"></ion-textarea>
+        </ion-item>
+
+       <ion-item>
+         <button ion-button color="default">Submit</button>
+       </ion-item>
+
+
+      </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

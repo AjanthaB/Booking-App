@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Response } from '@angular/http';
 
 import { BookingService } from '../../services/booking.service';
 import { PropertyInfoPage } from '../property-info/property-info';
