@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {ContactService} from "../../services/contact.service";
 
 
 @Component({
@@ -11,13 +12,13 @@ export class ContactPage {
 
   public _contactForm: FormGroup;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, private contactService: ContactService) {}
 
   /**
    * Angular lifecyvle event
    */
   ngOnInit() {
-    // this.createPersonalIntoForm();
+    this.createPersonalIntoForm();
   }
 
   /**
@@ -27,9 +28,14 @@ export class ContactPage {
     this._contactForm = new FormGroup({
       name: new FormControl("", Validators.required),
       email: new FormControl("", Validators.required),
-      contact_no: new FormControl("", Validators.required),
+      phone_no: new FormControl("", Validators.required),
       postcode: new FormControl("", Validators.required),
       message: new FormControl("", Validators.required),
     });
+  }
+
+  public sendContactRequest(): void {
+    console.log(this._contactForm.value);
+    // this.contactService.sendContactRequest();
   }
 }

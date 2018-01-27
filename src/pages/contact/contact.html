@@ -30,38 +30,40 @@
     </ion-row>
     <ion-row>
       <ion-col>
-       <ion-list>
-        <ion-item>
-          <ion-label color="primary" stacked>Name</ion-label>
-          <ion-input type="name" placeholder="Name"></ion-input>
-        </ion-item>
+        <form [formGroup]="_contactForm">
+          <ion-list>
 
-        <ion-item>
-          <ion-label color="primary" stacked>Emaill</ion-label>
-          <ion-input type="password" placeholder="Email"></ion-input>
-        </ion-item>
+            <ion-item>
+              <ion-label color="primary" stacked>Name</ion-label>
+              <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+            </ion-item>
 
-        <ion-item>
-          <ion-label color="primary" stacked>PostCode</ion-label>
-          <ion-input type="password" placeholder="postcode"></ion-input>
-        </ion-item>
+            <ion-item>
+              <ion-label color="primary" stacked>Emaill</ion-label>
+               <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+            </ion-item>
 
-        <ion-item>
-          <ion-label color="primary" stacked>Phone Number</ion-label>
-          <ion-input type="password" placeholder="phone_num"></ion-input>
-        </ion-item>
+            <ion-item>
+              <ion-label color="primary" stacked>PostCode</ion-label>
+              <ion-input type="text" placeholder="postcode" formControlName="postcode"></ion-input>
+            </ion-item>
 
-        <ion-item>
-          <ion-label color="primary" stacked>Message</ion-label>
-          <ion-textarea #message id="myInput" placeholder="Mssage" rows="3"></ion-textarea>
-        </ion-item>
+            <ion-item>
+              <ion-label color="primary" stacked>Phone Number</ion-label>
+              <ion-input type="text" placeholder="phone Number" formControlName="phone_no"></ion-input>
+            </ion-item>
 
-       <ion-item>
-         <button ion-button color="default">Submit</button>
-       </ion-item>
+            <ion-item>
+              <ion-label color="primary" stacked>Message</ion-label>
+              <ion-textarea #message id="myInput" placeholder="Mssage" rows="3" formControlName="message"></ion-textarea>
+            </ion-item>
 
+             <ion-item>
+               <button (click)="sendContactRequest()" ion-button color="default">Submit</button>
+             </ion-item>
 
-      </ion-list>
+          </ion-list>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

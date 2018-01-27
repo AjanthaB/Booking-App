@@ -26,6 +26,8 @@ import { OfflieDetectionService } from '../services/offline-detection.service';
 import {ContactPage} from "../pages/contact/contact";
 import {CallPage} from "../pages/call/call";
 import {QuotePage} from "../pages/quote/quote";
+import {ContactService} from "../services/contact.service";
+import {QuoteService} from "../services/quote.service";
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import {QuotePage} from "../pages/quote/quote";
     BookingService,
     InAppBrowser,
     Network,
-    OfflieDetectionService
+    OfflieDetectionService,
+    ContactService,
+    QuoteService
   ]
 })
 export class AppModule {}
