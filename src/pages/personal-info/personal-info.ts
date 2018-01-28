@@ -55,8 +55,13 @@ export class ProsonalInfoPage {
   public savePersonalInfo(): void {
     const formValue = this._personalInfoForm.value;
     this._formInvalid = false;
-    this.setPersonalData(formValue)
-    this.navCtrl.push(PropertyInfoPage);
+    console.log(this._personalInfoForm.valid);
+    if (!this._personalInfoForm.valid) {
+      this._formInvalid = true;
+    } else {
+      this.setPersonalData(formValue)
+      this.navCtrl.push(PropertyInfoPage);
+    }
   }
 
   private setPersonalData(formValue: any): void {

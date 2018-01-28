@@ -41,6 +41,11 @@ export class BookingService {
    * Hold the full amount value
    */
   private fullAmount = "0";
+  /**
+   * Hold the Booking Id
+   * @type {string}
+   */
+  private cartId = "";
 
   /**
    * Constructor function of the class
@@ -55,6 +60,15 @@ export class BookingService {
    */
   private initPropertyData() {
     this._bookingDataObj = this.getBookingInitData();
+  }
+
+  public getCartId(): string {
+    return this.cartId;
+  }
+
+  public setCartId(cartId: string): void {
+    this.cartId = cartId;
+    this._bookingDataObj.booking_ref = this.cartId;
   }
 
   public getBookkingFee(): any {
@@ -218,10 +232,45 @@ export class BookingService {
     return this.http.get(urlPrefix, {headers, params});
   }
 
-  public enableBooking(bookingDta: BookingData): any {
+  public enableBooking(bookingData: BookingData): any {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-enable`;
-    // todo: need to add paramaeter cartId
-    return this.http.get(urlPrefix);
+    const headers = this.getCORSJSONHeader();
+    const params = new HttpParams();
+    params.set("ref_id", this.getCartId());
+    params.set("paid_amount", bookingData.paid_amount.toString());
+
+    return this.http.get(urlPrefix, {headers, params});
+  }
+
+  /**
+   * Check the Payment has been done with a given booking id
+   * @param {string} cartRefId
+   * @returns {Observable<any>}
+   */
+  public checkBookingSucessLoop(cartRefId: string): Observable<any> {
+    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-status`;
+    const headers = this.getCORSJSONHeader();
+    const params = new HttpParams();
+    params.set("ref_id", cartRefId);
+
+    return this.http.get(urlPrefix, {headers, params});
+  }
+
+  /**
+   * Confirm the booking
+   * @param {BookingData} bookingData
+   * @returns {Observable<any>}
+   */
+  public confirmTheBooking(bookingData: BookingData): Observable<any> {
+    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-confirm`;
+    const headers = this.getCORSJSONHeader();
+    const params = new HttpParams();
+    params.set("booking_date", bookingData.booking_date);
+    params.set("booking_time", bookingData.booking_time);
+    params.set("cust_email", bookingData.email);
+    params.set("cust_name", bookingData.cust_name);
+
+    return this.http.get(urlPrefix, {headers, params});
   }
 
   /**

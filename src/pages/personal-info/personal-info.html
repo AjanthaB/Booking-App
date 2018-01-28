@@ -36,26 +36,46 @@
         <ion-item>
           Name <b>*</b><br>
           <input class="input_box" type="text" formControlName="name">
+          <div class="form-control-feedback"
+               *ngIf="_personalInfoForm.controls.name.errors && (_personalInfoForm.controls.name.dirty || _personalInfoForm.controls.name.touched)">
+            <p class="error-msg" *ngIf="_personalInfoForm.controls.name.errors.required">Name is required</p>
+          </div>
         </ion-item>
 
         <ion-item>
           Postcode <b>*</b><br>
           <input class="input_box" type="text" formControlName="postCode">
+          <div class="form-control-feedback"
+               *ngIf="_personalInfoForm.controls.postCode.errors && (_personalInfoForm.controls.postCode.dirty || _personalInfoForm.controls.postCode.touched)">
+            <p class="error-msg" *ngIf="_personalInfoForm.controls.postCode.errors.required">Postcode is required</p>
+          </div>
         </ion-item>
 
         <ion-item>
           Address <b>*</b><br>
           <input class="input_box" type="text" formControlName="address">
+          <div class="form-control-feedback"
+               *ngIf="_personalInfoForm.controls.address.errors && (_personalInfoForm.controls.address.dirty || _personalInfoForm.controls.address.touched)">
+            <p class="error-msg" *ngIf="_personalInfoForm.controls.address.errors.required">Address is required</p>
+          </div>
         </ion-item>
 
         <ion-item>
           Phone No <b>*</b><br>
           <input class="input_box" type="text" formControlName="phoneNum">
+          <div class="form-control-feedback"
+               *ngIf="_personalInfoForm.controls.phoneNum.errors && (_personalInfoForm.controls.phoneNum.dirty || _personalInfoForm.controls.phoneNum.touched)">
+            <p class="error-msg" *ngIf="_personalInfoForm.controls.phoneNum.errors.required">Phone Number is required</p>
+          </div>
         </ion-item>
 
         <ion-item>
           Email <b>*</b><br>
           <input class="input_box" type="text" formControlName="email">
+          <div class="form-control-feedback"
+               *ngIf="_personalInfoForm.controls.email.errors && (_personalInfoForm.controls.email.dirty || _personalInfoForm.controls.email.touched)">
+            <p class="error-msg" *ngIf="_personalInfoForm.controls.email.errors.required">Email is required</p>
+          </div>
         </ion-item>
 
         <ion-item>
@@ -66,8 +86,8 @@
       </ion-list>
     </form>
 
-    <ion-row *ngIf="_formInvalid">
-      <b>**</b> Please fill all the mandatory fields
+    <ion-row *ngIf="_formInvalid" >
+      <p style="color: red;"><b>**</b> Please fill all the mandatory fields</p>
     </ion-row>
 
     <ion-row style="padding-bottom: 50px;">

@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {ContactService} from "../../services/contact.service";
 
-
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'
@@ -11,6 +10,7 @@ import {ContactService} from "../../services/contact.service";
 export class ContactPage {
 
   public _contactForm: FormGroup;
+  public _formInvalid = false;
 
   constructor(public navCtrl: NavController, private contactService: ContactService) {}
 
@@ -34,8 +34,16 @@ export class ContactPage {
     });
   }
 
+  /**
+   * @desc - send Contact details to backend
+   */
   public sendContactRequest(): void {
     console.log(this._contactForm.value);
+    if (this._contactForm.valid) {
+      console.log("form valid");
+    } else {
+      console.log("form invalid");
+    }
     // this.contactService.sendContactRequest();
   }
 }
