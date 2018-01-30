@@ -92,3 +92,16 @@ padding-left:16px;
 	}
 
 }
+
+.list-ios{
+	.item-block, ion-item, .item-block:first-child, .item-block .item-inner, .item-block .item-inner{
+		border:none;
+	}	
+}
+.item-ios.item-block .item-inner{
+	border:none;
+}
+
+ion-grid > form > ion-row > ion-col:nth-child(2) > ion-item > div.item-inner{
+margin-right:10px;
+}
