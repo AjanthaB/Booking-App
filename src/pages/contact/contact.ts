@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {ContactService} from "../../services/contact.service";
+import { MailService } from "../../services/mail.service";
 
 @Component({
   selector: 'page-contact',
@@ -12,13 +12,15 @@ export class ContactPage {
   public _contactForm: FormGroup;
   public _formInvalid = false;
 
-  constructor(public navCtrl: NavController, private contactService: ContactService) {}
+  constructor(public navCtrl: NavController,
+              private mailService: MailService) {}
 
   /**
    * Angular lifecyvle event
    */
   ngOnInit() {
     this.createPersonalIntoForm();
+    this.mailService.initAndOpenEMailComposer();
   }
 
   /**
@@ -39,10 +41,17 @@ export class ContactPage {
    */
   public sendContactRequest(): void {
     console.log(this._contactForm.value);
-    this._formInvalid = false;
-    if (!this._contactForm.valid) {
-      this._formInvalid = true;
+    if (this._contactForm.valid) {
+      console.log("form valid");
+      const body = `Name: ${this._contactForm.value.name}<br>`
+        + `Email: ${this._contactForm.value.email}<br>`
+        + `postCode: ${this._contactForm.value.postcode}<br>`
+        + `Phone No: ${this._contactForm.value.phone_no}<br><br>`
+        + `${this._contactForm.value.message}`;
+      this.mailService.openMail(body);
+      this._contactForm.reset();
+    } else {
+      console.log("form invalid");
     }
-    // this.contactService.sendContactRequest();
   }
 }

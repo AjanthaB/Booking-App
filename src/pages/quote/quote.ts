@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {QuoteService} from "../../services/quote.service";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {MailService} from "../../services/mail.service";
 
 
 @Component({
@@ -20,13 +20,14 @@ export class QuotePage {
     "Regular domestic cleaning"
   ];
 
-  constructor(public navCtrl: NavController, private quoteService: QuoteService) {}
+  constructor(public navCtrl: NavController, private mailService: MailService) {}
 
   /**
    * Angular lifecyvle event
    */
   ngOnInit() {
     this.createQuoteForm();
+    this.mailService.initAndOpenEMailComposer();
   }
 
   /**
@@ -43,11 +44,17 @@ export class QuotePage {
   }
 
   public sendQuoteRequest(): void {
-    console.log(this._quoteForm);
-    this._formInvalid = false;
-    if (!this._quoteForm.valid) {
-      this._formInvalid = true;
+    console.log(this._quoteForm.value);
+    if (this._quoteForm.valid) {
+      const mailBody = `Name: ${this._quoteForm.value.name}<br>`
+        + `postCode: ${this._quoteForm.value.postcode}<br>`
+        + `Address: ${this._quoteForm.value.address}<br>`
+        + `Phone No: ${this._quoteForm.value.phone_no}<br>`
+        + `Service: ${this._quoteForm.value.service}`;
+      this.mailService.openMail(mailBody);
+      this._quoteForm.reset();
+    } else {
+      console.log("form not valid");
     }
-    // this.quoteService.sendQuoteRequest();
   }
 }

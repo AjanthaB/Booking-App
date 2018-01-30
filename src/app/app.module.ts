@@ -7,9 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { Network } from '@ionic-native/network';
+import { EmailComposer } from "@ionic-native/email-composer";
 
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -24,11 +23,11 @@ import { BookingService } from "../services/booking.service";
 import { ComponentsModule } from '../components/components.module';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfflieDetectionService } from '../services/offline-detection.service';
-import {ContactPage} from "../pages/contact/contact";
-import {CallPage} from "../pages/call/call";
-import {QuotePage} from "../pages/quote/quote";
-import {ContactService} from "../services/contact.service";
-import {QuoteService} from "../services/quote.service";
+import { ContactPage } from "../pages/contact/contact";
+import { CallPage } from "../pages/call/call";
+import { QuotePage } from "../pages/quote/quote";
+import { ContactService } from "../services/contact.service";
+import { MailService } from "../services/mail.service";
 
 
 @NgModule({
@@ -70,12 +69,13 @@ import {QuoteService} from "../services/quote.service";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BookingService,
     InAppBrowser,
+    EmailComposer,
     Network,
     OfflieDetectionService,
+    BookingService,
     ContactService,
-    QuoteService
+    MailService
   ]
 })
 export class AppModule {}
