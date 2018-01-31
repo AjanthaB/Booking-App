@@ -9,3 +9,11 @@
 .validation-error {
   border-bottom: 1px solid red;
 }
+
+.validation-error-item.item-block.item-md {
+  div.item-inner {
+    border: none;
+  }
+}
+
+

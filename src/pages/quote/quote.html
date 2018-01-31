@@ -26,33 +26,45 @@
           <ion-list>
             <ion-item>
               <ion-label color="primary" stacked>Name <b>*</b></ion-label>
-              <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+              <ion-input type="text" placeholder="Name" formControlName="name"
+                         [ngClass]="{'validation-error': _quoteForm.controls.name.errors && (_quoteForm.controls.name.dirty || _quoteForm.controls.name.touched)}"></ion-input>
+            </ion-item>
+            <ion-item class="form-control-feedback validation-error-item" *ngIf="_quoteForm.controls.name.errors && (_quoteForm.controls.name.dirty || _quoteForm.controls.name.touched)">
+              <p class="error-msg" *ngIf="_quoteForm.controls.name.errors.required">Name is required</p>
             </ion-item>
 
             <ion-item>
               <ion-label color="primary" stacked>Address <b>*</b></ion-label>
-              <ion-input type="text" placeholder="Adress" formControlName="address"></ion-input>
+              <ion-input type="text" placeholder="Adress" formControlName="address"
+                         [ngClass]="{'validation-error': _quoteForm.controls.address.errors && (_quoteForm.controls.address.dirty || _quoteForm.controls.address.touched)}"></ion-input>
+            </ion-item>
+            <ion-item class="form-control-feedback validation-error-item" *ngIf="_quoteForm.controls.address.errors && (_quoteForm.controls.address.dirty || _quoteForm.controls.address.touched)">
+              <p class="error-msg" *ngIf="_quoteForm.controls.address.errors.required">Address is required</p>
             </ion-item>
 
             <ion-item>
               <ion-label color="primary" stacked>PostCode <b>*</b></ion-label>
-              <ion-input type="text" placeholder="Postcode" formControlName="postcode"></ion-input>
+              <ion-input type="text" placeholder="Postcode" formControlName="postcode"
+                         [ngClass]="{'validation-error': _quoteForm.controls.postcode.errors && (_quoteForm.controls.postcode.dirty || _quoteForm.controls.postcode.touched)}"></ion-input>
+            </ion-item>
+            <ion-item class="form-control-feedback validation-error-item" *ngIf="_quoteForm.controls.postcode.errors && (_quoteForm.controls.postcode.dirty || _quoteForm.controls.postcode.touched)">
+              <p class="error-msg" *ngIf="_quoteForm.controls.postcode.errors.required">PostCode is required</p>
             </ion-item>
 
             <ion-item>
               <ion-label color="primary" stacked>Phone Number <b>*</b></ion-label>
-              <ion-input type="text" placeholder="Phone Number" formControlName="phone_no"></ion-input>
+              <ion-input type="text" placeholder="Phone Number" formControlName="phone_no"
+                         [ngClass]="{'validation-error': _quoteForm.controls.phone_no.errors && (_quoteForm.controls.phone_no.dirty || _quoteForm.controls.phone_no.touched)}"></ion-input>
+            </ion-item>
+            <ion-item class="form-control-feedback validation-error-item" *ngIf="_quoteForm.controls.phone_no.errors && (_quoteForm.controls.phone_no.dirty || _quoteForm.controls.phone_no.touched)">
+              <p class="error-msg" *ngIf="_quoteForm.controls.phone_no.errors.required">Phone Number is required</p>
             </ion-item>
 
-            <div class="dropdown-wrapper">
+            <ion-item>
               <ion-label>Services <b>*</b></ion-label>
-              <select id="service" class="dropdown" formControlName="service">
-                <option [value]="service" *ngFor="let service of services">{{service}}</option>
-              </select>
-            </div>
-
-            <ion-item *ngIf="_formInvalid" >
-              <p style="color: red;"><b>**</b> Please fill all the mandatory fields</p>
+              <ion-select id="service" class="dropdown" formControlName="service">
+                <ion-option [value]="service" *ngFor="let service of services">{{service}}</ion-option>
+              </ion-select>
             </ion-item>
 
             <ion-item>

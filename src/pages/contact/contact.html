@@ -40,16 +40,17 @@
               <ion-label color="primary" stacked>Name <b>*</b></ion-label>
               <ion-input type="text" placeholder="Name" formControlName="name" [ngClass]="{'validation-error': _contactForm.controls.name.errors && (_contactForm.controls.name.dirty || _contactForm.controls.name.touched)}"></ion-input>
             </ion-item>
-            <ion-item class="form-control-feedback" *ngIf="_contactForm.controls.name.errors && (_contactForm.controls.name.dirty || _contactForm.controls.name.touched)">
+            <ion-item class="form-control-feedback validation-error-item" *ngIf="_contactForm.controls.name.errors && (_contactForm.controls.name.dirty || _contactForm.controls.name.touched)">
               <p class="error-msg" *ngIf="_contactForm.controls.name.errors.required">Name is required</p>
             </ion-item>
 
             <ion-item>
               <ion-label color="primary" stacked>Emaill <b>*</b></ion-label>
-               <ion-input type="text" placeholder="Email" formControlName="email" [ngClass]="{'validation-error': _contactForm.controls.email.errors && (_contactForm.controls.email.dirty || _contactForm.controls.email.touched)}"></ion-input>
+               <ion-input type="text" placeholder="Email" formControlName="email" email="true" [ngClass]="{'validation-error': _contactForm.controls.email.errors && (_contactForm.controls.email.dirty || _contactForm.controls.email.touched)}"></ion-input>
             </ion-item>
-            <ion-item class="form-control-feedback"  *ngIf="_contactForm.controls.email.errors && (_contactForm.controls.email.dirty || _contactForm.controls.email.touched)">
+            <ion-item class="form-control-feedback validation-error-item"  *ngIf="_contactForm.controls.email.errors && (_contactForm.controls.email.dirty || _contactForm.controls.email.touched)">
               <p class="error-msg" *ngIf="_contactForm.controls.email.errors.required">Email is required</p>
+              <p class="error-msg" *ngIf="_contactForm.controls.email.errors.email && !_contactForm.controls.email.errors.required">Email is not Valid</p>
             </ion-item>
 
             <ion-item>
@@ -57,7 +58,7 @@
               <ion-input type="text" placeholder="postcode" formControlName="postcode"
                          [ngClass]="{'validation-error': _contactForm.controls.postcode.errors && (_contactForm.controls.postcode.dirty || _contactForm.controls.postcode.touched)}"></ion-input>
             </ion-item>
-            <ion-item class="form-control-feedback" *ngIf=" _contactForm.controls.postcode.errors && (_contactForm.controls.postcode.dirty || _contactForm.controls.postcode.touched)">
+            <ion-item class="form-control-feedback validation-error-item" *ngIf=" _contactForm.controls.postcode.errors && (_contactForm.controls.postcode.dirty || _contactForm.controls.postcode.touched)">
               <p class="error-msg" *ngIf="_contactForm.controls.postcode.errors.required">Postcode is required</p>
             </ion-item>
 
@@ -66,7 +67,7 @@
               <ion-input type="text" placeholder="phone Number" formControlName="phone_no"
                          [ngClass]="{'validation-error': _contactForm.controls.phone_no.errors && (_contactForm.controls.phone_no.dirty || _contactForm.controls.phone_no.touched)}"></ion-input>
             </ion-item>
-            <ion-item class="form-control-feedback" *ngIf="_contactForm.controls.phone_no.errors && (_contactForm.controls.phone_no.dirty || _contactForm.controls.phone_no.touched)">
+            <ion-item class="form-control-feedback validation-error-item" *ngIf="_contactForm.controls.phone_no.errors && (_contactForm.controls.phone_no.dirty || _contactForm.controls.phone_no.touched)">
               <p class="error-msg" *ngIf="_contactForm.controls.phone_no.errors.required">Phone Number is required</p>
             </ion-item>
 
@@ -75,7 +76,7 @@
               <ion-textarea #message id="myInput" placeholder="Message" rows="3" formControlName="message"
                             [ngClass]="{'validation-error': _contactForm.controls.message.errors && (_contactForm.controls.message.dirty || _contactForm.controls.message.touched)}"></ion-textarea>
             </ion-item>
-            <ion-item class="form-control-feedback" *ngIf="_contactForm.controls.message.errors && (_contactForm.controls.message.dirty || _contactForm.controls.message.touched)">
+            <ion-item class="form-control-feedback validation-error-item" *ngIf="_contactForm.controls.message.errors && (_contactForm.controls.message.dirty || _contactForm.controls.message.touched)">
               <p class="error-msg" *ngIf="_contactForm.controls.message.errors.required">Message is required</p>
             </ion-item>
 

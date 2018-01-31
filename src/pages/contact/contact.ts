@@ -24,7 +24,7 @@ export class ContactPage {
   }
 
   /**
-   * @desc - create an Angular form to add contact details with validations
+   * @desc - create an Angular form to add contact details with validations, email validation is added in the template
    */
   private createPersonalIntoForm(): void {
     this._contactForm = new FormGroup({
@@ -37,13 +37,14 @@ export class ContactPage {
   }
 
   /**
-   * @desc - send Contact details to backend
+   * @desc - send Contact details to email composer
    */
   public sendContactRequest(): void {
     console.log(this._contactForm.value);
     if (this._contactForm.valid) {
       this._formInvalid = false;
       console.log("form valid");
+      // email body for email composer. This message support limited html tags (if enable isHtml=true in email composer), so we can use them to style the email content.
       const body = `Name: ${this._contactForm.value.name}<br>`
         + `Email: ${this._contactForm.value.email}<br>`
         + `postCode: ${this._contactForm.value.postcode}<br>`
@@ -52,8 +53,8 @@ export class ContactPage {
       this.mailService.openMail(body);
       this._contactForm.reset();
     } else {
+      console.log("form invalid: ");
       this._formInvalid = true;
-      console.log("form invalid");
     }
   }
 }

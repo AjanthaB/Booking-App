@@ -29,16 +29,16 @@ export class ProsonalInfoPage {
    */
   ngOnInit() {
     this._bookingDataObj = this.bookingService.getBookingDataObj();
-    this.createPersonalIntoForm();
+    this.createPersonalInfoForm();
     this.updatePrice();
   }
 
   /**
    * @desc - create an Angular form to add personal details with validations
    */
-  private createPersonalIntoForm(): void {
+  private createPersonalInfoForm(): void {
     this._personalInfoForm = new FormGroup({
-      date: new FormControl(this._bookingDataObj.booking_date, Validators.required),
+      date: new FormControl(new Date(), Validators.required),
       time: new FormControl(this._bookingDataObj.booking_time, Validators.required),
       name: new FormControl(this._bookingDataObj.cust_name, Validators.required),
       postCode: new FormControl(this._bookingDataObj.postcode, Validators.required),
