@@ -42,6 +42,7 @@ export class ContactPage {
   public sendContactRequest(): void {
     console.log(this._contactForm.value);
     if (this._contactForm.valid) {
+      this._formInvalid = false;
       console.log("form valid");
       const body = `Name: ${this._contactForm.value.name}<br>`
         + `Email: ${this._contactForm.value.email}<br>`
@@ -51,6 +52,7 @@ export class ContactPage {
       this.mailService.openMail(body);
       this._contactForm.reset();
     } else {
+      this._formInvalid = true;
       console.log("form invalid");
     }
   }

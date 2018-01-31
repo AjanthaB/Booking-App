@@ -46,6 +46,7 @@ export class QuotePage {
   public sendQuoteRequest(): void {
     console.log(this._quoteForm.value);
     if (this._quoteForm.valid) {
+      this._formInvalid = false;
       const mailBody = `Name: ${this._quoteForm.value.name}<br>`
         + `postCode: ${this._quoteForm.value.postcode}<br>`
         + `Address: ${this._quoteForm.value.address}<br>`
@@ -55,6 +56,7 @@ export class QuotePage {
       this._quoteForm.reset();
     } else {
       console.log("form not valid");
+      this._formInvalid = true;
     }
   }
 }
