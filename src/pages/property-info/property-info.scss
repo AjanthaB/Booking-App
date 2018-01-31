@@ -51,20 +51,21 @@ page-property-info{
     margin-right: 2em;
   }
   
-  progress-eot, progress-eot .navigation{
-width: 245px;
-margin: 0 auto;
-padding-left:16px;
-}
-.propertySummary{
-	.numb{ border:none;}
-}
+	progress-eot, progress-eot .navigation{
+		width: 245px;
+		margin: 0 auto;
+		padding-left:16px;
+	}
+	.propertySummary{
+		.numb{ border:none;}
+	}
 
-.popup {
-    border: solid 2px #0093d1;
-    max-height: 100px;
-    overflow-y: scroll;
-}
+	.popup {
+		border: solid 2px #0093d1;
+		max-height: 100px;
+		overflow-y: scroll;
+	}
+
 
 }
 
