@@ -1,3 +1,4 @@
+import { SpalshPage } from './../pages/spalsh/spalsh';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -41,7 +42,8 @@ import {QuoteService} from "../services/quote.service";
     SliderComponent,
     ContactPage,
     CallPage,
-    QuotePage
+    QuotePage,
+    SpalshPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import {QuoteService} from "../services/quote.service";
     SliderComponent,
     ContactPage,
     CallPage,
-    QuotePage
+    QuotePage,
+    SpalshPage
   ],
   providers: [
     StatusBar,
