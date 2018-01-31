@@ -25,30 +25,35 @@
         <form [formGroup]="_quoteForm">
           <ion-list>
             <ion-item>
-              <ion-label color="primary" stacked>Name</ion-label>
+              <ion-label color="primary" stacked>Name <b>*</b></ion-label>
               <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label color="primary" stacked>Address</ion-label>
+              <ion-label color="primary" stacked>Address <b>*</b></ion-label>
               <ion-input type="text" placeholder="Adress" formControlName="address"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label color="primary" stacked>PostCode</ion-label>
-              <ion-input type="text" placeholder="postcode" formControlName="postcode"></ion-input>
+              <ion-label color="primary" stacked>PostCode <b>*</b></ion-label>
+              <ion-input type="text" placeholder="Postcode" formControlName="postcode"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label color="primary" stacked>Phone Number</ion-label>
-              <ion-input type="text" placeholder="phone Number" formControlName="phone_no"></ion-input>
+              <ion-label color="primary" stacked>Phone Number <b>*</b></ion-label>
+              <ion-input type="text" placeholder="Phone Number" formControlName="phone_no"></ion-input>
             </ion-item>
 
             <div class="dropdown-wrapper">
+              <ion-label>Services <b>*</b></ion-label>
               <select id="service" class="dropdown" formControlName="service">
                 <option [value]="service" *ngFor="let service of services">{{service}}</option>
               </select>
             </div>
+
+            <ion-item *ngIf="_formInvalid" >
+              <p style="color: red;"><b>**</b> Please fill all the mandatory fields</p>
+            </ion-item>
 
             <ion-item>
               <button (click)="sendQuoteRequest()" ion-button color="default">GET YOUR QUOTE</button>

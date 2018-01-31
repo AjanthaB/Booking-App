@@ -11,6 +11,7 @@ import {QuoteService} from "../../services/quote.service";
 export class QuotePage {
 
   public _quoteForm: FormGroup;
+  public _formInvalid: boolean = false;
   public services = [
     "After builders cleaning",
     "Spring cleaning",
@@ -42,7 +43,11 @@ export class QuotePage {
   }
 
   public sendQuoteRequest(): void {
-    console.log(this._quoteForm.value);
+    console.log(this._quoteForm);
+    this._formInvalid = false;
+    if (!this._quoteForm.valid) {
+      this._formInvalid = true;
+    }
     // this.quoteService.sendQuoteRequest();
   }
 }

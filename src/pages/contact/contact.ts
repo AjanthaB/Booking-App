@@ -39,10 +39,9 @@ export class ContactPage {
    */
   public sendContactRequest(): void {
     console.log(this._contactForm.value);
-    if (this._contactForm.valid) {
-      console.log("form valid");
-    } else {
-      console.log("form invalid");
+    this._formInvalid = false;
+    if (!this._contactForm.valid) {
+      this._formInvalid = true;
     }
     // this.contactService.sendContactRequest();
   }
