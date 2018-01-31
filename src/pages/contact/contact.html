@@ -37,7 +37,7 @@
           <ion-list>
 
             <ion-item>
-              <ion-label color="primary" stacked>Name</ion-label>
+              <ion-label color="primary" stacked>Name <b>*</b></ion-label>
               <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
               <div class="form-control-feedback"
                    *ngIf="_contactForm.controls.name.errors && (_contactForm.controls.name.dirty || _contactForm.controls.name.touched)">
@@ -46,7 +46,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label color="primary" stacked>Emaill</ion-label>
+              <ion-label color="primary" stacked>Emaill <b>*</b></ion-label>
                <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
               <div class="form-control-feedback"
                    *ngIf="_contactForm.controls.email.errors && (_contactForm.controls.email.dirty || _contactForm.controls.email.touched)">
@@ -55,7 +55,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label color="primary" stacked>PostCode</ion-label>
+              <ion-label color="primary" stacked>PostCode <b>*</b></ion-label>
               <ion-input type="text" placeholder="postcode" formControlName="postcode"></ion-input>
               <div class="form-control-feedback"
                    *ngIf="_contactForm.controls.postcode.errors && (_contactForm.controls.postcode.dirty || _contactForm.controls.postcode.touched)">
@@ -64,7 +64,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label color="primary" stacked>Phone Number</ion-label>
+              <ion-label color="primary" stacked>Phone Number <b>*</b></ion-label>
               <ion-input type="text" placeholder="phone Number" formControlName="phone_no"></ion-input>
               <div class="form-control-feedback"
                    *ngIf="_contactForm.controls.phone_no.errors && (_contactForm.controls.phone_no.dirty || _contactForm.controls.phone_no.touched)">
@@ -73,7 +73,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label color="primary" stacked>Message</ion-label>
+              <ion-label color="primary" stacked>Message <b>*</b></ion-label>
               <ion-textarea #message id="myInput" placeholder="Message" rows="3" formControlName="message"></ion-textarea>
               <div class="form-control-feedback"
                    *ngIf="_contactForm.controls.message.errors && (_contactForm.controls.message.dirty || _contactForm.controls.message.touched)">
@@ -81,6 +81,10 @@
               </div>
             </ion-item>
 
+            <ion-item *ngIf="_formInvalid" >
+                <p style="color: red;"><b>**</b> Please fill all the mandatory fields</p>
+              </ion-item>
+              
              <ion-item>
                <button (click)="sendContactRequest()" ion-button color="default">Submit</button>
              </ion-item>
