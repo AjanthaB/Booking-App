@@ -38,7 +38,7 @@ export class ProsonalInfoPage {
    */
   ngOnInit() {
     this._bookingDataObj = this.bookingService.getBookingDataObj();
-    if(this._bookingDataObj.booking_time == ""){
+    if(this._bookingDataObj.booking_time == "" || this._bookingDataObj.booking_time == undefined){
       this._bookingDataObj.booking_time = this.timeRangeValues[0].value.toString();
     }
     this.createPersonalInfoForm();
@@ -79,7 +79,7 @@ export class ProsonalInfoPage {
   private setPersonalData(formValue: any): void {
     const bookingData = this.bookingService.getBookingDataObj();
     bookingData.booking_date = formValue.date;  // need to format the date
-    bookingData.booking_time = this.timeRangeValues.indexOf(formValue.time).toString();
+    bookingData.booking_time = (formValue.time != undefined) ? formValue.time.toString() : this._bookingDataObj.booking_time;
     bookingData.cust_name = formValue.name;
     bookingData.postcode = formValue.postCode;
     bookingData.address = formValue.address;
