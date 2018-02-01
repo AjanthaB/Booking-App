@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MailService } from "../../services/mail.service";
+import { ContactDetails } from "../../model/contact";
+import { ContactService } from "../../services/contact.service";
 
 @Component({
   selector: 'page-contact',
@@ -12,15 +13,14 @@ export class ContactPage {
   public _contactForm: FormGroup;
   public _formInvalid = false;
 
-  constructor(public navCtrl: NavController,
-              private mailService: MailService) {}
+  constructor(public navCtrl: NavController, private contactService: ContactService) {}
 
   /**
    * Angular lifecyvle event
    */
   ngOnInit() {
     this.createPersonalIntoForm();
-    this.mailService.initAndOpenEMailComposer();
+    // this.mailService.initAndOpenEMailComposer();
   }
 
   /**
@@ -44,14 +44,21 @@ export class ContactPage {
     if (this._contactForm.valid) {
       this._formInvalid = false;
       console.log("form valid");
-      // email body for email composer. This message support limited html tags (if enable isHtml=true in email composer), so we can use them to style the email content.
-      const body = `Name: ${this._contactForm.value.name}<br>`
-        + `Email: ${this._contactForm.value.email}<br>`
-        + `postCode: ${this._contactForm.value.postcode}<br>`
-        + `Phone No: ${this._contactForm.value.phone_no}<br><br>`
-        + `${this._contactForm.value.message}`;
-      this.mailService.openMail(body);
-      this._contactForm.reset();
+      const formValues = this._contactForm.value;
+      const contactData: ContactDetails = {
+        name: formValues.name,
+        email: formValues.email,
+        phone: formValues.phone_no,
+        postcode: formValues.postcode,
+        message: formValues.message
+      };
+      this.contactService.sendContactRequest(contactData)
+        .subscribe((data: any) => {
+          console.log("contact request success:", data);
+          this._contactForm.reset();
+        }, err => {
+          console.log("error sending contact request: ", err);
+        });
     } else {
       console.log("form invalid: ");
       this._formInvalid = true;

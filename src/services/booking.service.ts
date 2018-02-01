@@ -3,8 +3,9 @@ import { Http, Headers, RequestOptions, Response, URLSearchParams } from "@angul
 
 import { BookingData } from "../model/booking-data";
 import { Observable } from "rxjs/Observable";
+import { map } from "rxjs/operators/map";
 import { DEMO_BOKKING_URI_PREFIX } from "../config/constants";
-import {HttpParams, HttpHeaders, HttpClient, HttpResponse} from "@angular/common/http";
+import { HttpParams, HttpHeaders, HttpClient, HttpResponse } from "@angular/common/http";
 
 @Injectable()
 export class BookingService {
@@ -92,7 +93,7 @@ export class BookingService {
   }
 
   public setPayValue(value: string): void {
-    this._bookingDataObj.full_amount = parseInt(value, 10);
+    this._bookingDataObj.full_amount = parseFloat(value);
     this.worldPayValue = value;
   }
 
@@ -101,7 +102,7 @@ export class BookingService {
   }
 
   public setFullAmount(value: string): void {
-    this._bookingDataObj.full_amount = parseInt(value, 10);
+    this._bookingDataObj.full_amount = parseFloat(value);
     this.fullAmount = value
   }
   /**
@@ -109,20 +110,20 @@ export class BookingService {
    */
   public getBookingInitData(): BookingData {
     return {
-      booking_ref: "",
-      booking_date: "",
-      booking_time: "",
-      cust_name: "",
-      postcode : "",
-      address : "",
-      phone : "",
-      email : "",
+      booking_ref: "BK198",
+      booking_date: "2018-02-02",
+      booking_time: "1",
+      cust_name: "Ajantha",
+      postcode : "AD 50170",
+      address : "Priyanka House",
+      phone : "0713634848",
+      email : "ajantha19991@gmail.com",
       cust_comments : "",
       paid_amount : 0,
       full_amount : 0,
       prop_type : "flat",
       flat_studio : "0",
-      bedrooms: "0",
+      bedrooms: "2",
       bathrooms_no: "0",
       ext_windows_no: "0",
       blinds_no: "0",
@@ -217,27 +218,27 @@ export class BookingService {
 
   /**
    * @desc - Create a new booking
-   * @param bookingDta
+   * @param bookingData
    */
   public addNewBooking(bookingData: BookingData): any {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/new`;
     const headers = this.getCORSJSONHeader();
-    const params = new HttpParams();
+    let params = new HttpParams();
 
     Object.keys(bookingData).forEach(key => {
-      params.append(key, bookingData[key]);
+      params = params.append(key, bookingData[key]);
     });
-    console.log(params);
+    console.log("params: ", params);
 
     return this.http.get(urlPrefix, {headers, params});
   }
 
-  public enableBooking(bookingData: BookingData): any {
+  public enableBooking(): any {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-enable`;
-    const headers = this.getCORSJSONHeader();
-    const params = new HttpParams();
-    params.set("ref_id", this.getCartId());
-    params.set("paid_amount", bookingData.paid_amount.toString());
+    const headers = this.getCORSTextHeader();
+    let params = new HttpParams();
+    params = params.append("ref_id", this.getCartId());
+    console.log("params: ", params);
 
     return this.http.get(urlPrefix, {headers, params});
   }
@@ -250,8 +251,8 @@ export class BookingService {
   public checkBookingSucessLoop(cartRefId: string): Observable<any> {
     const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-status`;
     const headers = this.getCORSJSONHeader();
-    const params = new HttpParams();
-    params.set("ref_id", cartRefId);
+    let params = new HttpParams();
+    params = params.set("ref_id", cartRefId);
 
     return this.http.get(urlPrefix, {headers, params});
   }
@@ -277,18 +278,18 @@ export class BookingService {
    * @desc - return header for access text type response
    */
   private getCORSTextHeader(): HttpHeaders {
-    const headers = new HttpHeaders();
-    headers.append('Accept', 'text/plain; charset=utf-8');
-    headers.append('Content-Type', 'text/plain; charset=utf-8');
-    headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
+    let headers = new HttpHeaders();
+    headers = headers.append('Accept', 'text/plain; charset=utf-8');
+    headers = headers.append('Content-Type', 'text/plain; charset=utf-8');
+    headers = headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
     return headers;
   }
 
   private getCORSJSONHeader(): HttpHeaders {
-    const headers = new HttpHeaders();
-    headers.append('Accept', 'application/json; charset=utf-8');
-    headers.append('Content-Type', 'application/json; charset=utf-8');
-    headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
+    let headers = new HttpHeaders();
+    headers = headers.append('Accept', 'application/json; charset=utf-8');
+    headers = headers.append('Content-Type', 'application/json; charset=utf-8');
+    headers = headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
     return  headers;
   }
 }

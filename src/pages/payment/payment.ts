@@ -6,6 +6,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { BookingData } from '../../model/booking-data';
 import { filter, flatMap } from 'rxjs/operators';
 import { interval } from "rxjs/observable/interval";
+import { timer } from "rxjs/observable/timer";
 
 @Component({
   selector: 'page-payment',
@@ -15,7 +16,6 @@ export class PaymentPage {
 
 
   private pageContent: string = ``;
-  private pageContentUrl = 'data:text/html;base64,' + btoa(this.pageContent);
   public bookingDataObj = {} as BookingData;
   public peymentType = "full";
 
@@ -24,7 +24,7 @@ export class PaymentPage {
     private bookingService: BookingService) {}
 
   /**
-   * Angular lifecyvle event
+   * Angular lifecycle event
    */
   ngOnInit() {
      this.bookingDataObj =  this.bookingService.getBookingDataObj();
@@ -72,13 +72,21 @@ export class PaymentPage {
    */
   public payNow(): void {
     const url = 'data:text/html;base64,' + btoa(this.getTheFormContent(this.bookingDataObj.booking_ref, this.bookingDataObj.paid_amount));
-    const browser:any = this.iab.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
-    browser.addEventListener('loaderror', this.loadErrorCallBack);
+    // const browser: any = this.iab.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
+    // if (browser) {
+    //   browser.addEventListener('loaderror', this.loadErrorCallBack);
+    //   browser.addEventListener('paymentSubmit', this.onPaymentSubmit);
+    // }
+
     this.enableBooking();
   }
 
   private loadErrorCallBack(err) {
     console.log(err);
+  }
+
+  private onPaymentSubmit(): void {
+
   }
 
   /**
@@ -88,8 +96,7 @@ export class PaymentPage {
   public onChangePaymentType(event): void {
     console.log(event);
     this.bookingService.updatePayValue(this.bookingDataObj, event)
-      .subscribe((res: Response) => {
-        const payValue: any = res.json();
+      .subscribe((payValue: any) => {
         this.bookingDataObj.paid_amount = payValue;
         this.bookingService.setBookingDataObj(this.bookingDataObj);
         this.bookingDataObj = this.bookingService.getBookingDataObj();
@@ -111,19 +118,21 @@ export class PaymentPage {
    */
   private createANewBooking(): void {
     this.bookingService.addNewBooking(this.bookingDataObj)
-      .subscribe((cartId: string) => {
-        console.log(cartId);
-        this.bookingService.setCartId(cartId);
+      .subscribe((data: any) => {
+        console.log(data);
+        if (data && data["ref_id"]) {
+          this.bookingService.setCartId(data["ref_id"]);
+        }
       }, err => {
         console.log("error: ", err);
       });
   }
 
   private enableBooking(): void {
-    this.bookingService.enableBooking(this.bookingDataObj)
+    this.bookingService.enableBooking()
       .subscribe(data => {
         console.log("booking enabled: ", data);
-        this.checkingPaymentSuccess();
+        // this.checkingPaymentSuccess();
       }, err => {
         console.log("error: ", err);
       });
@@ -133,7 +142,7 @@ export class PaymentPage {
    * Check the Payment has done after creating new booking. This execute in every 5 second to check the payment status until success.
    */
   private checkingPaymentSuccess(): void {
-    const source = interval(5000);
+    const source = timer(0, 5000);
     source.pipe(
       flatMap(() => this.bookingService.checkBookingSucessLoop(this.bookingService.getCartId())),
       filter(data => {

@@ -21,7 +21,7 @@ export class SplashPage {
     // after splash animation finish redirect to home page
     setTimeout(() => {
       this.redirectToHomePage();
-    }, 1000);
+    }, 1500);
   }
 
   /**

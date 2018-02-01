@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import {MailService} from "../../services/mail.service";
+import {ContactService} from "../../services/contact.service";
+import {QuoteDetails} from "../../model/quote";
 
 
 @Component({
@@ -20,18 +22,18 @@ export class QuotePage {
     "Regular domestic cleaning"
   ];
 
-  constructor(public navCtrl: NavController, private mailService: MailService) {}
+  constructor(public navCtrl: NavController, private contactService: ContactService) {}
 
   /**
    * Angular lifecyvle event
    */
   ngOnInit() {
     this.createQuoteForm();
-    this.mailService.initAndOpenEMailComposer();
+    // this.mailService.initAndOpenEMailComposer();
   }
 
   /**
-   * @desc - create an Angular form to add contact details with validations
+   * @desc - create an Angular form to add quote details with validations
    */
   private createQuoteForm(): void {
     this._quoteForm = new FormGroup({
@@ -47,13 +49,23 @@ export class QuotePage {
     console.log(this._quoteForm.value);
     if (this._quoteForm.valid) {
       this._formInvalid = false;
-      const mailBody = `Name: ${this._quoteForm.value.name}<br>`
-        + `postCode: ${this._quoteForm.value.postcode}<br>`
-        + `Address: ${this._quoteForm.value.address}<br>`
-        + `Phone No: ${this._quoteForm.value.phone_no}<br>`
-        + `Service: ${this._quoteForm.value.service}`;
-      this.mailService.openMail(mailBody);
-      this._quoteForm.reset();
+      const formData = this._quoteForm.value;
+      const quote: QuoteDetails = {
+        name: formData.name,
+        phone: formData.phone_no,
+        postcode: formData.postcode,
+        address: formData.address,
+        service: formData.service
+      };
+
+      this.contactService.sendQuoteRequest(formData)
+        .subscribe((data: any) => {
+          console.log("quote request success: ", data);
+          this._quoteForm.reset();
+        }, err => {
+          console.log("error sending quote:", quote);
+        });
+
     } else {
       console.log("form not valid");
       this._formInvalid = true;

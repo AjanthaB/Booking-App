@@ -67,7 +67,7 @@ export class ProsonalInfoPage {
   private setPersonalData(formValue: any): void {
     const bookingData = this.bookingService.getBookingDataObj();
     bookingData.booking_date = formValue.date;  // need to format the date
-    bookingData.booking_time = formValue.time; // need to format
+    bookingData.booking_time = this.timeRangeValues.indexOf(formValue.time).toString();
     bookingData.cust_name = formValue.name;
     bookingData.postcode = formValue.postCode;
     bookingData.address = formValue.address;
