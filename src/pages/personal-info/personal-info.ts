@@ -1,3 +1,4 @@
+import { flatMap } from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -5,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 import { PropertyInfoPage } from '../property-info/property-info';
 import { BookingData } from '../../model/booking-data';
+import { concat } from 'rxjs/operators/concat';
 
 @Component({
   selector: 'page-personal-info',
@@ -18,7 +20,14 @@ export class ProsonalInfoPage {
   public _personalInfoForm: FormGroup;
   public _formInvalid: boolean = false;
   private _bookingDataObj = {} as BookingData;
-  public timeRangeValues = ['07 AM : 08 AM', '08 AM : 09 AM', '09 AM : 10 AM', '12 PM : 01 PM', '01 PM : 02 PM', '03 PM : 04 PM', '04 PM : 05 PM', 'Arrival Time'];
+  // public timeRangeValues = ['07 AM : 08 AM', '08 AM : 09 AM', '09 AM : 10 AM', '12 PM : 01 PM', '01 PM : 02 PM', '03 PM : 04 PM', '04 PM : 05 PM', 'Arrival Time'];
+  public timeRangeValues = [{"value":1,"label":"07 AM : 08 AM"},{"value":2,"label":"08 AM : 09 AM"},{"value":3,"label":"09 AM : 10 AM"},{"value":4,"label":"12 PM : 01 PM"},{"value":5,"label":"01 PM : 02 PM"},{"value":6,"label":"02 PM : 03 PM"},{"value":7,"label":"03 PM : 04 PM"},{"value":8,"label":"04 PM : 05 PM"},{"value":9,"label":"05 PM : 06 PM"},{"value":10,"label":"Arrival Time"}];
+  public _postcodes = [
+    "NW 452 E1",
+    "SE 4122 E3",
+    "LM 412 S2",
+    "UE 4131 G1"
+  ];
 
   constructor(public navCtrl: NavController,
     private bookingService: BookingService) {
@@ -29,6 +38,9 @@ export class ProsonalInfoPage {
    */
   ngOnInit() {
     this._bookingDataObj = this.bookingService.getBookingDataObj();
+    if(this._bookingDataObj.booking_time == ""){
+      this._bookingDataObj.booking_time = this.timeRangeValues[0].value.toString();
+    }
     this.createPersonalInfoForm();
     this.updatePrice();
   }
@@ -74,6 +86,7 @@ export class ProsonalInfoPage {
     bookingData.phone = formValue.phoneNum;
     bookingData.email = formValue.email;
     bookingData.cust_comments = formValue.comments;
+    console.log(bookingData);
     this.bookingService.setBookingDataObj(bookingData);
   }
 
@@ -114,4 +127,16 @@ export class ProsonalInfoPage {
         console.log("error getting payValue ", err);
       })
   }
+
+  public dateChanged(date: string) {
+    this.bookingService.getAvailableTimeSlots(date)
+      .subscribe((res) => {
+        this.timeRangeValues = res;
+        this._bookingDataObj.booking_time = this.timeRangeValues[0].value.toString();
+        console.log("time chages")
+      },
+      (err) => {
+        console.log("error getting when get available time slots ", err);
+      });
+  };
 }

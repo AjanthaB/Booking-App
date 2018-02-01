@@ -292,4 +292,9 @@ export class BookingService {
     headers = headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
     return  headers;
   }
+
+  public getAvailableTimeSlots(selectedDate: string): Observable<any>{
+    const headers = this.getCORSJSONHeader();
+    return this.http.get("https://booking.end-of-tenancy-london.co.uk/available-timeslots?d=" + selectedDate, {headers})
+  }
 }

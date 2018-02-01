@@ -18,14 +18,14 @@
         <ion-col style="padding:0">
           <ion-item style="padding-left: 15px;">
             <ion-label stacked>Date <b>*</b></ion-label>
-            <ion-datetime class="input_box" displayFormat="YYYY-MM-DD" formControlName="date"></ion-datetime>
+            <ion-datetime class="input_box" displayFormat="YYYY-MM-DD" formControlName="date" max="2030-12-31" (ngModelChange)="dateChanged($event)"></ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col style="padding:0">
           <ion-item>
             <ion-label stacked>Time <b>*</b></ion-label>
             <ion-select class="input_box" formControlName="time" interface="action-sheet">
-              <ion-option *ngFor="let timeRange of timeRangeValues" [value]="timeRange">{{timeRange}}</ion-option>
+              <ion-option *ngFor="let timeRange of timeRangeValues" [value]="timeRange.value">{{timeRange.label}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -44,6 +44,9 @@
 
         <ion-item>
           Postcode <b>*</b><br>
+          <!-- <select class="input_box" formControlName="postCode">
+            <option *ngFor="let code of _postcodes" [ngValue]="code">{{code}}</option>
+          </select> -->
           <input class="input_box" type="text" formControlName="postCode">
           <div class="form-control-feedback"
                *ngIf="_personalInfoForm.controls.postCode.errors && (_personalInfoForm.controls.postCode.dirty || _personalInfoForm.controls.postCode.touched)">
