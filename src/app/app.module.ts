@@ -1,4 +1,4 @@
-import { SpalshPage } from './../pages/spalsh/spalsh';
+import { SplashPage } from '../pages/spalsh/splash';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -42,7 +42,7 @@ import { MailService } from "../services/mail.service";
     ContactPage,
     CallPage,
     QuotePage,
-    SpalshPage
+    SplashPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +63,7 @@ import { MailService } from "../services/mail.service";
     ContactPage,
     CallPage,
     QuotePage,
-    SpalshPage
+    SplashPage
   ],
   providers: [
     StatusBar,
