@@ -3,6 +3,7 @@ import { Slides } from 'ionic-angular';
 import { NavController } from "ionic-angular";
 
 import { ProsonalInfoPage } from "../personal-info/personal-info";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-slider',
@@ -15,7 +16,7 @@ export class SliderComponent {
    */
   @ViewChild(Slides) slides: Slides;
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController, private inAppBrowser: InAppBrowser,) {}
 
   /**
    * Angular lifecycle event
@@ -48,5 +49,27 @@ export class SliderComponent {
     this.slides.pager = true;
     this.slides.autoplay = 1000;
     this.slides.startAutoplay();
+  }
+
+  public openChat(): void {
+    // const url = 'data:text/html;base64,' + btoa(this.getTawkPage());
+    // this.inAppBrowser.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
+  }
+
+  private getTawkPage(): string {
+    return '<html><head></head><body>' +
+      '<script type="text/javascript">' +
+      'const load = () => {' +
+      'var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();' +
+      'var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];' +
+      's1.async=true;' +
+      's1.src="https://embed.tawk.to/5a7291f64b401e45400c9281/default";' +
+      's1.charset="UTF-8";' +
+      's1.setAttribute("crossorigin","*");' +
+      's0.parentNode.insertBefore(s1,s0);' +
+      '};' +
+      'window.onload = load;' +
+      '</script>\n' +
+      + '</body></html>';
   }
 }
