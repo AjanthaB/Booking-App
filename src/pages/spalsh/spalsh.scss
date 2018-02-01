@@ -38,7 +38,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#81d0f1', end
 	}
 }
 
-.bounceIn {
+.bounceIn, .bounceIn:hover {
   -webkit-animation-name: bounceIn;
   animation-name: bounceIn;
   -webkit-animation-duration: .75s;
