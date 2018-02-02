@@ -1,4 +1,3 @@
-import { flatMap } from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,7 +5,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../../services/booking.service';
 import { PropertyInfoPage } from '../property-info/property-info';
 import { BookingData } from '../../model/booking-data';
-import { concat } from 'rxjs/operators/concat';
 
 @Component({
   selector: 'page-personal-info',
@@ -20,7 +18,6 @@ export class ProsonalInfoPage {
   public _personalInfoForm: FormGroup;
   public _formInvalid: boolean = false;
   private _bookingDataObj = {} as BookingData;
-  // public timeRangeValues = ['07 AM : 08 AM', '08 AM : 09 AM', '09 AM : 10 AM', '12 PM : 01 PM', '01 PM : 02 PM', '03 PM : 04 PM', '04 PM : 05 PM', 'Arrival Time'];
   public timeRangeValues = [{"value":1,"label":"07 AM : 08 AM"},{"value":2,"label":"08 AM : 09 AM"},{"value":3,"label":"09 AM : 10 AM"},{"value":4,"label":"12 PM : 01 PM"},{"value":5,"label":"01 PM : 02 PM"},{"value":6,"label":"02 PM : 03 PM"},{"value":7,"label":"03 PM : 04 PM"},{"value":8,"label":"04 PM : 05 PM"},{"value":9,"label":"05 PM : 06 PM"},{"value":10,"label":"Arrival Time"}];
   public _postcodes = [
     "NW 452 E1",
@@ -49,7 +46,8 @@ export class ProsonalInfoPage {
    * @desc - create an Angular form to add personal details with validations
    */
   private createPersonalInfoForm(): void {
-    const date = new Date().toISOString().substring(0 ,10);
+    const date = this.calculateDate();
+
     this._personalInfoForm = new FormGroup({
       date: new FormControl(date, Validators.required),
       time: new FormControl(this._bookingDataObj.booking_time, Validators.required),
@@ -60,6 +58,26 @@ export class ProsonalInfoPage {
       email: new FormControl(this._bookingDataObj.email, Validators.required),
       comments: new FormControl(this._bookingDataObj.cust_comments)
     });
+  }
+
+  /**
+   * @desc - Calculate the date. If current time is grater than 05.00pm date is set as tomorrow, otherwise today.
+   * @returns {string}
+   */
+  private calculateDate(): string {
+    let date = "";
+    const today = new Date();
+    const currentTime = today.toTimeString().substring(0,8);
+    const tmpTime = "17:00:00";
+
+    if (currentTime > tmpTime) {
+      const tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+      date = tomorrow.toISOString().substring(0 ,10);
+    } else {
+      date = today.toISOString().substring(0 ,10);
+    }
+
+    return date;
   }
 
   /**

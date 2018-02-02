@@ -240,11 +240,11 @@ export class BookingService {
     params = params.append("ref_id", this.getCartId());
     console.log("params: ", params);
 
-    return this.http.get(urlPrefix, {headers, params});
+    return this.http.get(urlPrefix, {headers, params, responseType: 'text'});
   }
 
   /**
-   * Check the Payment has been done with a given booking id
+   * Check the Payment has been done or not with a given booking id
    * @param {string} cartRefId
    * @returns {Observable<any>}
    */
@@ -254,7 +254,7 @@ export class BookingService {
     let params = new HttpParams();
     params = params.set("ref_id", cartRefId);
 
-    return this.http.get(urlPrefix, {headers, params});
+    return this.http.get(urlPrefix, {headers, params, responseType: 'text'});
   }
 
   /**

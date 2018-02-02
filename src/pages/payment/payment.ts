@@ -72,7 +72,7 @@ export class PaymentPage {
    */
   public payNow(): void {
     const url = 'data:text/html;base64,' + btoa(this.getTheFormContent(this.bookingDataObj.booking_ref, this.bookingDataObj.paid_amount));
-    // const browser: any = this.iab.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
+    const browser: any = this.iab.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
     // if (browser) {
     //   browser.addEventListener('loaderror', this.loadErrorCallBack);
     //   browser.addEventListener('paymentSubmit', this.onPaymentSubmit);
@@ -132,7 +132,7 @@ export class PaymentPage {
     this.bookingService.enableBooking()
       .subscribe(data => {
         console.log("booking enabled: ", data);
-        // this.checkingPaymentSuccess();
+        this.checkingPaymentSuccess();
       }, err => {
         console.log("error: ", err);
       });
@@ -149,7 +149,7 @@ export class PaymentPage {
         return data === 1;
       })
     ).subscribe( data => {
-      console.log("Payment Sucess : ", data);
+      console.log("Payment Success : ", data);
       this.bookingService.confirmTheBooking(this.bookingDataObj)
         .subscribe(data => {
           console.log("Booking confirmation done")
