@@ -49,7 +49,7 @@ export class ProsonalInfoPage {
    * @desc - create an Angular form to add personal details with validations
    */
   private createPersonalInfoForm(): void {
-    const date = new Date().toISOString()
+    const date = new Date().toISOString().substring(0 ,10);
     this._personalInfoForm = new FormGroup({
       date: new FormControl(date, Validators.required),
       time: new FormControl(this._bookingDataObj.booking_time, Validators.required),

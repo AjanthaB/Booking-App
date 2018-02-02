@@ -53,7 +53,7 @@ export class SliderComponent {
 
   public openChat(): void {
     // const url = 'data:text/html;base64,' + btoa(this.getTawkPage());
-    // this.inAppBrowser.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
+    this.inAppBrowser.create("https://www.end-of-tenancy-london.co.uk/chat/index.html", "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
   }
 
   private getTawkPage(): string {
