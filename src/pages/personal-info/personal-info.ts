@@ -49,8 +49,9 @@ export class ProsonalInfoPage {
    * @desc - create an Angular form to add personal details with validations
    */
   private createPersonalInfoForm(): void {
+    const date = new Date().toISOString()
     this._personalInfoForm = new FormGroup({
-      date: new FormControl(new Date(), Validators.required),
+      date: new FormControl(date, Validators.required),
       time: new FormControl(this._bookingDataObj.booking_time, Validators.required),
       name: new FormControl(this._bookingDataObj.cust_name, Validators.required),
       postCode: new FormControl(this._bookingDataObj.postcode, Validators.required),
