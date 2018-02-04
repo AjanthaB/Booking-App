@@ -110,7 +110,7 @@ export class BookingService {
    */
   public getBookingInitData(): BookingData {
     return {
-      booking_ref: "BK198",
+      booking_ref: "",
       booking_date: "2018-02-02",
       booking_time: "1",
       cust_name: "Ajantha",
@@ -238,6 +238,7 @@ export class BookingService {
     const headers = this.getCORSTextHeader();
     let params = new HttpParams();
     params = params.append("ref_id", this.getCartId());
+    params = params.append("paid_amount", this.getPayValue());
     console.log("params: ", params);
 
     return this.http.get(urlPrefix, {headers, params, responseType: 'text'});
