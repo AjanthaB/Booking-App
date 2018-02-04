@@ -1,11 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers, RequestOptions, Response, URLSearchParams } from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import { HttpParams, HttpHeaders, HttpClient } from "@angular/common/http";
 
 import { BookingData } from "../model/booking-data";
-import { Observable } from "rxjs/Observable";
-import { map } from "rxjs/operators/map";
-import { DEMO_BOKKING_URI_PREFIX } from "../config/constants";
-import { HttpParams, HttpHeaders, HttpClient, HttpResponse } from "@angular/common/http";
+import { DEMO_BOOKING_URI_PREFIX } from "../config/constants";
 
 @Injectable()
 export class BookingService {
@@ -14,18 +12,6 @@ export class BookingService {
    * Object to hold all booking data
    */
   private _bookingDataObj = {} as BookingData;
-  /**
-   * Hold weather states are completed or not
-   */
-  private stateInfo = {
-    personalInfoCompleted: false,
-    propertyInfoCompleted: false,
-    paymentInfoCompleted: false
-  };
-  private requestInfo = {
-    personalInfoValid: false
-  };
-
   /**
    * Hold the booking fee
    */
@@ -138,13 +124,6 @@ export class BookingService {
   }
 
   /**
-   * @desc - set Personal Info Valid
-   */
-  public setPersonalInforValid(valid = false): void {
-    this.requestInfo.personalInfoValid = true;
-  }
-
-  /**
    * @desc - BookingData Object to hold booking data
    */
   public getBookingDataObj(): BookingData {
@@ -158,62 +137,86 @@ export class BookingService {
      this._bookingDataObj = bookingDta;
   }
 
-  public saveBookingData(): Observable<any> {
-    const saveUrl = "";
-    let headers = new HttpHeaders();
-    // headers.append('Authorization', this.authHeader);
-    headers.append('Accept', 'application/json; charset=utf-8');
-    headers.append('Content-Type', 'application/json; charset=utf-8');
-    headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
-    return this.http.post(saveUrl, this._bookingDataObj);
-  }
-
   /**
    * @desc - get the total cost of the cart in every toggle selection
    * @param bookingDta Booking Data Object
    */
-  public getCartTotal(bookingDta: BookingData): Observable<any> {
-    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
+  public getCartTotal(bookingData: BookingData): Observable<any> {
+    const url = `${DEMO_BOOKING_URI_PREFIX}/api/price`;
     const headers = this.getCORSTextHeader();
-    const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}`
-      + `&bedrooms=${bookingDta.bedrooms}&bathrooms=${bookingDta.bathrooms_no}&ext_windows=${bookingDta.ext_windows_no}&blinds=${bookingDta.blinds_no}`
-      + `&curtain=${bookingDta.curtain_steam_no}&mattress=${bookingDta.mattress_steam_no}&wall_washing=${bookingDta.wall_washing_no}&sofa_clean=${bookingDta.sofa_clean_no}`
-      + `&carpet_cleaning=${bookingDta.carpet_no}&rug=${bookingDta.rug}&balcony=${bookingDta.balcony}&bf=true&discount=false`;
 
-      return this.http.get(urlPrefix + urlParams, {headers});
+    let params = new HttpParams();
+    params = params.set("type", bookingData.prop_type);
+    params = params.set("studio_flat", bookingData.flat_studio);
+    params = params.set("bedrooms", bookingData.bedrooms);
+    params = params.set("bathrooms", bookingData.bathrooms_no);
+    params = params.set("ext_windows", bookingData.ext_windows_no);
+    params = params.set("blinds", bookingData.blinds_no);
+    params = params.set("curtain", bookingData.curtain_steam_no);
+    params = params.set("mattress", bookingData.mattress_steam_no);
+    params = params.set("wall_washing", bookingData.wall_washing_no);
+    params = params.set("sofa_clean", bookingData.sofa_clean_no);
+    params = params.set("carpet_cleaning", bookingData.carpet_no);
+    params = params.set("rug", bookingData.rug);
+    params = params.set("balcony", bookingData.balcony);
+    params = params.set("bf", "true");
+    params = params.set("discount", "false");
+
+    return this.http.get(url, {headers, params});
   }
 
   /**
    * @desc - get the Booking data in payment view
-   * @param bookingDta Booking Data Object
+   * @param bookingData Booking Data Object
    */
-  public getBookingFee(bookingDta: BookingData): Observable <any> {
-    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
-    const urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}&bedrooms=${bookingDta.bedrooms}&bf=only`;
+  public getBookingFee(bookingData: BookingData): Observable <any> {
+    const url = `${DEMO_BOOKING_URI_PREFIX}/api/price`;
     const headers = this.getCORSTextHeader();
 
-    return this.http.get(urlPrefix + urlParams, {headers} );
+    let params = new HttpParams();
+    params = params.set("type", bookingData.prop_type);
+    params = params.set("studio_flat", bookingData.flat_studio);
+    params = params.set("bedrooms", bookingData.bedrooms);
+    params = params.set("bf", "only");
+
+    return this.http.get(url , {headers, params} );
   }
 
   /**
    * @desc get the payment value. If payment full then return price with booking fees. If payment is not full return the booking fees only
-   * @param bookingDta Booking data Object
+   * @param bookingData Booking data Object
    * @param paymentType Payment type full or half
    */
-  public updatePayValue(bookingDta: BookingData, paymentType: string): Observable<any> {
-    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/price`;
+  public updatePayValue(bookingData: BookingData, paymentType: string): Observable<any> {
+    const url = `${DEMO_BOOKING_URI_PREFIX}/api/price`;
     const headers = this.getCORSTextHeader();
-    let urlParams = ``;
+    let params = new HttpParams();
+
+    params = params.set("type", bookingData.prop_type);
+    params = params.set("studio_flat", bookingData.flat_studio);
+    params = params.set("bedrooms", bookingData.bedrooms);
+
     if (paymentType === 'full') {
-      urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}`
-        + `&bedrooms=${bookingDta.bedrooms}&bathrooms=${bookingDta.bathrooms_no}&ext_windows=${bookingDta.ext_windows_no}&blinds=${bookingDta.blinds_no}`
-        + `&curtain=${bookingDta.curtain_steam_no}&mattress=${bookingDta.mattress_steam_no}&wall_washing=${bookingDta.wall_washing_no}&sofa_clean=${bookingDta.sofa_clean_no}`
-        + `&carpet_cleaning=${bookingDta.carpet_no}&rug=${bookingDta.rug}&balcony=${bookingDta.balcony}&bf=true&discount=true&vat=full`;
+      params = params.set("bathrooms", bookingData.bathrooms_no);
+      params = params.set("ext_windows", bookingData.ext_windows_no);
+      params = params.set("blinds", bookingData.blinds_no);
+      params = params.set("curtain", bookingData.curtain_steam_no);
+      params = params.set("mattress", bookingData.mattress_steam_no);
+      params = params.set("wall_washing", bookingData.wall_washing_no);
+      params = params.set("sofa_clean", bookingData.sofa_clean_no);
+      params = params.set("carpet_cleaning", bookingData.carpet_no);
+      params = params.set("rug", bookingData.rug);
+      params = params.set("balcony", bookingData.balcony);
+      params = params.set("bf", "true");
+      params = params.set("discount", "false");
+      params = params.set("discount", "true");
+      params = params.set("vat", "full");
     } else {
-      urlParams = `?type=${bookingDta.prop_type}&studio_flat=${bookingDta.flat_studio}&bedrooms=${bookingDta.bedrooms}&bf=only&vat=bf`;
+      params = params.set("bf", "only");
+      params = params.set("vat", "bf");
     }
 
-    return this.http.get(urlPrefix + urlParams, {headers});
+    return this.http.get(url, {headers, params});
   }
 
   /**
@@ -221,25 +224,27 @@ export class BookingService {
    * @param bookingData
    */
   public addNewBooking(bookingData: BookingData): any {
-    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/new`;
+    const urlPrefix = `${DEMO_BOOKING_URI_PREFIX}/api/new`;
     const headers = this.getCORSJSONHeader();
     let params = new HttpParams();
 
     Object.keys(bookingData).forEach(key => {
       params = params.append(key, bookingData[key]);
     });
-    console.log("params: ", params);
 
     return this.http.get(urlPrefix, {headers, params});
   }
 
+  /**
+   * @desc - Enable the newly create booking with given red_id
+   * @returns {any}
+   */
   public enableBooking(): any {
-    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-enable`;
+    const urlPrefix = `${DEMO_BOOKING_URI_PREFIX}/api/booking-enable`;
     const headers = this.getCORSTextHeader();
     let params = new HttpParams();
     params = params.append("ref_id", this.getCartId());
-    params = params.append("paid_amount", this.getPayValue());
-    console.log("params: ", params);
+    params = params.append("paid_amount", this._bookingDataObj.paid_amount.toString());
 
     return this.http.get(urlPrefix, {headers, params, responseType: 'text'});
   }
@@ -250,7 +255,7 @@ export class BookingService {
    * @returns {Observable<any>}
    */
   public checkBookingSucessLoop(cartRefId: string): Observable<any> {
-    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-status`;
+    const urlPrefix = `${DEMO_BOOKING_URI_PREFIX}/api/booking-status`;
     const headers = this.getCORSJSONHeader();
     let params = new HttpParams();
     params = params.set("ref_id", cartRefId);
@@ -264,7 +269,7 @@ export class BookingService {
    * @returns {Observable<any>}
    */
   public confirmTheBooking(bookingData: BookingData): Observable<any> {
-    const urlPrefix = `${DEMO_BOKKING_URI_PREFIX}/api/booking-confirm`;
+    const urlPrefix = `${DEMO_BOOKING_URI_PREFIX}/api/booking-confirm`;
     const headers = this.getCORSJSONHeader();
     const params = new HttpParams();
     params.set("booking_date", bookingData.booking_date);
@@ -276,26 +281,42 @@ export class BookingService {
   }
 
   /**
-   * @desc - return header for access text type response
+   * @desc - return HttpHeaders for text
+   * @returns {HttpHeaders}
    */
   private getCORSTextHeader(): HttpHeaders {
     let headers = new HttpHeaders();
     headers = headers.append('Accept', 'text/plain; charset=utf-8');
     headers = headers.append('Content-Type', 'text/plain; charset=utf-8');
     headers = headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
+
     return headers;
   }
 
+  /**
+   * @desc - return HttpHeaders for json
+   * @returns {HttpHeaders}
+   */
   private getCORSJSONHeader(): HttpHeaders {
     let headers = new HttpHeaders();
     headers = headers.append('Accept', 'application/json; charset=utf-8');
     headers = headers.append('Content-Type', 'application/json; charset=utf-8');
     headers = headers.append('X-CSRF-TOKEN', "Du1OJxE82SVMREHqVyBtGOQV2sCZ6BcN7PlqVP7U");
+
     return  headers;
   }
 
+  /**
+   * @desc - Fetch available time slot from back-end
+   * @param {string} selectedDate
+   * @returns {Observable<any>}
+   */
   public getAvailableTimeSlots(selectedDate: string): Observable<any>{
+    const url = `${DEMO_BOOKING_URI_PREFIX}/available-timeslots`;
     const headers = this.getCORSJSONHeader();
-    return this.http.get("https://booking.end-of-tenancy-london.co.uk/available-timeslots?d=" + selectedDate, {headers})
+    let params = new HttpParams();
+    params = params.set("d", selectedDate);
+
+    return this.http.get(url, {headers, params});
   }
 }

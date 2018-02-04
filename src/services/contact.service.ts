@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import {DEMO_BOKKING_URI_PREFIX} from "../config/constants";
+import {DEMO_BOOKING_URI_PREFIX} from "../config/constants";
 import {ContactDetails} from "../model/contact";
 import {QuoteDetails} from "../model/quote";
 
