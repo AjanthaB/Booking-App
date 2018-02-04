@@ -20,8 +20,8 @@
 	  font-weight: 300;
 	  margin: 5px 0px;
 	  padding: 8px 10px;
-	  border: solid 2px #0093d1;
-	  border-radius: 20px;
+	  border: solid 1px #0093d1;
+	  border-radius: 4px;
 	}
 
 	page-personal-info {
@@ -119,3 +119,7 @@
 		color:deepskyblue;
 	}
 	
+button, .button{
+	border-radius:4px !important;
+	height:40px;
+}

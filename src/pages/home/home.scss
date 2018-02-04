@@ -24,3 +24,17 @@
 // .container {
 //   @include centerer;
 // }
+
+.scroll-content .tabbar{
+	background: #1876BD;
+	
+	.tab-button[aria-selected=true] .tab-button-icon{
+		color:#fff;
+	}
+	.tab-button[aria-selected=true] .tab-button-text{
+		color:#fff;
+	}
+}
+.scroll-content  .tab-button-icon, .scroll-content .tab-button-text{
+	color:#000;
+}

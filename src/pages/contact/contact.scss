@@ -1,5 +1,5 @@
 .text-input{
-    //border-bottom: solid 1px #ccc;
+   // border-bottom: solid 1px #ccc;
 }
 .list-ios > .item-block:last-child{
 	border:none;
@@ -21,3 +21,16 @@
 }
 
 
+contact{
+	button, .button{
+		border-radius:4px !important;
+		height:40px !important;
+		padding-left:13px !important;
+		padding-right:13px !important;
+		background-color:#fff;
+		border-width: 1px;
+		border-style: solid;
+		border-color: #3693D5;
+		color: #3693D5;
+	}
+}
