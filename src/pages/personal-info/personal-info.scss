@@ -123,3 +123,11 @@ button, .button{
 	border-radius:4px !important;
 	height:40px;
 }
+page-personal-info{
+	.item-inner{
+		border: none !important;
+	}
+	form > ion-row > ion-col:nth-child(2) > ion-item > div.item-inner > div > ion-select{
+		padding-left:8px !important;
+	}
+}
