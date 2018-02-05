@@ -1,7 +1,6 @@
-import {Component, ContentChild, ViewChildren, QueryList, ViewChild} from '@angular/core';
+import { Component, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BookingService } from '../../services/booking.service';
-import { Response } from "@angular/http";
 
 import { PaymentPage } from '../payment/payment';
 import { BookingData } from '../../model/booking-data';
@@ -23,7 +22,8 @@ export class PropertyInfoPage {
   public discountPrice = "0";
   public summaryVisible = false;
 
-  constructor(public navCtrl: NavController, private bookingService: BookingService) {}
+  constructor(public navCtrl: NavController,
+              private bookingService: BookingService) {}
 
   /**
    * Angular lifecycle event
@@ -39,7 +39,7 @@ export class PropertyInfoPage {
   }
 
   /**
-   * @desc set initial Booking data values into toogle selectors id exist
+   * @desc set initial Booking data values into toggle selectors id exist
    */
   private setInitValues(): void {
     if (this.toggleSelectors) {
@@ -62,6 +62,10 @@ export class PropertyInfoPage {
     }
   }
 
+
+  /**
+   * @desc - fetch total cart price
+   */
   private updatePrice(): void {
     this.bookingService.getCartTotal(this.bookingDataObj)
       .subscribe((price: any) => {
@@ -76,6 +80,9 @@ export class PropertyInfoPage {
       });
   }
 
+  /**
+   * @desc - Fetch Booking free
+   */
   private updateBookingFee(): void {
     this.bookingService.getBookingFee(this.bookingDataObj)
       .subscribe((bookingFee: any) => {
@@ -86,6 +93,10 @@ export class PropertyInfoPage {
       })
   }
 
+  /**
+   * @desc - Fetch total pay value
+   * @param {string} paymentType
+   */
   private updatePayValue(paymentType: string): void {
     this.bookingService.updatePayValue(this.bookingDataObj, paymentType)
       .subscribe((payValue: any) => {
@@ -99,6 +110,10 @@ export class PropertyInfoPage {
       })
   }
 
+  /**
+   * @desc - Calculate price discount
+   * @param price
+   */
   private calCulateDiscount(price: any): void {
     const discountPrice = (price/100*90).toFixed(2);
     this.discountPrice = discountPrice;

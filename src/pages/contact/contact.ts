@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContactDetails } from "../../model/contact";
 import { ContactService } from "../../services/contact.service";
+import { OfflieDetectionService } from "../../services/offline-detection.service";
+import { TOAST_DURATION, TOAST_OFFLINE_MESSAGE, TOAST_POSITION } from "../../config/constants";
 
 @Component({
   selector: 'page-contact',
@@ -13,14 +15,15 @@ export class ContactPage {
   public _contactForm: FormGroup;
   public _formInvalid = false;
 
-  constructor(public navCtrl: NavController, private contactService: ContactService) {}
+  constructor(private toastController: ToastController,
+              private offlieDetectionService: OfflieDetectionService,
+              private contactService: ContactService) {}
 
   /**
    * Angular lifecyvle event
    */
   ngOnInit() {
     this.createPersonalIntoForm();
-    // this.mailService.initAndOpenEMailComposer();
   }
 
   /**
@@ -36,14 +39,25 @@ export class ContactPage {
     });
   }
 
+  private showToast(message: string): void {
+    let toast = this.toastController.create({
+      message: message,
+      duration: TOAST_DURATION,
+      position: TOAST_POSITION
+    });
+    toast.present();
+  }
+
   /**
    * @desc - send Contact details to email composer
    */
   public sendContactRequest(): void {
-    console.log(this._contactForm.value);
+    const offline = this.offlieDetectionService.isOnline();
+    if (offline) {
+      this.showToast(TOAST_OFFLINE_MESSAGE);
+      return;
+    }
     if (this._contactForm.valid) {
-      this._formInvalid = false;
-      console.log("form valid");
       const formValues = this._contactForm.value;
       const contactData: ContactDetails = {
         name: formValues.name,
@@ -54,14 +68,17 @@ export class ContactPage {
       };
       this.contactService.sendContactRequest(contactData)
         .subscribe((data: any) => {
-          console.log("contact request success:", data);
+          this.showToast('Contact request submitted.');
           this._contactForm.reset();
         }, err => {
           console.log("error sending contact request: ", err);
+          this.showToast('Contact request field, please try again');
         });
     } else {
-      console.log("form invalid: ");
-      this._formInvalid = true;
+      Object.keys(this._contactForm.controls).forEach(field => {
+        const control = this._contactForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
     }
   }
 }

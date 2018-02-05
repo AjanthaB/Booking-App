@@ -4,19 +4,24 @@ import { Network } from '@ionic-native/network'
 
 @Injectable()
 export class OfflieDetectionService {
-  
+
   private offline = false;
   private onConnect;
   private onDisConnect;
 
-  constructor( private network: Network) {}
+  constructor( private network: Network) {
+    this.init();
+  }
 
-  ionViewDidEnter() {
+  /**
+   * Angular lifecycle event
+   */
+  private init() {
     this.onConnect = this.network.onConnect().subscribe(data => {
       console.log(data)
       this.offline = false;
     }, error => console.error(error));
-   
+
     this.onDisConnect = this.network.onDisconnect().subscribe(data => {
       console.log(data)
       this.offline = true;
