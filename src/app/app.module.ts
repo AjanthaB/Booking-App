@@ -7,7 +7,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { Network } from '@ionic-native/network';
-import { EmailComposer } from "@ionic-native/email-composer";
 
 
 import { MyApp } from './app.component';
@@ -27,7 +26,6 @@ import { ContactPage } from "../pages/contact/contact";
 import { CallPage } from "../pages/call/call";
 import { QuotePage } from "../pages/quote/quote";
 import { ContactService } from "../services/contact.service";
-import { MailService } from "../services/mail.service";
 
 
 @NgModule({
@@ -70,12 +68,10 @@ import { MailService } from "../services/mail.service";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     InAppBrowser,
-    EmailComposer,
     Network,
     OfflieDetectionService,
     BookingService,
-    ContactService,
-    MailService
+    ContactService
   ]
 })
 export class AppModule {}

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { BookingService } from '../../services/booking.service';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { BookingData } from '../../model/booking-data';
 import { filter, flatMap } from 'rxjs/operators';
-import { interval } from "rxjs/observable/interval";
 import { timer } from "rxjs/observable/timer";
+import { TOAST_DURATION, TOAST_OFFLINE_MESSAGE, TOAST_POSITION } from "../../config/constants";
+import {OfflieDetectionService} from "../../services/offline-detection.service";
 
 @Component({
   selector: 'page-payment',
@@ -14,13 +15,13 @@ import { timer } from "rxjs/observable/timer";
 })
 export class PaymentPage {
 
-
-  private pageContent: string = ``;
   public bookingDataObj = {} as BookingData;
   public peymentType = "full";
 
   constructor(public navCtrl: NavController,
     private iab: InAppBrowser,
+    private offlineDetectionService: OfflieDetectionService,
+    private toastController: ToastController,
     private bookingService: BookingService) {}
 
   /**
@@ -28,13 +29,17 @@ export class PaymentPage {
    */
   ngOnInit() {
      this.bookingDataObj =  this.bookingService.getBookingDataObj();
-     // this.bookingDataObj.paid_amount = this.bookingService.getBookkingFee();
      this.bookingDataObj.paid_amount = this.bookingService.getPayValue();
      this.bookingService.setBookingDataObj(this.bookingDataObj);
-     console.log("Booking data: ", this.bookingDataObj);
-    this.createANewBooking();
+     this.createANewBooking();
   }
 
+  /**
+   * @desc - generate the html page as base64 string to open with InnApp Browser, after open this page redirect to payment gateway
+   * @param {string} cartId
+   * @param {number} worldpayValue
+   * @returns {string}
+   */
   private getTheFormContent(cartId: string, worldpayValue: number): string {
     return '<html><head></head><body>'
       + '<form id="myForm" action="https://secure-test.worldpay.com/wcc/purchase" method="POST">'
@@ -50,18 +55,34 @@ export class PaymentPage {
       + '</body></html>';
   }
 
-  public getBookingFee(): any {
+  /**
+   * return the booking fee
+   * @returns {string}
+   */
+  public getBookingFee(): string {
     return this.bookingService.getBookkingFee();
   }
 
+  /**
+   * return the payvalue
+   * @returns {any}
+   */
   public getPayValue(): any {
     return this.bookingService.getPayValue();
   }
 
+  /**
+   * return thr total cart price
+   * @returns {any}
+   */
   public getTotalCartPrice(): any {
     return this.bookingService.getTotalCart();
   }
 
+  /**
+   * Calculate the price discount
+   * @returns {any}
+   */
   private calCulateDiscount(): any {
     const price = this.bookingService.getTotalCart();
     const discountPrice = (price/100*90).toFixed(2);
@@ -72,22 +93,15 @@ export class PaymentPage {
    * cache Personal Information when click on Next button
    */
   public payNow(): void {
+    const offline = this.offlineDetectionService.isOnline();
+
+    if (offline) {
+      this.showToastMessage();
+      return;
+    }
     const url = 'data:text/html;base64,' + btoa(this.getTheFormContent(this.bookingDataObj.booking_ref, this.bookingDataObj.paid_amount));
-    const browser: any = this.iab.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
-    // if (browser) {
-    //   browser.addEventListener('loaderror', this.loadErrorCallBack);
-    //   browser.addEventListener('paymentSubmit', this.onPaymentSubmit);
-    // }
-
+    this.iab.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
     this.enableBooking();
-  }
-
-  private loadErrorCallBack(err) {
-    console.log(err);
-  }
-
-  private onPaymentSubmit(): void {
-
   }
 
   /**
@@ -129,6 +143,21 @@ export class PaymentPage {
       });
   }
 
+  /**
+   * show the toast message
+   */
+  private showToastMessage(): void {
+    let toast = this.toastController.create({
+      message: TOAST_OFFLINE_MESSAGE,
+      duration: TOAST_DURATION,
+      position: TOAST_POSITION
+    });
+    toast.present();
+  }
+
+  /**
+   * enable the newly created booking
+   */
   private enableBooking(): void {
     this.bookingService.enableBooking()
       .subscribe(data => {
@@ -140,7 +169,7 @@ export class PaymentPage {
   }
 
   /**
-   * Check the Payment has done after creating new booking. This execute in every 5 second to check the payment status until success.
+   * Check the Payment has done or not after creating new booking. This execute in every 5 second to check the payment status until success.
    */
   private checkingPaymentSuccess(): void {
     const source = timer(0, 5000);

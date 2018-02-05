@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BookingService } from '../../services/booking.service';
 import { PropertyInfoPage } from '../property-info/property-info';
 import { BookingData } from '../../model/booking-data';
+import {
+  DEFAULT_POST_CODES, DEFAULT_TIME_RANGE_VALUES, TOAST_DURATION, TOAST_OFFLINE_MESSAGE,
+  TOAST_POSITION
+} from "../../config/constants";
+import {OfflieDetectionService} from "../../services/offline-detection.service";
 
 @Component({
   selector: 'page-personal-info',
@@ -16,22 +21,19 @@ export class ProsonalInfoPage {
    * @desc - Angular Form Group to keep personal information
    */
   public _personalInfoForm: FormGroup;
-  public _formInvalid: boolean = false;
   private _bookingDataObj = {} as BookingData;
-  public timeRangeValues = [{"value":1,"label":"07 AM : 08 AM"},{"value":2,"label":"08 AM : 09 AM"},{"value":3,"label":"09 AM : 10 AM"},{"value":4,"label":"12 PM : 01 PM"},{"value":5,"label":"01 PM : 02 PM"},{"value":6,"label":"02 PM : 03 PM"},{"value":7,"label":"03 PM : 04 PM"},{"value":8,"label":"04 PM : 05 PM"},{"value":9,"label":"05 PM : 06 PM"},{"value":10,"label":"Arrival Time"}];
-  public _postcodes = [
-    "NW 452 E1",
-    "SE 4122 E3",
-    "LM 412 S2",
-    "UE 4131 G1"
-  ];
+  public timeRangeValues = DEFAULT_TIME_RANGE_VALUES;
+  public _postcodes = DEFAULT_POST_CODES;
+  public _formInvalid: boolean = false;
 
   constructor(public navCtrl: NavController,
+    private toastController: ToastController,
+    private offlineDetectionService: OfflieDetectionService,
     private bookingService: BookingService) {
   }
 
   /**
-   * Angular lifecyvle event
+   * Angular lifecycle event
    */
   ngOnInit() {
     this._bookingDataObj = this.bookingService.getBookingDataObj();
@@ -47,6 +49,7 @@ export class ProsonalInfoPage {
    */
   private createPersonalInfoForm(): void {
     const date = this.calculateDate();
+    this.dateChanged(date);
 
     this._personalInfoForm = new FormGroup({
       date: new FormControl(date, Validators.required),
@@ -88,13 +91,24 @@ export class ProsonalInfoPage {
     this._formInvalid = false;
     console.log(this._personalInfoForm.valid);
     if (!this._personalInfoForm.valid) {
-      this._formInvalid = true;
+      Object.keys(this._personalInfoForm.controls).forEach(field => {
+        const control = this._personalInfoForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
     } else {
-      this.setPersonalData(formValue)
+      this.setPersonalData(formValue);
+      const offline = this.offlineDetectionService.isOnline();
+      if (offline) {
+        this.showToastMessage(TOAST_OFFLINE_MESSAGE);
+      }
       this.navCtrl.push(PropertyInfoPage);
     }
   }
 
+  /**
+   * @desc - assign form values to Booking Date Object
+   * @param formValue
+   */
   private setPersonalData(formValue: any): void {
     const bookingData = this.bookingService.getBookingDataObj();
     bookingData.booking_date = formValue.date;  // need to format the date
@@ -116,6 +130,18 @@ export class ProsonalInfoPage {
     this.navCtrl.pop();
   }
 
+  /**
+   * show the toast message
+   */
+  private showToastMessage(message: string): void {
+    let toast = this.toastController.create({
+      message: message,
+      duration: TOAST_DURATION,
+      position: TOAST_POSITION
+    });
+    toast.present();
+  }
+
   private updatePrice(): void {
     this.bookingService.getCartTotal(this._bookingDataObj)
       .subscribe((price: any) => {
@@ -123,7 +149,7 @@ export class ProsonalInfoPage {
         this.updateBookingFee();
         this.updatePayValue("full");
       }, err => {
-        console.log("Error: ", err)
+        console.log("Error: ", err);
       });
   }
 
@@ -147,15 +173,19 @@ export class ProsonalInfoPage {
       })
   }
 
+  /**
+   * @desc - fetch available time slots for selected date
+   * @param {string} date
+   */
   public dateChanged(date: string) {
     this.bookingService.getAvailableTimeSlots(date)
       .subscribe((res) => {
         this.timeRangeValues = res;
         this._bookingDataObj.booking_time = this.timeRangeValues[0].value.toString();
-        console.log("time chages")
+        console.log("time changes")
       },
       (err) => {
-        console.log("error getting when get available time slots ", err);
+        console.log("error when getting available time slots ", err);
       });
   };
 }

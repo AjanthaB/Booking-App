@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import {MailService} from "../../services/mail.service";
-import {ContactService} from "../../services/contact.service";
-import {QuoteDetails} from "../../model/quote";
+
+import { ContactService} from "../../services/contact.service";
+import { QuoteDetails } from "../../model/quote";
+import { EOT_SERVICES, TOAST_DURATION, TOAST_OFFLINE_MESSAGE, TOAST_POSITION } from "../../config/constants";
+import { OfflieDetectionService } from "../../services/offline-detection.service";
 
 
 @Component({
@@ -14,22 +16,17 @@ export class QuotePage {
 
   public _quoteForm: FormGroup;
   public _formInvalid: boolean = false;
-  public services = [
-    "After builders cleaning",
-    "Spring cleaning",
-    "Carpet cleaning London",
-    "Office and commercial cleaning",
-    "Regular domestic cleaning"
-  ];
+  public services = EOT_SERVICES;
 
-  constructor(public navCtrl: NavController, private contactService: ContactService) {}
+  constructor(private contactService: ContactService,
+              private toastController: ToastController,
+              private offlineDetectionService: OfflieDetectionService) {}
 
   /**
-   * Angular lifecyvle event
+   * Angular lifecycle event
    */
   ngOnInit() {
     this.createQuoteForm();
-    // this.mailService.initAndOpenEMailComposer();
   }
 
   /**
@@ -45,8 +42,26 @@ export class QuotePage {
     });
   }
 
+  private showToastMessage(message: string): void {
+    let toast = this.toastController.create({
+      message: message,
+      duration: TOAST_DURATION,
+      position: TOAST_POSITION
+    });
+    toast.present();
+  }
+
+  /**
+   * create new Quote request
+   */
   public sendQuoteRequest(): void {
-    console.log(this._quoteForm.value);
+    const offline = this.offlineDetectionService.isOnline();
+
+    if (offline) {
+      this.showToastMessage(TOAST_OFFLINE_MESSAGE);
+      return;
+    }
+
     if (this._quoteForm.valid) {
       this._formInvalid = false;
       const formData = this._quoteForm.value;
@@ -60,15 +75,18 @@ export class QuotePage {
 
       this.contactService.sendQuoteRequest(formData)
         .subscribe((data: any) => {
-          console.log("quote request success: ", data);
+          this.showToastMessage('Quote request submitted.');
           this._quoteForm.reset();
         }, err => {
           console.log("error sending quote:", quote);
+          this.showToastMessage('Quote request field, please try again.');
         });
 
     } else {
-      console.log("form not valid");
-      this._formInvalid = true;
+      Object.keys(this._quoteForm.controls).forEach(field => {
+        const control = this._quoteForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
     }
   }
 }
