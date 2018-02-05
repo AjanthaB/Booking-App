@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import {DEMO_BOOKING_URI_PREFIX} from "../config/constants";
-import {ContactDetails} from "../model/contact";
-import {QuoteDetails} from "../model/quote";
+import { API_URI} from "../config/constants";
+import { ContactDetails } from "../model/contact";
+import { QuoteDetails } from "../model/quote";
 
 @Injectable()
 export class ContactService {
@@ -15,10 +15,10 @@ export class ContactService {
    * @returns {Observable<any>}
    */
   public sendContactRequest(contactDetails: ContactDetails): Observable<any> {
-    const prefixURL = `https://booking.end-of-tenancy-london.co.uk/api/message-submit`;
+    const url = `${API_URI}/message-submit`;
     const headers = this.getCORSJSONHeader();
 
-    return this.httpClient.post(prefixURL, contactDetails, {headers});
+    return this.httpClient.post(url, contactDetails, {headers});
   }
 
   /**
@@ -27,12 +27,16 @@ export class ContactService {
    * @returns {Observable<any>}
    */
   public sendQuoteRequest(quote: QuoteDetails): Observable <any> {
-    const prefixURL = `https://booking.end-of-tenancy-london.co.uk/api/quote-request`;
+    const url = `${API_URI}/quote-request`;
     const headers = this.getCORSJSONHeader();
 
-    return this.httpClient.post(prefixURL, quote, {headers});
+    return this.httpClient.post(url, quote, {headers});
   }
 
+  /**
+   * @desc - return the Http Headers for json
+   * @returns {HttpHeaders}
+   */
   private getCORSJSONHeader(): HttpHeaders {
     let headers = new HttpHeaders();
     headers = headers.append('Accept', 'application/json; charset=utf-8');
