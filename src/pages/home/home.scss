@@ -26,7 +26,9 @@
 // }
 
 .scroll-content .tabbar{
-	background: #1876BD;
+	// background: #1876BD;#3D9BDD
+	background: #2187d3;
+	border-top: solid 1px #0b2c44;
 	
 	.tab-button[aria-selected=true] .tab-button-icon{
 		color:#fff;
@@ -36,5 +38,5 @@
 	}
 }
 .scroll-content  .tab-button-icon, .scroll-content .tab-button-text{
-	color:#000;
+	color:#0b2c44;
 }
