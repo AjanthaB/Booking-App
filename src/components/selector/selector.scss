@@ -3,16 +3,17 @@ selector {
     padding: 2px;
     border-radius: 20px;
     border: solid 2px black;
-    height: 33px;
+    height: 32px;
     float: right;
     width: 108px;
   }
   .item {
     float: right;
     width: 55px;
-    padding: 6px 4px;
+    // border: solid 1px black;
+    padding: 3px 4px;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 20px;
   }
 
   .noItem {
