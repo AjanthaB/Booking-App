@@ -4,6 +4,7 @@ import { NavController } from "ionic-angular";
 
 import { ProsonalInfoPage } from "../personal-info/personal-info";
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { BrowserTab } from '@ionic-native/browser-tab';
 
 @Component({
   selector: 'page-slider',
@@ -16,7 +17,8 @@ export class SliderComponent {
    */
   @ViewChild(Slides) slides: Slides;
 
-  constructor(private navCtrl: NavController, private inAppBrowser: InAppBrowser,) {}
+  constructor(private navCtrl: NavController, private inAppBrowser: InAppBrowser,
+    private browserTab: BrowserTab) { }
 
   /**
    * Angular lifecycle event
@@ -53,7 +55,15 @@ export class SliderComponent {
 
   public openChat(): void {
     // const url = 'data:text/html;base64,' + btoa(this.getTawkPage());
-    this.inAppBrowser.create("https://www.end-of-tenancy-london.co.uk/chat/", "_blank", "hidden=no,location=no");
+    // this.inAppBrowser.create("https://www.end-of-tenancy-london.co.uk/chat/", "_blank", "hidden=no,location=no");
+    this.browserTab.isAvailable()
+      .then((isAvailable: boolean) => {
+        if (isAvailable) {
+          this.browserTab.openUrl('https://www.end-of-tenancy-london.co.uk/chat/');
+        } else {
+          console.log("err")
+        }
+      });
   }
 
   private getTawkPage(): string {
