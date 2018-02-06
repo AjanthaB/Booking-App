@@ -184,6 +184,7 @@
       <ion-col>
         <selector
         [key]="'bathrooms_no'"
+        #bathRoomSelector
         [lable]="'Bathrooms'"
         [items]="['01', '02', '03', '04', '05']"
         (onToggle)="onToggleBathrooms($event)"

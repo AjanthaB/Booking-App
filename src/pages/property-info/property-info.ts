@@ -16,6 +16,7 @@ export class PropertyInfoPage {
   @ViewChild("flatSelector") flatToggle: SelectorComponent;
   @ViewChild("typeSelector") typeToggle: SelectorComponent;
   @ViewChild("bedSelector") bedToggle: SelectorComponent;
+  @ViewChild("bathRoomSelector") bathRoomToggle: SelectorComponent;
 
   public bookingDataObj = {} as BookingData;
   public price = "0";
@@ -165,6 +166,9 @@ export class PropertyInfoPage {
       this.bookingDataObj.bedrooms = event.deActive;
       console.log("After select the bed rooms: ", this.bookingDataObj);
       this.bookingDataObj.flat_studio = "0";
+      this.bathRoomToggle.selectItem("01");
+      this.bathRoomToggle.setSelectedOnlyToggle();
+      this.bookingDataObj.bathrooms_no = "01";
       this.flatToggle.setUnSelectedOnlyToggle();
       this.updatePrice();
     }
