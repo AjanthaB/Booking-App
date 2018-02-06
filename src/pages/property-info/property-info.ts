@@ -182,6 +182,7 @@ export class PropertyInfoPage {
   public onToggleBedrooms(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.bedrooms = "0";
+      this.updatePrice();
       console.log("After toggle the bed rooms: ", this.bookingDataObj);
     }
   }
@@ -205,6 +206,7 @@ export class PropertyInfoPage {
   public onToggleBathrooms(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.bathrooms_no = "0";
+      this.updatePrice();
       console.log("After toggle the bath rooms: ", this.bookingDataObj);
     }
   }
@@ -228,6 +230,7 @@ export class PropertyInfoPage {
   public onToggleCarpets(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.carpet_no = "0";
+      this.updatePrice();
       console.log("After toggle the carrpets: ", this.bookingDataObj);
     }
   }
@@ -251,6 +254,7 @@ export class PropertyInfoPage {
   public onToggleWindows(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.ext_windows_no = "0";
+      this.updatePrice();
       console.log("After toggle the windows: ", this.bookingDataObj);
     }
   }
@@ -274,6 +278,7 @@ export class PropertyInfoPage {
   public onToggleBlinds(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.blinds_no = "0";
+      this.updatePrice();
       console.log("After toggle the Blinds: ", this.bookingDataObj);
     }
   }
@@ -297,6 +302,7 @@ export class PropertyInfoPage {
   public onToggleCurtain(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.curtain_steam_no = "0";
+      this.updatePrice();
       console.log("After toggle the Curtain: ", this.bookingDataObj);
     }
   }
@@ -320,6 +326,7 @@ export class PropertyInfoPage {
   public onToggleMattress(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.mattress_steam_no = "0";
+      this.updatePrice();
       console.log("After toggle the Mattress: ", this.bookingDataObj);
     }
   }
@@ -343,6 +350,7 @@ export class PropertyInfoPage {
   public onToggleWall(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.wall_washing_no = "0";
+      this.updatePrice();
       console.log("After toggle the Mattress: ", this.bookingDataObj);
     }
   }
@@ -366,6 +374,7 @@ export class PropertyInfoPage {
   public onToggleSofa(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.sofa_clean_no = "0";
+      this.updatePrice();
       console.log("After toggle the Sofa: ", this.bookingDataObj);
     }
   }
@@ -390,6 +399,7 @@ export class PropertyInfoPage {
   public onToggleRug(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.rug = "0";
+      this.updatePrice();
       console.log("After toggle the run: ", this.bookingDataObj);
     }
   }
@@ -413,6 +423,7 @@ export class PropertyInfoPage {
   public onToggleBalcony(event: any): void {
     if (!event.selected) {
       this.bookingDataObj.balcony = "0";
+      this.updatePrice();
       console.log("After toggle the balcony: ", this.bookingDataObj);
     }
   }
