@@ -26,7 +26,6 @@ import { ContactPage } from "../pages/contact/contact";
 import { CallPage } from "../pages/call/call";
 import { QuotePage } from "../pages/quote/quote";
 import { ContactService } from "../services/contact.service";
-import { MailService } from "../services/mail.service";
 import { BrowserTab } from '@ionic-native/browser-tab';
 
 @NgModule({
@@ -73,7 +72,6 @@ import { BrowserTab } from '@ionic-native/browser-tab';
     OfflieDetectionService,
     BookingService,
     ContactService,
-    MailService,
     BrowserTab
   ]
 })
