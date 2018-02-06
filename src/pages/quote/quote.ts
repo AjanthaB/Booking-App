@@ -42,11 +42,12 @@ export class QuotePage {
     });
   }
 
-  private showToastMessage(message: string): void {
+  private showToastMessage(message: string, cssClass: string): void {
     let toast = this.toastController.create({
       message: message,
       duration: TOAST_DURATION,
-      position: TOAST_POSITION
+      position: TOAST_POSITION,
+      cssClass
     });
     toast.present();
   }
@@ -58,7 +59,7 @@ export class QuotePage {
     const offline = this.offlineDetectionService.isOnline();
 
     if (offline) {
-      this.showToastMessage(TOAST_OFFLINE_MESSAGE);
+      this.showToastMessage(TOAST_OFFLINE_MESSAGE, "toast-offline");
       return;
     }
 
@@ -75,11 +76,11 @@ export class QuotePage {
 
       this.contactService.sendQuoteRequest(formData)
         .subscribe((data: any) => {
-          this.showToastMessage('Quote request submitted.');
+          this.showToastMessage('Quote request submitted.', "toast-success");
           this._quoteForm.reset();
         }, err => {
           console.log("error sending quote:", quote);
-          this.showToastMessage('Quote request field, please try again.');
+          this.showToastMessage('Quote request field, please try again.', "toast-error");
         });
 
     } else {

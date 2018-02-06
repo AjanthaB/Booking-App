@@ -23,4 +23,24 @@ ion-footer{
 button{
 	border-radius:4px !important;
 }
-	
+
+
+.toast-success {
+  > div{
+    background-color: #28a279 !important;
+    text-align: center;
+  }
+}
+
+.toast-error {
+  .toast-container{
+    background-color: #a23d11 !important;
+    text-align: center;
+  }
+}
+
+.toast-offline {
+  .toast-container {
+    text-align: center;
+  }
+}

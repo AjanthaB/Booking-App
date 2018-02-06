@@ -19,8 +19,8 @@ export class PropertyInfoPage {
   @ViewChild("bathRoomSelector") bathRoomToggle: SelectorComponent;
 
   public bookingDataObj = {} as BookingData;
-  public price = "0";
-  public discountPrice = "0";
+  public price = "0.00";
+  public discountPrice = "0.00";
   public summaryVisible = false;
 
   constructor(public navCtrl: NavController,
@@ -70,9 +70,9 @@ export class PropertyInfoPage {
   private updatePrice(): void {
     this.bookingService.getCartTotal(this.bookingDataObj)
       .subscribe((price: any) => {
-        this.price = price;
-        this.bookingService.setTotalCart(price);
-        this.calCulateDiscount(price);
+        this.price = price.toFixed(2);
+        this.bookingService.setTotalCart(this.price );
+        this.calCulateDiscount(this.price);
         this.updateBookingFee();
         this.updatePayValue("full");
         console.log("Updated price: ", this.price);
@@ -87,6 +87,7 @@ export class PropertyInfoPage {
   private updateBookingFee(): void {
     this.bookingService.getBookingFee(this.bookingDataObj)
       .subscribe((bookingFee: any) => {
+
         this.bookingService.setBookingFee(bookingFee);
         console.log("Booking fee: ", bookingFee);
       }, err => {

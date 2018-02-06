@@ -11,6 +11,8 @@ import {
 } from "../../config/constants";
 import {OfflieDetectionService} from "../../services/offline-detection.service";
 
+import * as moment from "moment-timezone";
+
 @Component({
   selector: 'page-personal-info',
   templateUrl: 'personal-info.html'
@@ -69,17 +71,18 @@ export class ProsonalInfoPage {
    */
   private calculateDate(): string {
     let date = "";
-    const today = new Date();
-    const currentTime = today.toTimeString().substring(0,8);
-    const tmpTime = "17:00:00";
+    const today = moment().tz("Europe/London");
+    const londonTime  = today.format("HH:mm:ss");
+    const tmpTime = "17:30:00";
 
-    if (currentTime > tmpTime) {
-      const tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000));
-      date = tomorrow.toISOString().substring(0 ,10);
+    if (londonTime > tmpTime) {
+      const tomorrow = today.add(1, 'days');
+      date = tomorrow.format("YYYY-MM-DD");
     } else {
-      date = today.toISOString().substring(0 ,10);
+      date = today.format("YYYY-MM-DD");
     }
 
+    console.log(date);
     return date;
   }
 
@@ -99,7 +102,7 @@ export class ProsonalInfoPage {
       this.setPersonalData(formValue);
       const offline = this.offlineDetectionService.isOnline();
       if (offline) {
-        this.showToastMessage(TOAST_OFFLINE_MESSAGE);
+        this.showToastMessage(TOAST_OFFLINE_MESSAGE, 'toast-offline');
       }
       this.navCtrl.push(PropertyInfoPage);
     }
@@ -133,11 +136,12 @@ export class ProsonalInfoPage {
   /**
    * show the toast message
    */
-  private showToastMessage(message: string): void {
+  private showToastMessage(message: string, cssClass: string): void {
     let toast = this.toastController.create({
       message: message,
       duration: TOAST_DURATION,
-      position: TOAST_POSITION
+      position: TOAST_POSITION,
+      cssClass
     });
     toast.present();
   }
@@ -145,7 +149,7 @@ export class ProsonalInfoPage {
   private updatePrice(): void {
     this.bookingService.getCartTotal(this._bookingDataObj)
       .subscribe((price: any) => {
-        this.bookingService.setTotalCart(price);
+        this.bookingService.setTotalCart(price.toFixed(2));
         this.updateBookingFee();
         this.updatePayValue("full");
       }, err => {
@@ -156,8 +160,8 @@ export class ProsonalInfoPage {
   private updateBookingFee(): void {
     this.bookingService.getBookingFee(this._bookingDataObj)
       .subscribe((price) => {
-        this.bookingService.setBookingFee(price);
-        console.log("Booking fee: ", price);
+        this.bookingService.setBookingFee(price.toFixed(2));
+        console.log("Booking fee: ", price.toFixed(2));
       }, err => {
         console.log("error getting booking fee: ", err);
       })
@@ -166,8 +170,8 @@ export class ProsonalInfoPage {
   private updatePayValue(paymentType: string): void {
     this.bookingService.updatePayValue(this._bookingDataObj, paymentType)
       .subscribe((payValue: any) => {
-        this.bookingService.setPayValue(payValue);
-        console.log("PayValue", payValue);
+        this.bookingService.setPayValue(payValue.toFixed(2));
+        console.log("PayValue", payValue.toFixed(2));
       }, err => {
         console.log("error getting payValue ", err);
       })

@@ -39,11 +39,12 @@ export class ContactPage {
     });
   }
 
-  private showToast(message: string): void {
+  private showToast(message: string, cssClass: string): void {
     let toast = this.toastController.create({
       message: message,
       duration: TOAST_DURATION,
-      position: TOAST_POSITION
+      position: TOAST_POSITION,
+      cssClass
     });
     toast.present();
   }
@@ -54,7 +55,7 @@ export class ContactPage {
   public sendContactRequest(): void {
     const offline = this.offlieDetectionService.isOnline();
     if (offline) {
-      this.showToast(TOAST_OFFLINE_MESSAGE);
+      this.showToast(TOAST_OFFLINE_MESSAGE, "toast-offline");
       return;
     }
     if (this._contactForm.valid) {
@@ -68,11 +69,11 @@ export class ContactPage {
       };
       this.contactService.sendContactRequest(contactData)
         .subscribe((data: any) => {
-          this.showToast('Contact request submitted.');
+          this.showToast('Contact request submitted.', "toast-success");
           this._contactForm.reset();
         }, err => {
           console.log("error sending contact request: ", err);
-          this.showToast('Contact request field, please try again');
+          this.showToast('Contact request field, please try again', "toast-error");
         });
     } else {
       Object.keys(this._contactForm.controls).forEach(field => {

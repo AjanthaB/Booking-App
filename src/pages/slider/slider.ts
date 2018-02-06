@@ -3,8 +3,8 @@ import { Slides } from 'ionic-angular';
 import { NavController } from "ionic-angular";
 
 import { ProsonalInfoPage } from "../personal-info/personal-info";
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { BrowserTab } from '@ionic-native/browser-tab';
+import {CHAT_URL} from "../../config/constants";
 
 @Component({
   selector: 'page-slider',
@@ -17,7 +17,7 @@ export class SliderComponent {
    */
   @ViewChild(Slides) slides: Slides;
 
-  constructor(private navCtrl: NavController, private inAppBrowser: InAppBrowser,
+  constructor(private navCtrl: NavController,
     private browserTab: BrowserTab) { }
 
   /**
@@ -53,33 +53,17 @@ export class SliderComponent {
     this.slides.startAutoplay();
   }
 
+  /**
+   * Open the tawk.io chat in a browser tab
+   */
   public openChat(): void {
-    // const url = 'data:text/html;base64,' + btoa(this.getTawkPage());
-    // this.inAppBrowser.create("https://www.end-of-tenancy-london.co.uk/chat/", "_blank", "hidden=no,location=no");
     this.browserTab.isAvailable()
       .then((isAvailable: boolean) => {
         if (isAvailable) {
-          this.browserTab.openUrl('https://www.end-of-tenancy-london.co.uk/chat/');
+          this.browserTab.openUrl(CHAT_URL);
         } else {
           console.log("err")
         }
       });
-  }
-
-  private getTawkPage(): string {
-    return '<html><head></head><body>' +
-      '<script type="text/javascript">' +
-      'const load = () => {' +
-      'var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();' +
-      'var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];' +
-      's1.async=true;' +
-      's1.src="https://embed.tawk.to/5a7291f64b401e45400c9281/default";' +
-      's1.charset="UTF-8";' +
-      's1.setAttribute("crossorigin","*");' +
-      's0.parentNode.insertBefore(s1,s0);' +
-      '};' +
-      'window.onload = load;' +
-      '</script>\n' +
-      + '</body></html>';
   }
 }
