@@ -7,6 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { Network } from '@ionic-native/network';
+import { HTTP } from '@ionic-native/http';
+import { Device } from '@ionic-native/device';
 
 
 import { MyApp } from './app.component';
@@ -72,7 +74,9 @@ import { BrowserTab } from '@ionic-native/browser-tab';
     OfflieDetectionService,
     BookingService,
     ContactService,
-    BrowserTab
+    BrowserTab,
+    HTTP,
+    Device
   ]
 })
 export class AppModule {}

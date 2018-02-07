@@ -70,8 +70,8 @@ export class PropertyInfoPage {
   private updatePrice(): void {
     this.bookingService.getCartTotal(this.bookingDataObj)
       .subscribe((price: any) => {
-        this.price = price.toFixed(2);
-        this.bookingService.setTotalCart(this.price );
+        this.price = parseFloat(price).toFixed(2);
+        this.bookingService.setTotalCart(this.price);
         this.calCulateDiscount(this.price);
         this.updateBookingFee();
         this.updatePayValue("full");
@@ -87,9 +87,9 @@ export class PropertyInfoPage {
   private updateBookingFee(): void {
     this.bookingService.getBookingFee(this.bookingDataObj)
       .subscribe((bookingFee: any) => {
-
-        this.bookingService.setBookingFee(bookingFee);
-        console.log("Booking fee: ", bookingFee);
+        const fee = parseFloat(bookingFee).toFixed(2)
+        this.bookingService.setBookingFee(fee);
+        console.log("Booking fee: ", fee);
       }, err => {
         console.log("error getting booking fee: ", err);
       })
@@ -102,11 +102,12 @@ export class PropertyInfoPage {
   private updatePayValue(paymentType: string): void {
     this.bookingService.updatePayValue(this.bookingDataObj, paymentType)
       .subscribe((payValue: any) => {
+        const value = parseFloat(payValue).toFixed(2)
         if (payValue === "full") {
-          this.bookingService.setFullAmount(payValue);
+          this.bookingService.setFullAmount(value);
         }
-        this.bookingService.setPayValue(payValue);
-        console.log("PayValue", payValue);
+        this.bookingService.setPayValue(value);
+        console.log("PayValue", value);
       }, err => {
         console.log("error getting payvalue ", err);
       })

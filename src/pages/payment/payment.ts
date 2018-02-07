@@ -8,6 +8,8 @@ import { filter, flatMap } from 'rxjs/operators';
 import { timer } from "rxjs/observable/timer";
 import { TOAST_DURATION, TOAST_OFFLINE_MESSAGE, TOAST_POSITION } from "../../config/constants";
 import {OfflieDetectionService} from "../../services/offline-detection.service";
+import {HomePage} from "../home/home";
+import {SplashPage} from "../spalsh/splash";
 
 @Component({
   selector: 'page-payment',
@@ -100,8 +102,28 @@ export class PaymentPage {
       return;
     }
     const url = 'data:text/html;base64,' + btoa(this.getTheFormContent(this.bookingDataObj.booking_ref, this.bookingDataObj.paid_amount));
-    this.iab.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
+    let browser = this.iab.create(url, "_blank", "hidden=no,location=no,clearsessioncache=yes,clearcache=yes");
+
+    browser.on("exit").subscribe((event) => {
+      console.log("bowser has been closed..");
+      this.clearTheData();
+      this.navCtrl.popToRoot();
+    }, err => {
+      console.log("Error: ", err);
+    });
+
     this.enableBooking();
+  }
+
+  /**
+   * Clear the Booking data and.
+   */
+  private clearTheData(): void {
+    this.bookingService.setBookingDataObj(this.bookingService.getBookingInitData());
+    this.bookingService.setCartId("");
+    this.bookingService.setBookingFee("0.00");
+    this.bookingService.setFullAmount("0.00");
+    this.bookingService.setPayValue("0.00");
   }
 
   /**
@@ -112,7 +134,8 @@ export class PaymentPage {
     console.log(event);
     this.bookingService.updatePayValue(this.bookingDataObj, event)
       .subscribe((payValue: any) => {
-        this.bookingDataObj.paid_amount = payValue;
+        const value = parseFloat(payValue).toFixed(2);
+        this.bookingDataObj.paid_amount = value;
         this.bookingService.setBookingDataObj(this.bookingDataObj);
         this.bookingDataObj = this.bookingService.getBookingDataObj();
         console.log("Booking Data: ", this.bookingDataObj);
@@ -173,10 +196,12 @@ export class PaymentPage {
    */
   private checkingPaymentSuccess(): void {
     const source = timer(0, 5000);
+    const cartId = this.bookingService.getCartId();
     source.pipe(
-      flatMap(() => this.bookingService.checkBookingSucessLoop(this.bookingService.getCartId())),
+      flatMap(() => this.bookingService.checkBookingSucessLoop(cartId)),
       filter(data => {
-        return data === 1;
+        console.log("Payment pending: ", data);
+        return data == 1;
       })
     ).subscribe( data => {
       console.log("Payment Success : ", data);

@@ -12,6 +12,7 @@ import {
 import {OfflieDetectionService} from "../../services/offline-detection.service";
 
 import * as moment from "moment-timezone";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-personal-info',
@@ -149,7 +150,8 @@ export class ProsonalInfoPage {
   private updatePrice(): void {
     this.bookingService.getCartTotal(this._bookingDataObj)
       .subscribe((price: any) => {
-        this.bookingService.setTotalCart(price.toFixed(2));
+        const cartPrice = parseFloat(price);
+        this.bookingService.setTotalCart(cartPrice.toFixed(2));
         this.updateBookingFee();
         this.updatePayValue("full");
       }, err => {
@@ -160,8 +162,9 @@ export class ProsonalInfoPage {
   private updateBookingFee(): void {
     this.bookingService.getBookingFee(this._bookingDataObj)
       .subscribe((price) => {
-        this.bookingService.setBookingFee(price.toFixed(2));
-        console.log("Booking fee: ", price.toFixed(2));
+        const bookingFee = parseFloat(price);
+        this.bookingService.setBookingFee(bookingFee.toFixed(2));
+        console.log("Booking fee: ", bookingFee.toFixed(2));
       }, err => {
         console.log("error getting booking fee: ", err);
       })
@@ -170,8 +173,9 @@ export class ProsonalInfoPage {
   private updatePayValue(paymentType: string): void {
     this.bookingService.updatePayValue(this._bookingDataObj, paymentType)
       .subscribe((payValue: any) => {
-        this.bookingService.setPayValue(payValue.toFixed(2));
-        console.log("PayValue", payValue.toFixed(2));
+        const value = parseFloat(payValue);
+        this.bookingService.setPayValue(value.toFixed(2));
+        console.log("PayValue", value.toFixed(2));
       }, err => {
         console.log("error getting payValue ", err);
       })
@@ -186,7 +190,6 @@ export class ProsonalInfoPage {
       .subscribe((res) => {
         this.timeRangeValues = res;
         this._bookingDataObj.booking_time = this.timeRangeValues[0].value.toString();
-        console.log("time changes")
       },
       (err) => {
         console.log("error when getting available time slots ", err);

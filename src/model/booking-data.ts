@@ -6,13 +6,13 @@ export interface BookingData {
   booking_ref: string;
   booking_date: string;
   booking_time: string;
-  cust_name: string;  
+  cust_name: string;
   postcode : string;
   address : string;
   phone : string;
   email : string;
   cust_comments : string;
-  paid_amount : number;
+  paid_amount : number | any;
   full_amount : number;
   prop_type : string;
   flat_studio : string;
@@ -26,6 +26,6 @@ export interface BookingData {
   wall_washing_no : string;
   sofa_clean_no : string;
   carpet_no : string;
-  rug : string; 
-  balcony : string; 
+  rug : string;
+  balcony : string;
 }
