@@ -92,18 +92,31 @@
     <ion-row style="padding-bottom: 50px;">
       <ion-col>
         <div class="col-sm-12">
+			<!--
           <button class="back" ion-button round outline float-left [disabled]="true" (click)="redirecToHomePage()">
             Back
             <ion-icon name="md-arrow-dropleft-circle" style="float:right;"></ion-icon>
           </button>
+		  -->
+			 <button ion-button icon-left [disabled]="true" (click)="redirecToHomePage()">
+				<ion-icon name="arrow-back"></ion-icon>
+				Back
+			</button>
         </div>
       </ion-col>
       <ion-col>
+	  
         <div class="col-sm-12">
+		<!--
           <button class="next" ion-button round outline icon-right (click)="savePersonalInfo()">
             Next
             <ion-icon name="md-arrow-dropright-circle"></ion-icon>
           </button>
+		-->
+			<button ion-button icon-right (click)="savePersonalInfo()">
+				Next
+				<ion-icon name="arrow-forward"></ion-icon>
+			</button>
         </div>
       </ion-col>
     </ion-row>

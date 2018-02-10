@@ -7,6 +7,14 @@
 
     .btn-icon {
       padding-right: 5px;
-      font-size: 18px;
+      font-size: 18px !important;
     }
+	
+	ion-title{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+
   }
+

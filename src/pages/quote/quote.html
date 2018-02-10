@@ -60,9 +60,9 @@
               <p class="error-msg" *ngIf="_quoteForm.controls.phone_no.errors.required">Phone Number is required</p>
             </ion-item>
 
-            <ion-item>
+            <ion-item class="serviceDropDown">
               <ion-label stacked>Services <b>*</b></ion-label>
-              <ion-select id="service" class="dropdown" formControlName="service">
+              <ion-select id="service" class="dropdown" formControlName="service" >
                 <ion-option [value]="service" *ngFor="let service of services">{{service}}</ion-option>
               </ion-select>
             </ion-item>
@@ -71,7 +71,7 @@
             </ion-item>
 
             <ion-item>
-              <button (click)="sendQuoteRequest()" ion-button round outline style="height: 40px; padding-left: 16px; padding-right: 16px; border: solid #3693D5 1px; color: #3693D5; background:#fff;">GET YOUR QUOTE</button>
+              <button (click)="sendQuoteRequest()" ion-button style="height: 40px; padding-left: 16px; padding-right: 16px;">Get Your Quote</button>
             </ion-item>
           </ion-list>
         </form>

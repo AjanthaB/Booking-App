@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title style="padding-left: 10px; padding-right: 10px;">
       <img src="assets/imgs/eot.png" alt="your image" style="display: block; width: 35px; height:23px; float:left; margin-right: 8px;">
-      <h1 style="font-weight: normal; font-size: 20px; padding: 0; margin: 0;">End of Tenancy Cleaning Service</h1>
+      <h1 style="font-weight: normal; font-size:18px; padding: 0; margin: 0;">End of Tenancy Cleaning Service</h1>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -32,21 +32,21 @@
     <ion-row class="s">
       <span style="font-size: 25px;text-align:center;width:100%;padding-top:10px">Need Some else?</span>
       <span style="font-size: 15px;text-align:center;width:100%;padding: 5px 10px">Just let us know, You will be amazed at what we can do</span>
-      <ion-row style="width:162px; margin:0 auto;">
-        
-          <button ion-button round outline block>
+      
+	  <ion-row style="width:265px; margin:0 auto;">
+	      <button ion-button round outline block style="width:125px; float:left;">
             <a href="tel: {{+2033711200}}" style="text-decoration: none; padding-bottom:2px;">
               <ion-icon style="padding-right: 5px;font-size: 18px;" class="btn-icon" name="call"></ion-icon>
               Call Now
             </a>
           </button>
 
-          <button ion-button round outline block (click)="openChat()">
+          <button ion-button round outline block (click)="openChat()" style="width:125px; float:left; margin-left:8px;">
             <ion-icon style="padding-right: 5px;font-size: 18px;" class="btn-icon" name="chatbubbles"></ion-icon>
             Start Chat
           </button>
-
-      </ion-row>
+	  
+	  </ion-row>
     </ion-row>
 
   </ion-grid>

@@ -51,9 +51,20 @@
 	}
 
 	.next {
-	  background: #0b3853;
+	 // background: #0b3853;
 	  float: right;
 	}
+	
+	button.button{
+   // border-bottom: solid 1px #ccc;
+   width: 100%;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 5px 0px;
+    padding: 8px 10px;
+    border: solid 1px #0093d1;
+    border-radius: 4px;
+}
 
 	progress-eot{
 		width: 245px;
