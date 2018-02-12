@@ -72,3 +72,10 @@ background: radial-gradient(ellipse at center, rgba(225,255,255,1) 0%,rgba(225,2
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 }
+.backimg{
+ width: 100%;
+    height: 100% auto;
+    background-image: url('../../assets/imgs/back.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
