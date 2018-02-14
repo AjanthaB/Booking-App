@@ -141,4 +141,8 @@ page-personal-info{
 	form > ion-row > ion-col:nth-child(2) > ion-item > div.item-inner > div > ion-select{
 		padding-left:8px !important;
 	}
+
+	.item-label-stacked .select-md, .item-label-floating .select-md{
+		padding-bottom: 4px;
+	}
 }
