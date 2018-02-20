@@ -58,7 +58,7 @@
     "@ionic/app-scripts": "3.1.6",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project",
+  "description": "End OF Tenancy Cleaning",
   "cordova": {
     "plugins": {
       "cordova-plugin-inappbrowser": {},
@@ -68,7 +68,6 @@
       "cordova-plugin-whitelist": {},
       "ionic-plugin-keyboard": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-email-composer": {},
       "cordova-plugin-browsertab": {},
       "cordova-plugin-advanced-http": {}
     },
