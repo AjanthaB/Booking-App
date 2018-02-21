@@ -1,21 +1,8 @@
-<div class="navigation">
-	<div class="row" style="width: 290px; margin: 0 auto;">
-		<div style="width:33%;">
-		  <span class="bullet" [ngClass]="{'default next': _position < 1}" style=""></span>
-		  <span class="line filled"></span>
-		</div>
-		<div style="width:33%;">
-		  <span id="second-bullet" class="bullet" [ngClass]="{'default next': _position < 2}"></span>
-		  <span id="second-line" class="line filled"></span>
-		</div>
-		<div style="width:33%;">
-		  <span id="third-bullet" class="bullet" [ngClass]="{'default next': _position < 3}"></span>
-		</div>
-	</div>
-	
-	  <div class="row labels" style="width: 290px; margin: 0 auto;">
-		<div style="width:33%;text-align:center; margin-left: -35px;" class="default-text" [ngClass]="{'done-text': _position == 1}">Personal Info</div>
-		<div style="width:33%;text-align:center" class="default-text" [ngClass]="{'done-text': _position == 2}">Property Info</div>
-		<div style="width:33%;text-align:center" class="default-text" [ngClass]="{'done-text': _position == 3}">Complete</div>
-	  </div>
+<div class="container">
+	<ul class="progressbar" style="padding-left:0px">
+		<li [ngClass]="{'active': _position >= 1}">Personal Info</li>
+		<li [ngClass]="{'active': _position >= 2}">Property Info</li>
+		<li [ngClass]="{'active': _position >= 3}">Complete</li>
+	</ul>
 </div>
+
