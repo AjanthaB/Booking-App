@@ -79,7 +79,6 @@ export class QuotePage {
           this.showToastMessage('Quote request submitted.', "toast-success");
           this._quoteForm.reset();
         }, err => {
-          console.log("error sending quote:", quote);
           this.showToastMessage('Quote request field, please try again.', "toast-error");
         });
 

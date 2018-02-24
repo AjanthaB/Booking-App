@@ -164,7 +164,6 @@ export class ProsonalInfoPage {
       .subscribe((price) => {
         const bookingFee = parseFloat(price);
         this.bookingService.setBookingFee(bookingFee.toFixed(2));
-        console.log("Booking fee: ", bookingFee.toFixed(2));
       }, err => {
         console.log("error getting booking fee: ", err);
       })
@@ -175,7 +174,6 @@ export class ProsonalInfoPage {
       .subscribe((payValue: any) => {
         const value = parseFloat(payValue);
         this.bookingService.setPayValue(value.toFixed(2));
-        console.log("PayValue", value.toFixed(2));
       }, err => {
         console.log("error getting payValue ", err);
       })
