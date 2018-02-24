@@ -138,7 +138,6 @@ export class PaymentPage {
         this.bookingDataObj.paid_amount = value;
         this.bookingService.setBookingDataObj(this.bookingDataObj);
         this.bookingDataObj = this.bookingService.getBookingDataObj();
-        console.log("Booking Data: ", this.bookingDataObj);
       }, err => {
         console.log("Error: ", err);
       });
@@ -184,7 +183,6 @@ export class PaymentPage {
   private enableBooking(): void {
     this.bookingService.enableBooking()
       .subscribe(data => {
-        console.log("booking enabled: ", data);
         this.checkingPaymentSuccess();
       }, err => {
         console.log("error: ", err);
@@ -200,14 +198,12 @@ export class PaymentPage {
     source.pipe(
       flatMap(() => this.bookingService.checkBookingSucessLoop(cartId)),
       filter(data => {
-        console.log("Payment pending: ", data);
         return data == 1;
       })
     ).subscribe( data => {
-      console.log("Payment Success : ", data);
       this.bookingService.confirmTheBooking(this.bookingDataObj)
         .subscribe(data => {
-          console.log("Booking confirmation done")
+          console.log("Booking confirmation done");
         }, err => {
           console.log("error: ", err);
         })

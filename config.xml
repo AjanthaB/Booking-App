@@ -7,6 +7,9 @@
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <!-- Allow links to example.com -->
+    <allow-navigation href="https://www.end-of-tenancy-london.co.uk/*" />
+    <allow-navigation href="http://localhost:8080">
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />

@@ -75,7 +75,6 @@ export class PropertyInfoPage {
         this.calCulateDiscount(this.price);
         this.updateBookingFee();
         this.updatePayValue("full");
-        console.log("Updated price: ", this.price);
       }, err => {
         console.log("Error: ", err)
       });
@@ -89,7 +88,6 @@ export class PropertyInfoPage {
       .subscribe((bookingFee: any) => {
         const fee = parseFloat(bookingFee).toFixed(2)
         this.bookingService.setBookingFee(fee);
-        console.log("Booking fee: ", fee);
       }, err => {
         console.log("error getting booking fee: ", err);
       })
@@ -107,7 +105,6 @@ export class PropertyInfoPage {
           this.bookingService.setFullAmount(value);
         }
         this.bookingService.setPayValue(value);
-        console.log("PayValue", value);
       }, err => {
         console.log("error getting payvalue ", err);
       })
@@ -138,7 +135,6 @@ export class PropertyInfoPage {
       this.flatToggle.setUnSelectedOnlyToggle();
     }
     this.updatePrice();
-    console.log("booking type selected: ", this.bookingDataObj);
   }
 
   /**
@@ -156,7 +152,6 @@ export class PropertyInfoPage {
       this.bookingDataObj.flat_studio = "0";
     }
     this.updatePrice();
-    console.log("Flat or Studio selected: ", this.bookingDataObj);
   }
 
    /**
@@ -166,7 +161,6 @@ export class PropertyInfoPage {
   public onSelectBedrooms(event: any): void {
     if (event.selected) {
       this.bookingDataObj.bedrooms = event.deActive;
-      console.log("After select the bed rooms: ", this.bookingDataObj);
       this.bookingDataObj.flat_studio = "0";
       this.bathRoomToggle.selectItem("01");
       this.bathRoomToggle.setSelectedOnlyToggle();
@@ -184,7 +178,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.bedrooms = "0";
       this.updatePrice();
-      console.log("After toggle the bed rooms: ", this.bookingDataObj);
     }
   }
 
@@ -195,7 +188,6 @@ export class PropertyInfoPage {
   public onSelectBathRooms(event: any): void {
     if (event.selected) {
       this.bookingDataObj.bathrooms_no = event.deActive;
-      console.log("After toggle the bathrooms: ", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -208,7 +200,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.bathrooms_no = "0";
       this.updatePrice();
-      console.log("After toggle the bath rooms: ", this.bookingDataObj);
     }
   }
 
@@ -219,7 +210,6 @@ export class PropertyInfoPage {
   public onSelectCatpets(event: any): void {
     if (event.selected) {
       this.bookingDataObj.carpet_no = event.deActive;
-      console.log("After select the carpers", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -232,7 +222,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.carpet_no = "0";
       this.updatePrice();
-      console.log("After toggle the carrpets: ", this.bookingDataObj);
     }
   }
 
@@ -243,7 +232,6 @@ export class PropertyInfoPage {
   public onSelectWindows(event: any): void {
     if (event.selected) {
       this.bookingDataObj.ext_windows_no = event.deActive;
-      console.log("After select the windows", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -256,7 +244,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.ext_windows_no = "0";
       this.updatePrice();
-      console.log("After toggle the windows: ", this.bookingDataObj);
     }
   }
 
@@ -267,7 +254,6 @@ export class PropertyInfoPage {
   public onSelectBlinds(event: any): void {
     if (event.selected) {
       this.bookingDataObj.blinds_no = event.deActive;
-      console.log("After select the Blinds", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -280,7 +266,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.blinds_no = "0";
       this.updatePrice();
-      console.log("After toggle the Blinds: ", this.bookingDataObj);
     }
   }
 
@@ -291,7 +276,6 @@ export class PropertyInfoPage {
   public onSelectCurtain(event: any): void {
     if (event.selected) {
       this.bookingDataObj.curtain_steam_no = event.deActive;
-      console.log("After select the Curtain", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -304,7 +288,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.curtain_steam_no = "0";
       this.updatePrice();
-      console.log("After toggle the Curtain: ", this.bookingDataObj);
     }
   }
 
@@ -315,7 +298,6 @@ export class PropertyInfoPage {
   public onSelectMattress(event: any): void {
     if (event.selected) {
       this.bookingDataObj.mattress_steam_no = event.deActive;
-      console.log("After select the Matttress", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -328,7 +310,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.mattress_steam_no = "0";
       this.updatePrice();
-      console.log("After toggle the Mattress: ", this.bookingDataObj);
     }
   }
 
@@ -339,7 +320,6 @@ export class PropertyInfoPage {
   public onSelectWall(event: any): void {
     if (event.selected) {
       this.bookingDataObj.wall_washing_no = event.deActive;
-      console.log("After select the Wall", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -352,7 +332,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.wall_washing_no = "0";
       this.updatePrice();
-      console.log("After toggle the Mattress: ", this.bookingDataObj);
     }
   }
 
@@ -363,7 +342,6 @@ export class PropertyInfoPage {
   public onSelectSofa(event: any): void {
     if (event.selected) {
       this.bookingDataObj.sofa_clean_no = event.deActive;
-      console.log("After select the Sofa", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -376,7 +354,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.sofa_clean_no = "0";
       this.updatePrice();
-      console.log("After toggle the Sofa: ", this.bookingDataObj);
     }
   }
 
@@ -388,7 +365,6 @@ export class PropertyInfoPage {
   public onSelectRug(event: any): void {
     if (event.selected) {
       this.bookingDataObj.rug = event.deActive;
-      console.log("After select Rug", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -412,7 +388,6 @@ export class PropertyInfoPage {
   public onSelectBalcony(event: any): void {
     if (event.selected) {
       this.bookingDataObj.balcony = event.deActive;
-      console.log("After select balcony", this.bookingDataObj);
       this.updatePrice();
     }
   }
@@ -425,7 +400,6 @@ export class PropertyInfoPage {
     if (!event.selected) {
       this.bookingDataObj.balcony = "0";
       this.updatePrice();
-      console.log("After toggle the balcony: ", this.bookingDataObj);
     }
   }
 
