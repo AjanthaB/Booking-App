@@ -62,7 +62,7 @@
 
             <ion-item class="serviceDropDown">
               <ion-label stacked>Services <b>*</b></ion-label>
-              <ion-select id="service" class="dropdown" formControlName="service" >
+              <ion-select id="service" class="dropdown" formControlName="service" placeholder=" Select the required service">
                 <ion-option [value]="service" *ngFor="let service of services">{{service}}</ion-option>
               </ion-select>
             </ion-item>
