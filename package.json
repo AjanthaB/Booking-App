@@ -1,4 +1,3 @@
-
 { "name": "eot_cleaning_services",
   "version": "0.3.2",
   "author": "EOT Cleaning Service",
@@ -70,10 +69,6 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-browsertab": {},
       "cordova-plugin-advanced-http": {}
-    },
-    "platforms": [
-      "ios",
-      "android"
-    ]
+    }
   }
 }
