@@ -1,7 +1,7 @@
 {
     "name": "uk.eot.mobile",
-    "version": "0.2.0",
-    "displayName": "EOT CLEANING",
+    "version": "0.2.1",
+    "displayName": "EOT Cleaning Services",
     "cordova": {
         "platforms": [
             "android",
