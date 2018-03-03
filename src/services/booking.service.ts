@@ -411,4 +411,19 @@ export class BookingService {
       return this.http.get(url, {headers, params})
     }
   }
+
+  public checkAvailablityOfDate(selectedDate: string): Observable<any>{
+    const url = `${DEMO_BOOKING_URI_PREFIX}/date-checking`;
+
+    if (this.device.platform === "iOS") {
+      const headers = this.getHeadersForNativeHttpClient();
+      return Observable.fromPromise(this.httpNativeClient.post(url, {date: selectedDate}, headers))
+        .map( res => JSON.parse(res.data))
+    } else {
+      let params = new HttpParams();
+      params = params.set("date", selectedDate);
+      const headers = this.getCORSTextHeader();
+      return this.http.post(url, {headers, params})
+    }
+  }
 }

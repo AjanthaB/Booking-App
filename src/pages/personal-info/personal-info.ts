@@ -192,5 +192,15 @@ export class ProsonalInfoPage {
       (err) => {
         console.log("error when getting available time slots ", err);
       });
+
+    this.bookingService.checkAvailablityOfDate(date)
+      .subscribe((res) => {
+        alert(JSON.stringify(res))
+        console.log(res);
+      },
+      (err) => {
+        alert(JSON.stringify(err))
+        console.log(err)
+      });
   };
 }
