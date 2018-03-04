@@ -28,6 +28,7 @@ export class ProsonalInfoPage {
   public timeRangeValues = DEFAULT_TIME_RANGE_VALUES;
   public _postcodes = DEFAULT_POST_CODES;
   public _formInvalid: boolean = false;
+  public isDateAvailable = true;
 
   constructor(public navCtrl: NavController,
     private toastController: ToastController,
@@ -191,6 +192,19 @@ export class ProsonalInfoPage {
       },
       (err) => {
         console.log("error when getting available time slots ", err);
+      });
+
+    this.bookingService.checkAvailablityOfDate(date)
+      .subscribe((res) => {
+        if (res && res.status == "0") {
+          this.showToastMessage("This Date is not Available.", 'toast-offline');
+          this.isDateAvailable = false;
+        } else {
+          this.isDateAvailable = true;
+        }
+      },
+      (err) => {
+        console.log(err);
       });
   };
 }

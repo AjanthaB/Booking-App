@@ -27,6 +27,11 @@ export class SliderComponent {
     this.startSlider();
   }
 
+  ionViewWillEnter() {
+    // console.log("enter to the slider page");
+    // this.initSlider();
+  }
+
   /**
    * Start the Slider
    */

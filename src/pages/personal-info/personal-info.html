@@ -28,9 +28,13 @@
             </ion-select>
           </ion-item>
         </ion-col>
+
       </ion-row>
 
       <ion-list>
+        <ion-item *ngIf="!isDateAvailable">
+          <p class="error-msg">Selected Date is not available.</p>
+        </ion-item>
 
         <ion-item>
           Name <b>*</b><br>
