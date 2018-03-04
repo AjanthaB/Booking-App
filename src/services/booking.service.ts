@@ -7,7 +7,7 @@ import { Device } from '@ionic-native/device';
 import { HTTP } from "@ionic-native/http";
 
 import { BookingData } from "../model/booking-data";
-import { DEMO_BOOKING_URI_PREFIX } from "../config/constants";
+import { DEMO_BOOKING_URI_PREFIX, API_URI} from "../config/constants";
 
 
 @Injectable()
@@ -413,17 +413,16 @@ export class BookingService {
   }
 
   public checkAvailablityOfDate(selectedDate: string): Observable<any>{
-    const url = `${DEMO_BOOKING_URI_PREFIX}/date-checking`;
+    const url = `${API_URI}/date-checking`;
 
     if (this.device.platform === "iOS") {
       const headers = this.getHeadersForNativeHttpClient();
       return Observable.fromPromise(this.httpNativeClient.post(url, {date: selectedDate}, headers))
         .map( res => JSON.parse(res.data))
     } else {
-      let params = new HttpParams();
-      params = params.set("date", selectedDate);
+      const data = { date: "selectedDate"}
       const headers = this.getCORSTextHeader();
-      return this.http.post(url, {headers, params})
+      return this.http.post(url, data, {headers});
     }
   }
 }
