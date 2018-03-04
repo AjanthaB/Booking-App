@@ -1,10 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="uk.eot.mobile" version="0.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-<<<<<<< HEAD
-    <name>EOT CLEANING</name>
-=======
     <name>EOT Cleaning Services</name>
->>>>>>> androidProduction
     <description>EOT Cleaning Service Booking Application</description>
     <author email="hi@ionicframework" href="https://www.end-of-tenancy-london.co.uk/">EOT Cleaning Services</author>
     <content src="index.html" />
