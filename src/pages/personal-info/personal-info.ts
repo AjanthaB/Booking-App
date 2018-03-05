@@ -124,7 +124,6 @@ export class ProsonalInfoPage {
     bookingData.phone = formValue.phoneNum;
     bookingData.email = formValue.email;
     bookingData.cust_comments = formValue.comments;
-    console.log(bookingData);
     this.bookingService.setBookingDataObj(bookingData);
   }
 

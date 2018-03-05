@@ -156,7 +156,6 @@ export class PaymentPage {
   private createANewBooking(): void {
     this.bookingService.addNewBooking(this.bookingDataObj)
       .subscribe((data: any) => {
-        console.log(data);
         if (data && data["ref_id"]) {
           this.bookingService.setCartId(data["ref_id"]);
         }
