@@ -420,7 +420,7 @@ export class BookingService {
       return Observable.fromPromise(this.httpNativeClient.post(url, {date: selectedDate}, headers))
         .map( res => JSON.parse(res.data))
     } else {
-      const data = { date: "selectedDate"}
+      const data = { date: selectedDate};
       const headers = this.getCORSTextHeader();
       return this.http.post(url, data, {headers});
     }
