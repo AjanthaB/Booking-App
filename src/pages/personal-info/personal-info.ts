@@ -11,7 +11,7 @@ import {
 } from "../../config/constants";
 import {OfflieDetectionService} from "../../services/offline-detection.service";
 
-import * as moment from "moment-timezone";
+import * as momentTimeZone from "moment-timezone";
 import {HomePage} from "../home/home";
 
 @Component({
@@ -29,7 +29,7 @@ export class ProsonalInfoPage {
   public _postcodes = DEFAULT_POST_CODES;
   public _formInvalid: boolean = false;
   public isDateAvailable = true;
-  public _today = "2018-03-01"
+  public _minDay = ""
 
   constructor(public navCtrl: NavController,
     private toastController: ToastController,
@@ -41,7 +41,7 @@ export class ProsonalInfoPage {
    * Angular lifecycle event
    */
   ngOnInit() {
-    this.getToday();
+    momentTimeZone.tz.setDefault("Europe/London");
     this._bookingDataObj = this.bookingService.getBookingDataObj();
     if(this._bookingDataObj.booking_time == "" || this._bookingDataObj.booking_time == undefined){
       this._bookingDataObj.booking_time = this.timeRangeValues[0].value.toString();
@@ -75,27 +75,21 @@ export class ProsonalInfoPage {
    */
   private calculateDate(): string {
     let date = "";
-    const today = moment().tz("Europe/London");
+    const today = momentTimeZone();
     const londonTime  = today.format("HH:mm:ss");
     const tmpTime = "17:30:00";
-
+    
     if (londonTime > tmpTime) {
       const tomorrow = today.add(1, 'days');
       date = tomorrow.format("YYYY-MM-DD");
+      this._minDay = today.add(2, 'days').format("YYYY-MM-DD").toString();
     } else {
       date = today.format("YYYY-MM-DD");
+      this._minDay = today.format("YYYY-MM-DD").toString();
     }
-
-    console.log(date);
     return date;
   }
 
-  public getToday(){
-    let date = "";
-    const today = moment().tz("Europe/London");
-    date = today.format("YYYY-MM-DD");
-    this._today =  date.toString();
-  }
   /**
    * cache Personal Information when click on Next button
    */
