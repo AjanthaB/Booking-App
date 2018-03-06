@@ -44,9 +44,9 @@ export class PaymentPage {
    */
   private getTheFormContent(cartId: string, worldpayValue: number): string {
     return '<html><head></head><body>'
-      + '<form id="myForm" action="https://secure-test.worldpay.com/wcc/purchase" method="POST">'
+      + '<form id="myForm" action="https://secure.worldpay.com/wcc/purchase" method="POST">'
       + '<meta name="csrf-token" content="ia5ZAHasWnjDT4MtIVk79pySycFNlWG2KBShBBnm">'
-      + '<input type="hidden" name="testMode" value="100">'
+      + '<input type="hidden" name="testMode" value="0">'
       + '<input type="hidden" name="instId" value="1179612">'
       + '<input type="hidden" id="cartId" name="cartId" value="' + cartId + '">'
       + '<input id="worldpay-value" type="hidden" name="amount" value="' + worldpayValue + '">'
