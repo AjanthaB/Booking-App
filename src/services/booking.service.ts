@@ -421,7 +421,7 @@ export class BookingService {
         .map( res => JSON.parse(res.data))
     } else {
       const data = { date: selectedDate};
-      const headers = this.getCORSTextHeader();
+      const headers = this.getCORSJSONHeader();
       return this.http.post(url, data, {headers});
     }
   }
