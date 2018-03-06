@@ -29,6 +29,7 @@ export class ProsonalInfoPage {
   public _postcodes = DEFAULT_POST_CODES;
   public _formInvalid: boolean = false;
   public isDateAvailable = true;
+  public _today = "2018-03-01"
 
   constructor(public navCtrl: NavController,
     private toastController: ToastController,
@@ -40,6 +41,7 @@ export class ProsonalInfoPage {
    * Angular lifecycle event
    */
   ngOnInit() {
+    this.getToday();
     this._bookingDataObj = this.bookingService.getBookingDataObj();
     if(this._bookingDataObj.booking_time == "" || this._bookingDataObj.booking_time == undefined){
       this._bookingDataObj.booking_time = this.timeRangeValues[0].value.toString();
@@ -88,6 +90,12 @@ export class ProsonalInfoPage {
     return date;
   }
 
+  public getToday(){
+    let date = "";
+    const today = moment().tz("Europe/London");
+    date = today.format("YYYY-MM-DD");
+    this._today =  date.toString();
+  }
   /**
    * cache Personal Information when click on Next button
    */

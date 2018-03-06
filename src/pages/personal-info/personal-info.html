@@ -17,7 +17,7 @@
         <ion-col style="padding:0">
           <ion-item style="padding-left: 15px;">
             <ion-label stacked>Date <b>*</b></ion-label>
-            <ion-datetime class="input_box" displayFormat="YYYY-MM-DD" formControlName="date" min="2018" max="2030-12-31" (ngModelChange)="dateChanged($event)"></ion-datetime>
+            <ion-datetime class="input_box" displayFormat="YYYY-MM-DD" formControlName="date" [min]="_today" max="2100-12-31" (ngModelChange)="dateChanged($event)"></ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col style="padding:0">
