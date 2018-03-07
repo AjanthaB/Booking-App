@@ -36,9 +36,9 @@ export class SliderComponent {
    * Start the Slider
    */
   public startSlider(): void {
-    // setTimeout(() => {
-    //   this.initSlider();
-    // }, 3000);
+    setTimeout(() => {
+      this.initSlider();
+    }, 3000);
   }
 
   /**
