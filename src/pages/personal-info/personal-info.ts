@@ -84,8 +84,9 @@ export class ProsonalInfoPage {
       date = tomorrow.format("YYYY-MM-DD");
       this._minDay = today.add(2, 'days').format("YYYY-MM-DD").toString();
     } else {
-      date = today.format("YYYY-MM-DD");
-      this._minDay = today.format("YYYY-MM-DD").toString();
+      const tomorrow = today.add(1, 'days');
+      date = tomorrow.format("YYYY-MM-DD");
+      this._minDay = tomorrow.format("YYYY-MM-DD").toString();
     }
     return date;
   }
