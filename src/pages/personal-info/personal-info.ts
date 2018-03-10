@@ -80,7 +80,7 @@ export class ProsonalInfoPage {
     const tmpTime = "17:30:00";
     
     if (londonTime > tmpTime) {
-      const tomorrow = today.add(1, 'days');
+      const tomorrow = today.add(2, 'days');
       date = tomorrow.format("YYYY-MM-DD");
       this._minDay = today.add(2, 'days').format("YYYY-MM-DD").toString();
     } else {
