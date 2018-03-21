@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Content } from 'ionic-angular';
+import { ViewChild } from '@angular/core';
 
 import { BookingService } from '../../services/booking.service';
 import { PropertyInfoPage } from '../property-info/property-info';
@@ -19,6 +21,8 @@ import {HomePage} from "../home/home";
   templateUrl: 'personal-info.html'
 })
 export class ProsonalInfoPage {
+
+  @ViewChild(Content) content: Content;
 
   /**
    * @desc - Angular Form Group to keep personal information
@@ -48,6 +52,11 @@ export class ProsonalInfoPage {
     }
     this.createPersonalInfoForm();
     this.updatePrice();
+
+    this._personalInfoForm.valueChanges
+      .subscribe((values) => {
+        this.onChangeInput();
+      });
   }
 
   /**
@@ -67,6 +76,11 @@ export class ProsonalInfoPage {
       email: new FormControl(this._bookingDataObj.email, Validators.required),
       comments: new FormControl(this._bookingDataObj.cust_comments)
     });
+  }
+
+  onChangeInput() {
+    // scroll the content to the same place in 1ms
+    this.content.scrollTo(0, 0, 1);
   }
 
   /**
@@ -206,7 +220,7 @@ export class ProsonalInfoPage {
         }
       },
       (err) => {
-        console.log(err);
+        console.log("error while cheking date availability", err);
       });
   };
 }

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="uk.eot.*" version="0.3.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="uk.eot.prod" version="0.3.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>EOT Cleaning Services</name>
     <description>EOT Cleaning Service Booking Application</description>
     <author email="hi@ionicframework" href="https://www.end-of-tenancy-london.co.uk/">EOT Cleaning Services</author>
@@ -8,7 +8,7 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-navigation href="https://www.end-of-tenancy-london.co.uk/*" />
-    <allow-navigation href="http://localhost:8080" />
+    <allow-navigation href="http://localhost:8080/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
@@ -21,6 +21,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -79,10 +80,11 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <engine name="android" spec="6.3.0" />
-    <engine name="ios" spec="^4.5.4" />
+    <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.9.1" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
+    <plugin name="cordova-plugin-email-composer" spec="^0.8.13" />
     <plugin name="cordova-plugin-inappbrowser" spec="^2.0.1" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />

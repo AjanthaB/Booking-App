@@ -1,85 +1,85 @@
-	ion-label, .label, .label-ios {
-	  font-size: 14px !important;
-	  font-weight: bold;
-	  color: #0b3853;
-	}
-
-	ion-label b {
-	  color: #ee0043;
-	  font-weight: bolder;
-	  font-size: 15px;
-	}
-
-	ion-input, .datetime-text {
-	  color: #555;
-	}
-
-	.input_box {
-	  width: 100%;
-	  font-size: 16px;
-	  font-weight: 300;
-	  margin: 5px 0px;
-	  padding: 8px 10px;
-	  border: solid 1px #0093d1;
-	  border-radius: 4px;
-	}
-
-	page-personal-info {
-	  .label-md {
-		margin: 5px 8px 5px 0;
-	  }
-	  .list-md .item-block .item-inner {
-		border: 0px;
-	  }
-	  ion-input, .datetime-text {
-			padding-left: 8px ;
-	  }
-	}
-
-	.button-outline-md {
-	  border-width: 2px;
-	  border-radius: 20px;
-	}
-
-	.button-md {
-	  border-radius: 20px;
-	}
-
-	.back {
-	  border-color: #0b3853;
-	  color: #0b3853;
-	}
-
-	.next {
-	 // background: #0b3853;
-	  float: right;
-	}
-	
-	button.button{
-   // border-bottom: solid 1px #ccc;
-   width: 100%;
-    font-size: 16px;
-    font-weight: 300;
-    margin: 5px 0px;
-    padding: 8px 10px;
-    border: solid 1px #0093d1;
-    border-radius: 4px;
+ion-label, .label, .label-ios {
+	font-size: 14px !important;
+	font-weight: bold;
+	color: #0b3853;
 }
 
-	progress-eot{
-		width: 100%;
-		margin: 0 auto;
-		padding-left: -40px !important;
-	}
+ion-label b {
+	color: #ee0043;
+	font-weight: bolder;
+	font-size: 15px;
+}
 
-	.picker-wrapper{
-		.picker-toolbar{
-			background:#3D9BDD;
-		}
-		.picker-button{
-			color:#fff;
-		}
+ion-input, .datetime-text {
+	color: #555;
+}
+
+.input_box {
+	width: 100%;
+	font-size: 16px;
+	font-weight: 300;
+	margin: 5px 0px;
+  	padding: 8px 10px;
+	border: solid 1px #0093d1;
+	border-radius: 4px;
+}
+
+page-personal-info {
+	.label-md {
+	margin: 5px 8px 5px 0;
 	}
+	.list-md .item-block .item-inner {
+	border: 0px;
+	}
+	ion-input, .datetime-text {
+		padding-left: 8px ;
+	}
+}
+
+.button-outline-md {
+	border-width: 2px;
+	border-radius: 20px;
+}
+
+.button-md {
+	border-radius: 20px;
+}
+
+.back {
+	border-color: #0b3853;
+	color: #0b3853;
+}
+
+.next {
+	// background: #0b3853;
+	float: right;
+}
+	
+button.button{
+	// border-bottom: solid 1px #ccc;
+	width: 100%;
+	font-size: 16px;
+	font-weight: 300;
+	margin: 5px 0px;
+	padding: 8px 10px;
+	border: solid 1px #0093d1;
+	border-radius: 4px;
+}
+
+progress-eot{
+	width: 100%;
+	margin: 0 auto;
+	padding-left: -40px !important;
+}
+
+.picker-wrapper{
+	.picker-toolbar{
+		background:#3D9BDD;
+	}
+	.picker-button{
+		color:#fff;
+	}
+}
 	.action-sheet-title{
 		background:#3D9BDD;
 		color:#fff !important;
@@ -104,6 +104,7 @@
 
 	}
 
+
 	.list-ios{
 		.item-block, ion-item, .item-block:first-child, .item-block .item-inner, .item-block .item-inner{
 			border:none;
@@ -114,20 +115,14 @@
 	}
 
 	ion-grid > form > ion-row > ion-col:nth-child(2) > ion-item > div.item-inner{
-	margin-right:10px;
+		margin-right:10px;
 	}
-
 	.picker-ios{
 		.picker-wrapper{
 			width: 94%;
 			border-radius: 12px;
 			margin-bottom: 10px;
 		}
-	}
-	h3{
-		font-size:17px;
-		text-align: center;
-		color:#0b2c44;
 	}
 	
 button, .button{
@@ -142,7 +137,9 @@ page-personal-info{
 		padding-left:8px !important;
 	}
 
+
 	.item-label-stacked .select-md, .item-label-floating .select-md{
 		padding-bottom: 4px;
 	}
 }
+

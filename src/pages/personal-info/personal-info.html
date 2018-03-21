@@ -59,7 +59,7 @@
           <input class="input_box" type="text" formControlName="address">
           <div class="form-control-feedback"
                *ngIf="_personalInfoForm.controls.address.errors && (_personalInfoForm.controls.address.dirty || _personalInfoForm.controls.address.touched)">
-            <p class="error-msg" *ngIf="_personalInfoForm.controls.address.errors.required">Address is required</p>
+            <div class="error-msg" *ngIf="_personalInfoForm.controls.address.errors.required">Address is required</div>
           </div>
         </ion-item>
 
@@ -68,7 +68,7 @@
           <input class="input_box" type="text" formControlName="phoneNum">
           <div class="form-control-feedback"
                *ngIf="_personalInfoForm.controls.phoneNum.errors && (_personalInfoForm.controls.phoneNum.dirty || _personalInfoForm.controls.phoneNum.touched)">
-            <p class="error-msg" *ngIf="_personalInfoForm.controls.phoneNum.errors.required">Phone Number is required</p>
+            <div class="error-msg" *ngIf="_personalInfoForm.controls.phoneNum.errors.required">Phone Number is required</div>
           </div>
         </ion-item>
 

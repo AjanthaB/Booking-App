@@ -412,17 +412,17 @@ export class BookingService {
     }
   }
 
-  public checkAvailablityOfDate(selectedDate: string): Observable<any>{
-    const url = `${API_URI}/date-checking`;
+  public checkAvailablityOfDate(selectedDate: string): Observable<any> {
+    const url = API_URI + '/date-checking';
 
-    if (this.device.platform === "iOS") {
-      const headers = this.getHeadersForNativeHttpClient();
-      return Observable.fromPromise(this.httpNativeClient.post(url, {date: selectedDate}, headers))
-        .map( res => JSON.parse(res.data))
-    } else {
-      const data = { date: selectedDate};
+    // if (this.device.platform === "iOS") {
+    //   const headers = this.getHeadersForNativeHttpClient();
+    //   return Observable.fromPromise(this.httpNativeClient.post(url, {date: selectedDate}, headers))
+    //     .map( res => JSON.parse(res.data))
+    // } else {
+      const data = { date: selectedDate };
       const headers = this.getCORSJSONHeader();
       return this.http.post(url, data, {headers});
-    }
+    // }
   }
 }
