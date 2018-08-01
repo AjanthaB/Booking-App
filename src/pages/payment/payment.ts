@@ -8,8 +8,6 @@ import { filter, flatMap } from 'rxjs/operators';
 import { timer } from "rxjs/observable/timer";
 import { TOAST_DURATION, TOAST_OFFLINE_MESSAGE, TOAST_POSITION } from "../../config/constants";
 import {OfflieDetectionService} from "../../services/offline-detection.service";
-import {HomePage} from "../home/home";
-import {SplashPage} from "../spalsh/splash";
 
 @Component({
   selector: 'page-payment',
@@ -44,6 +42,7 @@ export class PaymentPage {
    */
   private getTheFormContent(cartId: string, worldpayValue: number): string {
     return '<html><head></head><body>'
+      + '<div>' + cartId + '</div>'
       + '<form id="myForm" action="https://secure.worldpay.com/wcc/purchase" method="POST">'
       + '<meta name="csrf-token" content="ia5ZAHasWnjDT4MtIVk79pySycFNlWG2KBShBBnm">'
       + '<input type="hidden" name="testMode" value="0">'
@@ -158,7 +157,13 @@ export class PaymentPage {
       .subscribe((data: any) => {
         if (data && data["ref_id"]) {
           this.bookingService.setCartId(data["ref_id"]);
+          // this.bookingDataObj.booking_ref = data["ref_id"];
+          this.bookingDataObj = Object.assign(
+            this.bookingService.getBookingDataObj(),
+            { booking_ref: data["ref_id"] }
+          );
         }
+        console.log("Booking Data: ", data);
       }, err => {
         console.log("error: ", err);
       });

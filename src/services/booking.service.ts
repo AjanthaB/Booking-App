@@ -62,7 +62,7 @@ export class BookingService {
 
   public setCartId(cartId: string): void {
     this.cartId = cartId;
-    this._bookingDataObj.booking_ref = this.cartId;
+    this._bookingDataObj.booking_ref = cartId;
   }
 
   public getBookkingFee(): any {
